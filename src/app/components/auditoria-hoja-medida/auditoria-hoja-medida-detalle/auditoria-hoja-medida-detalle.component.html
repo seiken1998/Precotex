@@ -1,0 +1,65 @@
+<!--<a [routerLink]="['/AuditoriaHojaMedida']" >auditoria-hoja-medida-detalle works!-->
+
+    
+<div class="container"> 
+
+    <div class="grid-container"> 
+ 
+        <div class="title">Hoja de medidas Top</div>
+
+        <form class="container-cuerpo" [formGroup]="formulario">
+            <div class="container-cuerpo-fila1">
+                
+       
+                    <mat-form-field class="fila1-Cliente"> 
+                        <mat-label>Cliente</mat-label>
+                        <input matInput type="text"  placeholder="Cliente" value=""
+                            autocomplete="off" formControlName="inputCliente" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-EstCli"> 
+                        <mat-label>Estilo Cliente</mat-label>
+                        <input matInput type="text"  placeholder="Estilo Cliente" value=""
+                            autocomplete="off" formControlName="inputEstCli" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-EstPro"> 
+                        <mat-label>Estilo Propio</mat-label>
+                        <input matInput type="text"  placeholder="Estilo Propio" value=""
+                            autocomplete="off" formControlName="inputEstPro" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Version"> 
+                        <mat-label>Version</mat-label>
+                        <input matInput type="text"  placeholder="Version" value=""
+                            autocomplete="off" formControlName="inputVersion" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Ops"> 
+                        <mat-label>OP'S</mat-label>
+                        <input matInput type="text"  placeholder="OP'S" value=""
+                            autocomplete="off" formControlName="inputOps" >
+                    </mat-form-field>
+
+            </div>   
+ 
+           
+            <div class="container-cuerpo-fila2">
+                <table mat-table #table  [dataSource]="dataSource"   class="mat-elevation-z8" >
+                 
+                </table>
+
+                <mat-paginator  class="paginador" #paginator [pageSizeOptions]="[50, 100, 150]" showFirstLastButtons aria-label="Select page of periodic elements">
+                </mat-paginator>
+
+            </div>
+
+        </form>
+
+    </div>
+ 
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin">  
+    <p style="color: white; text-align: center; " >Cargando... </p>  
+</ngx-spinner>       

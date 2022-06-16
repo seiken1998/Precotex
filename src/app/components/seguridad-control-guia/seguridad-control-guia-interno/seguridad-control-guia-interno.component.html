@@ -1,0 +1,154 @@
+<div class="container">
+    <!-- ventana nro 3 - salida -->
+    <div class="grid-container">
+
+        <div class="title">.:: {{ des_planta }} ::. - Ingreso Interno</div>
+
+        <form class="container-cuerpo" [formGroup]="formulario">
+            <div class="container-cuerpo-fila1">
+                <mat-form-field class="fila1-guia">
+                    <mat-label>Numero de Guia</mat-label>
+                    <mat-select formControlName="num_guia" name="listar_guia" (selectionChange)="DatosGuia()">
+                        <mat-option *ngFor="let listar_guia of listar_guias" [value]="listar_guia.num_guia">
+                            {{listar_guia.num_guia}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>  
+
+            <div class="container-cuerpo-fila2">
+                <mat-form-field class="fila2-destino">
+                    <mat-label>Origen</mat-label>
+                    <input matInput disabled value='{{ origen_select }}' />
+                </mat-form-field>
+            </div>
+ 
+            <div class="container-cuerpo-fila3">
+                <mat-form-field class="fila3-cod-entregado">
+                    <mat-label>Dni Entrega</mat-label>
+                    <input matInput type="text" (keyup)="BuscarNomTrabajador('E')" placeholder="Dni Entrega" value=""
+                        autocomplete="off" formControlName="cod_entregado">
+                </mat-form-field>
+
+                <mat-form-field class="fila3-nom-entregado">
+                    <mat-label>Personal Entrega Guia</mat-label>
+                    <input matInput disabled value='{{ nom_entregado }}'>
+                </mat-form-field>
+            </div>
+
+            <div class="container-cuerpo-fila4">
+                <div class="fila4-num-bulto">
+                    <mat-form-field>
+                        <mat-label>Bultos</mat-label>
+                        <input matInput type="text" placeholder="Bultos" value="" autocomplete="off"
+                            formControlName="num_bulto">
+                    </mat-form-field>
+                </div>
+                <div class="fila4-num-cantidad">
+                    <mat-form-field>
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput type="text" placeholder="Cantidad" value="" autocomplete="off"
+                            formControlName="num_cantidad">
+                    </mat-form-field>
+                </div>
+                <div class="fila4-num-peso">
+                    <mat-form-field>
+                        <mat-label>Peso</mat-label>
+                        <input matInput type="text" placeholder="Peso" value="" autocomplete="off"
+                            formControlName="num_peso">
+                    </mat-form-field>
+                </div> 
+            </div>
+ 
+            <div class="container-cuerpo-fila5">
+                <mat-form-field class="fila5-cod-despachado">
+                    <mat-label>Dni Recibe</mat-label>
+                    <input matInput type="text" (keyup)="BuscarNomTrabajador('D')" placeholder="Dni Recibe" value=""
+                        autocomplete="off" formControlName="cod_despachado">
+                </mat-form-field>
+
+                <mat-form-field class="fila5-nom-despachado">
+                    <mat-label>Personal Recibe Guia</mat-label>
+                    <input matInput disabled value='{{ nom_despachado }}'>
+                </mat-form-field>
+            </div>
+            <div class="container-cuerpo-fila6">
+                <mat-form-field class="fila6-glosa">
+                    <mat-label>Glosa</mat-label>
+                    <input matInput disabled value='{{ glosa_select }}'>
+                </mat-form-field>
+            </div>
+
+            <div class="container-cuerpo-foot">
+
+                <button type="button" class="button-trabajador" mat-flat-button color="primary"
+                    (click)="MostrarVentanaPersonal()">
+                    <mat-icon aria-label=" person">accessibility</mat-icon>
+                </button>
+
+                <button type="button" class="button-registrar" mat-flat-button color="primary" (click)="Guardar()">
+                    <mat-icon aria-label="person">check_circle_outline
+                    </mat-icon>Registrar
+                </button>
+                <button type="button" class="button-cancelar" mat-flat-button color="primary"
+                    [routerLink]="['/SeguridadControlGuiaAccion']">
+                    <mat-icon aria-label="person">highlight_off
+                    </mat-icon>Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ventana registrar personal -->
+    <div class="container-personal"
+        [ngClass]="Visible_Registro_Personal ? 'container-personal-activo-si' : 'container-personal-activo-no'">
+        <div class="container-personal-popup"
+            [ngClass]="Visible_Registro_Personal ? 'container-personal-popup-activo-si' : 'container-personal-popup-activo-no'">
+
+            <div class="container-personal-title">Agregar Personal</div>
+
+            <div class="container-personal-main">
+                <form class="container-personal-personalForm" [formGroup]="personalForm">
+                    <div class="container-personal-fila1">
+                        <mat-form-field>
+                            <mat-label>Dni Nro.</mat-label>
+                            <input matInput type="text" placeholder="Dni Nro." value="" autocomplete="off"
+                                formControlName="num_dni">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila2">
+                        <mat-form-field>
+                            <mat-label>Apellido Paterno</mat-label>
+                            <input matInput type="text" placeholder="Apellido Paterno" value="" autocomplete="off"
+                                formControlName="ape_paterno">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila3">
+                        <mat-form-field>
+                            <mat-label>Apellido Materno</mat-label>
+                            <input matInput type="text" placeholder="Apellido Materno" value="" autocomplete="off"
+                                formControlName="ape_materno">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila4">
+                        <mat-form-field>
+                            <mat-label>Nombres</mat-label>
+                            <input matInput type="text" placeholder="Nombres" value="" autocomplete="off"
+                                formControlName="nombres">
+                        </mat-form-field>
+                    </div>                                                            
+                    <div class="container-personal-foot">
+                        <button type="button" class="button-personal-registrar" mat-flat-button color="primary" (click)="GuardarRegistroPersonal()">
+                            <mat-icon aria-label="person">check_circle_outline
+                            </mat-icon>Registrar
+                        </button>
+                        <button type="button" class="button-personal-cancelar" mat-flat-button color="primary" (click)="MostrarVentanaPersonal()">
+                            <mat-icon aria-label="person">highlight_off
+                            </mat-icon>Cancelar
+                        </button>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

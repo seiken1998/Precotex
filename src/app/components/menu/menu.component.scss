@@ -1,0 +1,93 @@
+
+
+ 
+example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  
+}
+
+.example-sidenav-container {
+  flex: 1;
+  
+}
+
+.example-spacer1 {
+  flex: none;
+}
+.example-spacer2 {
+  flex: 1 1 auto;
+}
+
+.user{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+mat-toolbar{
+  background: white;
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  //border-bottom: 1px solid rgb(238, 238, 238);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  
+}
+
+.logo{
+  width: 150px;
+  margin-left: 20px;
+}
+
+
+mat-sidenav{
+  width: 350px;
+}
+
+ .item{
+  
+  margin: 10px 0;
+}
+
+
+.sub-item{
+  width: 300px;
+}
+
+mat-sidenav-container{
+  background: white;
+  height: 90vh;
+}
+
+
+@media only screen and (max-width: 500px) {
+ 
+  
+  /*mat-toolbar{
+    background: red;
+    justify-content: space-between;
+    
+  }*/
+
+  .mat-toolbar-row, .mat-toolbar-single-row{
+    padding: 0;
+  }
+
+
+.example-spacer1 {
+  flex: 1 1 auto;
+}
+.example-spacer2 {
+  flex: 1 1 auto;
+}
+
+}
+
+
+

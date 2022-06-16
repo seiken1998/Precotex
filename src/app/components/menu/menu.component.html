@@ -1,0 +1,200 @@
+<div class="example-container">
+    <mat-toolbar  class="example-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+            <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+        </button> 
+
+        <!--<h1 class="example-app-name">MEDIAPP</h1>-->
+        <span class="example-spacer1"></span>
+       
+        <img class="logo" src="assets/logo.jpg" >
+ 
+        
+        <span class="example-spacer2"></span>
+        
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>person</mat-icon>
+        </button>
+ 
+        <mat-menu #menu="matMenu">
+            
+            <button mat-menu-item >
+                <mat-icon>account_box</mat-icon>
+                <span><strong class="user">{{this.sCod_Usuario}}</strong></span>
+            </button>
+            <!--<button mat-menu-item >
+                <mat-icon>account_box</mat-icon>
+                <span>Mi Perfil</span>
+            </button>-->
+            <button mat-menu-item  (click)="CerrarSession()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Cerrar Sesión</span>
+            </button>
+        </mat-menu> 
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #sidenav  mode="over">
+            <!--<img src="assets/faviconprecotex.png" width="128" style="margin-left: 20px">-->
+           
+
+        <!-- <mat-divider></mat-divider>
+
+            <button *ngIf="MuestraMenuSeguridad" class="item" mat-menu-item [matMenuTriggerFor]="seguridad" style="margin-top:10px;cursor: pointer">
+                <mat-icon>assignment</mat-icon>
+                <span>Seguridad</span>
+            </button>
+
+           <mat-divider></mat-divider>
+
+            <button *ngIf="MuestraMenuCalidad" class="item" mat-menu-item [matMenuTriggerFor]="calidad"
+                style="cursor: pointer">
+                <mat-icon>assignment</mat-icon>
+                <span>Control de Calidad</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button *ngIf="MuestraMenuMovimiento" class="item" mat-menu-item [matMenuTriggerFor]="movimiento"
+                style="cursor: pointer">
+                <mat-icon>assignment</mat-icon>
+                <span>Movimientos</span>
+            </button>
+
+            <mat-divider></mat-divider>-->   
+
+
+            <ng-container *ngFor="let item of opciones">
+                <button class="item" mat-menu-item  routerLink="{{item.Ruta_Opcion}}" (click)="sidenav.toggle()" style="margin-top:10px;cursor: pointer">
+                    <mat-icon>assignment</mat-icon>
+                    <span>{{item.Des_Opcion }}</span>
+                </button>
+                <mat-divider></mat-divider>
+            </ng-container>
+
+
+        </mat-sidenav>
+
+        <!--<ng-container *ngFor="let child of Items" >        
+            <mat-menu   #Seguridad="matMenu" [overlapTrigger]="false">
+    
+                    <button class="sub-item" mat-menu-item routerLink="{{child.Ruta_Opcion}}" style="cursor: pointer">
+                        <mat-icon>assessment</mat-icon>
+                        <span>{{child.Des_Opcion}}</span>
+                    </button>
+                    <mat-divider></mat-divider>
+      
+            </mat-menu>
+        </ng-container>  -->
+
+
+            <!--<mat-menu   #seguridad="matMenu">
+               
+                <button  class="sub-item" mat-menu-item routerLink="/SeguridadControlGuia" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Control de Guias</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/SeguridadControlVehiculo" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Control de Vehiculos</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/SeguridadControlVehiculoRegistroConductor" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Mantenimiento Conductores</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/SeguridadControlVehiculoRegistroVehiculo" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Mantenimiento Vehiculos</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/SeguridadControlVehiculoReporte" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Reporte Control Vehiculos</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/SeguridadControlJaba" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Control de Jabas</span>
+                </button>
+           
+              </mat-menu>
+
+
+              <mat-menu   #calidad="matMenu">
+               
+                <button class="sub-item" mat-menu-item routerLink="/AuditoriaLineaCostura" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Auditoria en Linea Costura</span>
+                </button>
+                <mat-divider></mat-divider>
+
+                <button class="sub-item" mat-menu-item routerLink="/AuditoriaInspeccionCostura" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Auditoria Final Costura</span>
+                </button>
+                <mat-divider></mat-divider>-->
+
+               <!-- <button class="sub-item" mat-menu-item routerLink="/ AuditoriaDefectoDerivadoComponent" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Auditoria Defecto Derivado</span>
+                </button>
+                <mat-divider></mat-divider>-->
+ 
+           <!-- <button class="sub-item" mat-menu-item routerLink="/DefectosAlamacenDerivados" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Registro de Defectos - Derivados</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/ReporteDefectosAlmacenDerivados" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Reporte Cantidad Defectos - Derivados</span>
+                </button>
+                
+                <mat-divider></mat-divider>
+                <button class="sub-item" mat-menu-item routerLink="/ReporteDefectosTotalesDerivados" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Reporte Defectos Detallado - Derivados</span>
+                </button>
+              </mat-menu>
+              
+               
+              <mat-menu   #movimiento="matMenu">
+               
+                <button class="sub-item" mat-menu-item routerLink="/DespachoTelaCruda" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Despacho Tela Cruda</span>
+                </button>
+               
+               <mat-divider></mat-divider>-->
+
+                <!--<button class="sub-item" mat-menu-item routerLink="/MovimientoInspeccion" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Generar Movimiento Transito Costura</span>
+                </button>-->
+
+               <!-- <button class="sub-item" mat-menu-item routerLink="/IngresoRolloTejido" (click)="sidenav.toggle()"  style="cursor: pointer">
+                    <mat-icon>assessment</mat-icon>
+                    <span>Ingreso de Rollo Tejido</span>
+                </button>
+
+             </mat-menu>-->
+
+                   
+   
+            
+
+   
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+
+
+    </mat-sidenav-container>
+
+</div>
+
+

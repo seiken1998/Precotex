@@ -1,0 +1,127 @@
+
+<div class="container"> 
+
+    <div class="grid-container"> 
+ 
+        <div class="title">Auditoria Hoja de Medida - Costura</div>
+
+        <form class="container-cuerpo" [formGroup]="formulario">
+            <div class="container-cuerpo-fila1">
+                
+       
+                    <mat-form-field class="fila1-Codigo"> 
+                        <mat-label>Codigo</mat-label>
+                        <input matInput type="text"  placeholder="Codigo" value=""
+                            autocomplete="off" formControlName="inputCodigo" >
+                    </mat-form-field>
+       
+                    <mat-form-field class="fila1-Cliente" appearance="fill"> 
+                        <mat-label>Cliente</mat-label>
+                        <input matInput type="text"  #trigger="matAutocompleteTrigger" placeholder="Cliente" formControlName="inputCliente"  [matAutocomplete]="autoDataCliente" />
+                        <mat-autocomplete autoActiveFirstOption #autoDataCliente="matAutocomplete">
+                            <mat-option *ngFor="let option of filtroOperacionCliente | async" [value]="option.Nom_Cliente" (click)="CambiarValorCliente(option.Cod_Cliente,option.Abr_Cliente)">
+                            {{option.Nom_Cliente}}
+                            </mat-option> 
+                        </mat-autocomplete>                            
+                    </mat-form-field>
+
+
+                    <mat-form-field class="fila1-Estilo" appearance="fill">
+                        <mat-label>Estilo</mat-label>
+                        <input matInput type="text"  #trigger="matAutocompleteTrigger" placeholder="Estilo" formControlName="inputEstilo" #estilo  [matAutocomplete]="autoDataEstilo" />
+                        <mat-autocomplete autoActiveFirstOption #autoDataEstilo="matAutocomplete">
+                            <mat-option  *ngFor="let option of filtroOperacionEstilo | async" [value]="option" (click)="BuscarPrenda()" >
+                                {{option}}
+                            </mat-option> 
+                        </mat-autocomplete>                             
+                    </mat-form-field>
+
+
+                    <mat-form-field class="fila1-Prenda"> 
+                        <mat-label>Prenda</mat-label>
+                        <input matInput type="text"  placeholder="Prenda" value=""
+                            autocomplete="off" formControlName="inputPrenda" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-TipoPrenda"> 
+                        <mat-label>Tipo Prenda</mat-label>
+                        <input matInput type="text"  placeholder="Tipo Prenda" value=""
+                            autocomplete="off" formControlName="inputTipoPrenda" >
+                    </mat-form-field>
+
+                   <!-- <mat-form-field appearance="fill" class="fila1-Temporada" >
+                        <mat-label>Temporada</mat-label>
+                        <mat-select formControlName="inputTemporada">
+                          <mat-option  *ngFor="let option of listar_operacionTemporada" [value]="option.Codigo"  >
+                            {{option.Descripcion}} - Stock: {{option.Stock}} 
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>-->
+        
+
+                <button type="button" class="fila1-buscar" mat-flat-button (click)="MostrarVersiones()">                    
+                    <mat-icon aria-label="person">search</mat-icon>Versiones
+                </button>
+               
+ 
+
+            </div>   
+ 
+           
+            <div class="container-cuerpo-fila2">
+                <table mat-table #table  [dataSource]="dataSource"   class="mat-elevation-z8" >
+                    
+                    <ng-container matColumnDef="CodTarifadoCost">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Estilo Propio</th>
+                        <td mat-cell  *matCellDef="let data_det">  {{data_det.Cod_Tarifado_Costeo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Codigo">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Codigo</th>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Version}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Descripcion">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Descripcion</th>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Descr}}  </td>
+                    </ng-container>
+                    <ng-container matColumnDef="DesTelaCli">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Des. Tela Cliente</th>
+                        <td mat-cell *matCellDef="let data_det">  {{data_det.Des_Tela_Cliente}} </td>
+                    </ng-container>
+
+                     
+   
+ 
+                  
+                    <ng-container matColumnDef="Acciones">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let data_det">
+
+                            <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Version.length>0"  (click)="VerDetalle(data_det.Cod_Tarifado_Costeo, data_det.Version)" [routerLink]="['/AuditoriaHojaMedidaDetalle']" >
+                                <mat-icon color="primary">assignment</mat-icon>
+                               
+                            </a>
+ 
+                        </td>
+                    </ng-container> 
+
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns_cab"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns_cab;"></tr>
+
+                </table>
+
+                <mat-paginator  class="paginador" #paginator [pageSizeOptions]="[50, 100, 150]" showFirstLastButtons aria-label="Select page of periodic elements">
+                </mat-paginator>
+
+            </div>
+
+        </form>
+
+    </div>
+ 
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin">  
+    <p style="color: white; text-align: center; " >Cargando... </p>  
+</ngx-spinner>       

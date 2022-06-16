@@ -1,0 +1,282 @@
+<div class="container">
+    <!-- ventana nro 3 - salida -->
+    <div class="grid-container"> 
+
+        <div class="title">.:: {{ des_planta }} ::. - Ingreso Externo</div>
+
+        <form class="container-cuerpo" [formGroup]="formulario">
+            <div class="container-cuerpo-fila1">
+
+                <mat-form-field class="fila1-guia">
+                    <mat-label>Numero de Guia</mat-label>
+                    <input matInput type="text" [textMask]="{mask: num_guiaMascara}" placeholder="Numero de Guia"
+                        value="" autocomplete="off" formControlName="num_guia">
+                </mat-form-field>
+            </div>
+ 
+            <div class="container-cuerpo-fila2">
+                <mat-form-field class="fila2-ruc-proveedor">
+                    <mat-label>Ruc Proveedor</mat-label>
+                    <input matInput type="text" (keyup)="BuscarNomProveedor()" placeholder="Ruc Proveedor" value=""
+                        autocomplete="off" formControlName="ruc_proveedor">
+                </mat-form-field>
+
+                <mat-form-field class="fila2-nom-proveedor">
+                    <mat-label>Nombre Proveedor</mat-label>
+                    <input matInput disabled value='{{ nom_proveedor }}'>
+                </mat-form-field>
+
+            </div>
+
+            <div class="container-cuerpo-fila3">
+                <mat-form-field class="fila3-cod-entregado">
+                    <mat-label>Dni Entrega</mat-label>
+                    <input matInput type="text" (keyup)="BuscarNomTrabajador('E')" placeholder="Dni Entrega" value=""
+                        autocomplete="off" formControlName="cod_entregado">
+                </mat-form-field>
+
+                <mat-form-field class="fila3-nom-entregado">
+                    <mat-label>Personal Entrega Guia</mat-label>
+                    <input matInput disabled value='{{ nom_entregado }}'>
+                </mat-form-field>
+            </div>
+
+            <div class="container-cuerpo-fila4">
+                <div class="fila4-num-bulto">
+                    <mat-form-field>
+                        <mat-label>Bultos</mat-label>
+                        <input matInput type="text" placeholder="Bultos" value="" autocomplete="off"
+                            formControlName="num_bulto">
+                    </mat-form-field>
+                </div>
+                <div class="fila4-num-cantidad">
+                    <mat-form-field>
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput type="text" placeholder="Cantidad" value="" autocomplete="off"
+                            formControlName="num_cantidad">
+                    </mat-form-field>
+                </div>
+                <div class="fila4-num-peso">
+                    <mat-form-field>
+                        <mat-label>Peso</mat-label>
+                        <input matInput type="text" placeholder="Peso" value="" autocomplete="off"
+                            formControlName="num_peso">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="container-cuerpo-fila5">
+                <mat-form-field class="fila5-cod-despachado">
+                    <mat-label>Dni Recibe</mat-label>
+                    <input matInput type="text" (keyup)="BuscarNomTrabajador('D')" placeholder="Dni Recibe" value=""
+                        autocomplete="off" formControlName="cod_despachado">
+                </mat-form-field>
+
+                <mat-form-field class="fila5-nom-despachado">
+                    <mat-label>Personal Recibe Guia</mat-label>
+                    <input matInput disabled value='{{ nom_despachado }}'>
+                </mat-form-field>
+            </div>
+            <div class="container-cuerpo-fila6">
+                <mat-form-field class="fila6-glosa">
+                    <mat-label>Glosa</mat-label>
+                    <input matInput type="text" placeholder="Glosa" value="" autocomplete="off" formControlName="glosa">
+                </mat-form-field>
+
+            </div>
+
+            <div class="container-cuerpo-foot">
+                <button type="button" class="button-ruc" mat-flat-button color="primary"
+                    (click)="MostrarVentanaRuc()">
+                    <mat-icon aria-label=" person">add_shopping_cart</mat-icon>
+                </button>
+
+                <button type="button" class="button-trabajador" mat-flat-button color="primary"
+                    (click)="MostrarVentanaPersonal()">
+                    <mat-icon aria-label=" person">accessibility</mat-icon>
+                </button>
+
+                <button type="button" class="button-oc" mat-flat-button color="primary"
+                    (click)="MostrarVentanaOrdComp()">
+                    <mat-icon aria-label="person">list_alt</mat-icon>
+                </button>
+
+                <button type="button" class="button-registrar" mat-flat-button color="primary" (click)="Guardar()">
+                    <mat-icon aria-label="person">check_circle_outline
+                    </mat-icon>Registrar
+                </button>
+                <button type="button" class="button-cancelar" mat-flat-button color="primary"
+                    [routerLink]="['/SeguridadControlGuiaAccion']">
+                    <mat-icon aria-label="person">highlight_off
+                    </mat-icon>Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ventana registrar ruc -->
+    <div class="container-ruc"
+        [ngClass]="Visible_Registro_Ruc ? 'container-ruc-activo-si' : 'container-ruc-activo-no'">
+        <div class="container-ruc-popup"
+            [ngClass]="Visible_Registro_Ruc ? 'container-ruc-popup-activo-si' : 'container-ruc-popup-activo-no'">
+
+            <div class="container-ruc-title">Buscar Ruc por OC</div>
+
+            <div class="container-ruc-main">
+                <form class="container-ruc-rucForm" [formGroup]="rucForm">
+                    <div class="container-ruc-fila1">
+                        <mat-form-field>
+                            <mat-label>Numero de OC (###-######)</mat-label>
+                            <input matInput type="text"  (keyup)="BuscarRucProveedor()"  placeholder="Numero de OC" value="" autocomplete="off"
+                                formControlName="num_ordcomp">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="container-ruc-fila2">
+                        <mat-form-field>
+                            <mat-label>Proveedor</mat-label>
+                            <input matInput type="text" placeholder="Proveedor" value="" autocomplete="off"
+                                formControlName="ordcomp_proveedor">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="container-ruc-foot">
+                        <button type="button" class="button-ruc-cancelar" mat-flat-button color="primary"
+                            (click)="MostrarVentanaRuc()">
+                            <mat-icon aria-label="person">highlight_off
+                            </mat-icon>Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ventana registrar personal -->
+    <div class="container-personal"
+        [ngClass]="Visible_Registro_Personal ? 'container-personal-activo-si' : 'container-personal-activo-no'">
+        <div class="container-personal-popup"
+            [ngClass]="Visible_Registro_Personal ? 'container-personal-popup-activo-si' : 'container-personal-popup-activo-no'">
+
+            <div class="container-personal-title">Agregar Personal</div>
+
+            <div class="container-personal-main">
+                <form class="container-personal-personalForm" [formGroup]="personalForm">
+                    <div class="container-personal-fila1">
+                        <mat-form-field>
+                            <mat-label>Dni Nro.</mat-label>
+                            <input matInput type="text" placeholder="Dni Nro." value="" autocomplete="off"
+                                formControlName="num_dni">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila2">
+                        <mat-form-field>
+                            <mat-label>Apellido Paterno</mat-label>
+                            <input matInput type="text" placeholder="Apellido Paterno" value="" autocomplete="off"
+                                formControlName="ape_paterno">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila3">
+                        <mat-form-field>
+                            <mat-label>Apellido Materno</mat-label>
+                            <input matInput type="text" placeholder="Apellido Materno" value="" autocomplete="off"
+                                formControlName="ape_materno">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-fila4">
+                        <mat-form-field>
+                            <mat-label>Nombres</mat-label>
+                            <input matInput type="text" placeholder="Nombres" value="" autocomplete="off"
+                                formControlName="nombres">
+                        </mat-form-field>
+                    </div>
+                    <div class="container-personal-foot">
+                        <button type="button" class="button-personal-registrar" mat-flat-button color="primary"
+                            (click)="GuardarRegistroPersonal()">
+                            <mat-icon aria-label="person">check_circle_outline
+                            </mat-icon>Registrar
+                        </button>
+                        <button type="button" class="button-personal-cancelar" mat-flat-button color="primary"
+                            (click)="MostrarVentanaPersonal()">
+                            <mat-icon aria-label="person">highlight_off
+                            </mat-icon>Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ventana registrar orden compra -->
+    <div class="container-ordcomp"
+        [ngClass]="Visible_Registro_OrdComp ? 'container-ordcomp-activo-si' : 'container-ordcomp-activo-no'">
+        <div class="container-ordcomp-popup"
+            [ngClass]="Visible_Registro_OrdComp ? 'container-ordcomp-popup-activo-si' : 'container-ordcomp-popup-activo-no'">
+
+            <div class="container-ordcomp-title">Orden de Compra</div>
+
+            <div class="container-ordcomp-main">
+                <form class="container-ordcomp-ordcompForm" [formGroup]="ordcompForm">
+                    <div class="container-ordcomp-fila1">
+                        <mat-form-field class="ofila1-num-guia">
+                            <mat-label>Numero de Guia</mat-label>
+                            <input matInput disabled value='{{ num_guia }}'>
+                        </mat-form-field>
+                    </div>
+                    <div class="container-ordcomp-fila2">
+                        <mat-form-field class="ofila2-nom-proveedor">
+                            <mat-label>Nombre Proveedor</mat-label>
+                            <input matInput disabled value='{{ nom_proveedor }}'>
+                        </mat-form-field>
+                    </div>
+                    <div class="container-ordcomp-fila3">
+
+                        <mat-form-field class="ofila3-ordcomp">
+                            <mat-label>Orden Compra</mat-label>
+                            <mat-select formControlName="num_ordcomp" name="listar_num_ordcomp">
+                                <mat-option *ngFor="let listar_num_ordcomp of listar_num_ordcomps"
+                                    [value]="listar_num_ordcomp.num_ordcomp">
+                                    {{listar_num_ordcomp.num_ordcomp}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button type="button" class="ofila3-adicionar" mat-flat-button color="primary"
+                            (click)="InsertDeleteOrdComp('I','')">
+                            <mat-icon aria-label="person">add</mat-icon>Añadir
+                        </button>
+
+                    </div>
+                    <div class="container-ordcomp-fila4">
+                        <table mat-table [dataSource]="data_ordcomp" class="mat-elevation-z8">
+                            <ng-container matColumnDef="num_ordcomp">
+                                <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Orden Compra</th>
+                                <td mat-cell *matCellDef="let data_ordcomp"> {{data_ordcomp.num_ordcomp}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="detalle">
+                                <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Eliminar</th>
+                                <td mat-cell *matCellDef="let data_ordcomp">
+                                    <a mat-icon-button *ngIf="data_ordcomp.num_ordcomp.length>0"
+                                        (click)="InsertDeleteOrdComp('D', data_ordcomp.num_ordcomp)">
+                                        <mat-icon color="warn">delete</mat-icon>
+                                    </a>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns_cab"></tr>
+                            <tr mat-row *matRowDef="let fila; columns: displayedColumns_cab;"
+                                class="example-element-row"></tr>
+                        </table>
+                    </div>
+                    <div class="container-ordcomp-foot">
+                        <button type="button" class="button-ordcomp-cancelar" mat-flat-button color="primary"
+                            (click)="MostrarVentanaOrdComp()">
+                            <mat-icon aria-label="person">reply
+                            </mat-icon>Regresar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

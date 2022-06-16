@@ -1,0 +1,57 @@
+ 
+<div class="container"> 
+    <!-- ventana nro 4 - historial --> 
+    <div class="grid-container"> 
+ 
+        <div class="title">Reporte Cantidades por Fecha</div>
+        <form class="container-cuerpo" [formGroup]="formulario"  >
+            <div class="container-cuerpo-fila1">
+                
+                    <mat-form-field class="fila1-Total"> 
+                        <mat-label>Total Ingreso</mat-label>
+                        <input matInput type="text"  placeholder="Total Ingreso" value="" 
+                            autocomplete="off" formControlName="Total" >
+                    </mat-form-field>
+                    
+                    <mat-form-field class="fila1-Especial"> 
+                        <mat-label>Total Especiales</mat-label>
+                        <input matInput type="text"  placeholder="Total Especiales" value="" 
+                            autocomplete="off" formControlName="Especial" >
+                    </mat-form-field>    
+
+                    <mat-form-field class="fila1-Defecto"> 
+                        <mat-label>Total Defectos</mat-label>
+                        <input matInput type="text"  placeholder="Total Defectos" value="" 
+                            autocomplete="off" formControlName="Defecto" >
+                    </mat-form-field>    
+
+            </div>    
+
+
+ 
+            <div class="container-cuerpo-foot">
+                    
+
+                <button type="button" class="button-cancelar" mat-button mat-dialog-close mat-dialog-close  mat-flat-button>
+                    <mat-icon aria-label="person">highlight_off
+                    </mat-icon>  Cerrar
+                </button>               
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+ 
+ 
+   
+
+
+
+ 
+
+
+
+</div>

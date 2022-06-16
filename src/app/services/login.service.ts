@@ -1,0 +1,50 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Login } from '../models/login';
+import { GlobalVariable } from '../VarGlobals';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginService {
+
+  baseUrl = GlobalVariable.baseUrl;
+  sCod_Usuario = GlobalVariable.vusu;
+ 
+  //_url: string ="/ws_android/app_login.php";
+  //_url: string ="https://gestion.precotex.com/ws_android/app_login.php";
+
+  constructor(private http: HttpClient) { }
+ 
+  validarUsuario(login: Login){
+    //console.log(this.baseUrl);
+    return this.http.post<any>(`${this.baseUrl}/app_login_sc.php`,login)
+  } 
+
+  MuestraMenu(){
+    this.sCod_Usuario = GlobalVariable.vusu;
+    return this.http.get(`${this.baseUrl}/app_muestra_menu.php?Cod_Usuario=${this.sCod_Usuario}`);
+  }
+
+  MuestraOpcion(){
+    this.sCod_Usuario = GlobalVariable.vusu;
+    return this.http.get(`${this.baseUrl}/app_muestra_opcion.php?Cod_Usuario=${this.sCod_Usuario}`);
+  }
+
+
+  ValidaMuestraMenuSeguridad() {
+    this.sCod_Usuario = GlobalVariable.vusu;
+    return this.http.get(`${this.baseUrl}/app_muestra_menu_seguridad.php?Cod_Usuario=${this.sCod_Usuario}`);
+  }
+
+  ValidaMuestraMenuCalidad() {
+    this.sCod_Usuario = GlobalVariable.vusu;
+    return this.http.get(`${this.baseUrl}/app_muestra_menu_calidad.php?Cod_Usuario=${this.sCod_Usuario}`);
+  }  
+
+  ValidaMuestraMenuMovimiento() {
+    this.sCod_Usuario = GlobalVariable.vusu;
+    return this.http.get(`${this.baseUrl}/app_muestra_menu_movimiento.php?Cod_Usuario=${this.sCod_Usuario}`);
+  }  
+}
