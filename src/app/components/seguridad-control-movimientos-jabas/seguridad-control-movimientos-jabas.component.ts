@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService }  from "ngx-spinner";
 import { Router} from '@angular/router';
 import { DialogRegistrarEstadoControlMovmientosJabasComponent} from './dialog-seguridad-control-movimientos-jabas/dialog-registrar-estado-control-movmientos-jabas/dialog-registrar-estado-control-movmientos-jabas.component'
+import { DialogConfirmacionComponent} from 'src/app/components/dialogs/dialog-confirmacion/dialog-confirmacion.component';
 import { GlobalVariable } from 'src/app/VarGlobals';
 
 interface data_det {
@@ -71,6 +72,7 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
  Hora             = ''
  Cod_Usuario      = ''
  Titulo           = ''
+ Cod_Barras_Flg   = ''
 
 
 
@@ -149,7 +151,42 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
   }
  
 
- 
+  DarDeBajaJaba(){
+    let dialogRef =  this.dialog.open(DialogConfirmacionComponent, {disableClose: true,data: { }});
+      dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        this.Cod_Accion         = 'B'
+        this.Cod_Mov_Jaba       = 0
+        this.Cod_Barras         
+        this.Cod_Estado         = 'C'
+        this.Observacion        = ''
+        this.Operacion          = ''
+        this.Fec_Registro       = ''
+        this.seguridadControlJabaService.ListarMovimientosJabas(
+          this.Cod_Accion,
+          this.Cod_Mov_Jaba,
+          this.Cod_Barras,
+          this.Cod_Estado,
+          this.Observacion,
+          this.Operacion,
+          this.Fec_Registro
+        ).subscribe(
+          (result: any) => { 
+            if (result[0].Respuesta == 'OK') {
+              this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+              this.Cod_Barras_Flg = ''
+              this.dataSource.data = []
+              this.inputAdd.nativeElement.focus()
+            }
+            else {
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 2500,
+          }))
+    }}) 
+  }
   
 
   applyEnterAdd(event: any) {
@@ -183,12 +220,21 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
     ).subscribe(
       (result: any) => { 
         if (result[0].Respuesta == 'OK') {
-          console.log(result)
+         
           this.ListarMovimientosJabas()
           this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+          this.Cod_Baras = this.formulario.get('bulto_añadir')?.value
+          this.Cod_Barras_Flg = this.formulario.get('bulto_añadir')?.value
+          this.formulario.controls['bulto_añadir'].setValue('')
+          this.inputAdd.nativeElement.focus()
         }
         else {
           this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+          this.formulario.controls['bulto_añadir'].setValue('')
+          this.Cod_Baras = ''
+          this.Cod_Barras_Flg = ''
+          this.dataSource.data = []
+          this.inputAdd.nativeElement.focus()
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {

@@ -1,9 +1,11 @@
-
+<!--DefectosAlamacenDerivados-->
+  
+  
 <div class="container"> 
-
+    <!-- ventana nro 4 - historial --> 
     <div class="grid-container">  
  
-        <div class="title">Registrar <strong>{{this.Titulo}}</strong> de Jabas </div>
+        <div class="title">Registrar <strong>{{this.Titulo}}</strong> de Jabas - {{this.Cod_Barras_Flg}}</div>
 
         <form class="container-cuerpo" [formGroup]="formulario">
             <div class="container-cuerpo-fila1">
@@ -34,6 +36,10 @@
 
                 <button type="button" class="fila1-btn_regresar" mat-flat-button [routerLink]="['/SeguridadControlMovimientosJabasAccion']">                    
                     <mat-icon aria-label="person">reply_all</mat-icon>
+                </button>
+
+                <button type="button" *ngIf="this.Cod_Barras_Flg !== ''" class="fila1-btn_baja" mat-flat-button (click)="DarDeBajaJaba()">                    
+                    <mat-icon aria-label="person">remove_circle</mat-icon>Dar de Baja
                 </button>
                 <!--<button type="button" class="button-close" style="display: none;" mat-dialog-close > </button>
                     <button type="button" class="fila1-btn_registrar" mat-flat-button  >                    
