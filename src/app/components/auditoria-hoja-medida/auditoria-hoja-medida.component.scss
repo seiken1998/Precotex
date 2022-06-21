@@ -219,7 +219,7 @@ tr:active {
         display: grid;
     
         grid-template:
-        "fila1" 100px
+        "fila1" 170px
         "fila2" 535px
         "foot" 55px /
         99%;
@@ -228,29 +228,38 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 col3 col4 col5" auto /
-        100px 200px 200px 200px 200px  auto;
-    }
+        "col1 col2 col3" 70px
+        "col4 col5 col6" 70px/
+        150px 350px 350px;
+}
+
+
+.fila1-Codigo {
+    grid-area: col1;
+     
+}
+.fila1-Cliente {
+    grid-area: col2;
     
-    .fila1-Codigo {
-        grid-area: col1;
-         
-    }
-    .fila1-Cliente {
-        grid-area: col2;
-        
-    }
-    .fila1-Estilo {
-        grid-area: col3;
-        
-    }
-    .fila1-Prenda {
-        grid-area: col4;
-        
-    }
-    .fila1-buscar {   
-        grid-area: col5;    
-    }
+}
+.fila1-Estilo {
+    grid-area: col3;
+    
+}
+.fila1-Prenda {
+    grid-area: col4;
+    
+}
+.fila1-TipoPrenda {
+    grid-area: col5;
+    
+}
+.fila1-buscar {
+ 
+    grid-area: col6;
+
+}
+
 }
 
 
@@ -271,14 +280,15 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 col3" 80px 
-        "col4 col5 auto" 80px/
-        200px 200px 200px;
+        "col1 col2 col3" 70px
+        "col4 col5 col6" 70px/
+        150px 300px 300px;
     }
-    
+
+
     .fila1-Codigo {
         grid-area: col1;
-        width: 100px;
+        
     }
     .fila1-Cliente {
         grid-area: col2;
@@ -292,8 +302,14 @@ tr:active {
         grid-area: col4;
         
     }
-    .fila1-buscar {   
-        grid-area: col5;    
+    .fila1-TipoPrenda {
+        grid-area: col5;
+        
+    }
+    .fila1-buscar {
+    
+        grid-area: col6;
+
     }
 
   }

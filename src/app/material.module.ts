@@ -23,6 +23,7 @@ import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatDividerModule} from '@angular/material/divider'
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list'; 
 
 @NgModule ({
     imports: [
@@ -49,7 +50,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatSidenavModule,
         MatRadioModule,
         MatDividerModule,
-        MatTabsModule
+        MatTabsModule,
+        MatListModule
         
         
     ],
@@ -77,7 +79,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatSidenavModule,
         MatRadioModule,
         MatDividerModule,
-        MatTabsModule
+        MatTabsModule,
+        MatListModule
     ]
 })
 

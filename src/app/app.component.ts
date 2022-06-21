@@ -11,7 +11,7 @@ import { LoginService } from './services/login.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
-})
+}) 
 
 export class AppComponent implements OnInit {
   hide = true;
@@ -48,18 +48,17 @@ export class AppComponent implements OnInit {
  
   validarUsuario() {
  
-    this.loginService.validarUsuario(this.loginForm.value).subscribe(
+    this.loginService.validarUsuario2(this.loginForm.value).subscribe(
       (result: any) => {
-
+ 
           console.log(result)
         if(result[0].resp == 'OK' || result == 'OK'){
 
           this.login_activo = false
-          GlobalVariable.vusu  = result[0].Nom_Usuario
           this.usuario = result[0].Nom_Usuario
           GlobalVariable.vusu  = this.loginForm.get('user').value
           this.usuario =  GlobalVariable.vusu  
-
+          GlobalVariable.vCod_Rol = result[0].Cod_Rol
 
           //this.router.navigate(['/principal']);
         }

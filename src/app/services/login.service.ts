@@ -16,16 +16,23 @@ export class LoginService {
   //_url: string ="https://gestion.precotex.com/ws_android/app_login.php";
 
   constructor(private http: HttpClient) { }
- 
+  
   validarUsuario(login: Login){
     //console.log(this.baseUrl);
     return this.http.post<any>(`${this.baseUrl}/app_login_sc.php`,login)
   } 
 
-  MuestraMenu(){
+  validarUsuario2(login: Login){
+    //console.log(this.baseUrl);
+    return this.http.post<any>(`${this.baseUrl}/app_login_sc_copia.php`,login)
+  } 
+
+  MuestraMenu(Cod_Rol: number, Cod_Empresa: string){
     this.sCod_Usuario = GlobalVariable.vusu;
-    return this.http.get(`${this.baseUrl}/app_muestra_menu.php?Cod_Usuario=${this.sCod_Usuario}`);
+    return this.http.get(`${this.baseUrl}/app_muestra_menu_copia.php?Cod_Rol=${Cod_Rol}&Cod_Empresa=${Cod_Empresa}`);
   }
+
+  
 
   MuestraOpcion(){
     this.sCod_Usuario = GlobalVariable.vusu;

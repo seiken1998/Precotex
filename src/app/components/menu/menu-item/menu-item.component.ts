@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import { Menu} from 'src/app/components/menu/menu';
-import { Opcion} from 'src/app/components/menu/opcion';
+
 
 interface Cod_Menu {
  

@@ -1,5 +1,6 @@
  export const GlobalVariable = {
     vusu: '',
+    vCod_Rol: 0, 
     baseUrl: "/ws_android",
     baseUrlLocal: "/ws_local",
     num_planta: 0,
