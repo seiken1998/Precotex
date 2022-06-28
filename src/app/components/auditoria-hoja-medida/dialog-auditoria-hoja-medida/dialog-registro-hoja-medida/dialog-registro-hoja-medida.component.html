@@ -1,0 +1,65 @@
+ 
+<div class="container"> 
+    <div class="grid-container">  
+        <div class="title">Registrar Medidas</div>
+        <form class="container-cuerpo" [formGroup]="formulario" #formDirective="ngForm" (ngSubmit)="submit(formDirective)" >
+            
+       
+            
+            <div class="container-cuerpo-fila1">
+
+                    <div class="fila1-Datos"> 
+                        <p><b>Talla:</b> {{Cod_Talla}}</p>
+                        <p><b>Descripcion:</b> {{Des_Medida}}</p>
+                        <br>
+                        <hr>
+                    </div>
+                  
+                     
+                    <mat-form-field class="fila1-Medida1"> 
+                        <mat-label>Medida1</mat-label>
+                        <input matInput type="text"   placeholder="Medida1" value=""   (keydown.enter)="focusMedida2()"
+                            autocomplete="off" formControlName="Medida1">
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Medida2"> 
+                        <mat-label>Medida2</mat-label>
+                        <input matInput type="text"   placeholder="Medida2" value="" #inputMedida2 (keydown.enter)="focusMedida3()"
+                            autocomplete="off" formControlName="Medida2">
+                    </mat-form-field>   
+                    <mat-form-field class="fila1-Medida3"> 
+                        <mat-label>Medida3</mat-label>
+                        <input matInput type="text"   placeholder="Medida3" value="" #inputMedida3 (keydown.enter)="focusMedida4()"
+                            autocomplete="off" formControlName="Medida3">
+                    </mat-form-field>   
+                    <mat-form-field class="fila1-Medida4"> 
+                        <mat-label>Medida4</mat-label>
+                        <input matInput type="text"   placeholder="Medida4" value="" #inputMedida4 (keydown.enter)="focusMedida5()"
+                            autocomplete="off" formControlName="Medida4">
+                    </mat-form-field>   
+                    <mat-form-field class="fila1-Medida5"> 
+                        <mat-label>Medida5</mat-label>
+                        <input matInput type="text"   placeholder="Medida5" value="" #inputMedida5
+                            autocomplete="off" formControlName="Medida5">
+                    </mat-form-field>          
+            </div>     
+ 
+
+ 
+            <div class="container-cuerpo-foot">
+                <button  type="submit" class="button-agregar"  mat-dialog-close="true" [disabled]="!formulario.valid" mat-flat-button>
+                    <mat-icon aria-label="person" >save
+                    </mat-icon>  Registrar
+                </button>
+
+                <button type="button" class="button-cancelar" mat-button mat-dialog-close mat-dialog-close  mat-flat-button>
+                    <mat-icon aria-label="person">highlight_off
+                    </mat-icon>  Cancelar
+                </button>               
+            </div> 
+        </form>
+
+    </div>
+
+
+</div>

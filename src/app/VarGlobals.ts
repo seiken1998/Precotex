@@ -30,6 +30,7 @@
     Cod_TallaG: '',
 
     Cant_PrendasG: 0,
+    Cod_Hoja_Medida_Cab: 0,
 
     Accion: ''
     //baseUrl: "https://gestion.precotex.com/ws_android"

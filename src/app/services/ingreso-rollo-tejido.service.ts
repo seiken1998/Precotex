@@ -35,9 +35,9 @@ export class IngresoRolloTejidoService {
 
 
 
-  GenerarMovimientoRolloTejidoService(sOrden_Servicio: string, sCod_Barras: string) {
+  GenerarMovimientoRolloTejidoService(sCod_Barras: string) {
 
-    return this.http.get(`${this.baseUrl}/app_man_ingreso_rollo_tejido_genera_mov.php?Orden_Servicio=${sOrden_Servicio}&Cod_Barras=${sCod_Barras}&Cod_Usuario=${this.sCod_Usuario}`);
+    return this.http.get(`${this.baseUrl}/app_man_ingreso_rollo_tejido_genera_mov.php?Cod_Barras=${sCod_Barras}&Cod_Usuario=${this.sCod_Usuario}`);
 
   }
 

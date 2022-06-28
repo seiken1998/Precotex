@@ -47,7 +47,7 @@
     display: grid;
 
     grid-template:
-        "fila1" 140px
+        "fila1" 90px
         "fila2" 400px
         "foot" 55px / 
         99%;
@@ -79,16 +79,18 @@ mat-form-field {
     display: grid;
 
     grid-template:
-    "col1 col2 auto auto" 70px 
+   /* "col1 col2 auto auto" 70px 
     "col3 col4 col5 col6" 70px /
-    185px 70px 185px 70px;
+    185px 70px 185px 70px;*/
+    "col3 col4 col5 col6 col2" 70px /
+    185px 70px 185px 70px 80px;
 }
 
 
-.fila1-Orden_Servicio {
+/*.fila1-Orden_Servicio {
     grid-area: col1;
     width: 180px; 
-}
+}*/
 
 .fila1-btn_regresar {
     grid-area: col2;
@@ -225,7 +227,7 @@ tr:active {
         display: grid;
     
         grid-template:
-        "fila1" 140px
+        "fila1" 90px
         "fila2" 535px
         "foot" 55px /
         99%;
@@ -234,15 +236,18 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 auto auto" 70px 
+        /*"col1 col2 auto auto" 70px 
         "col3 col4 col5 col6" 70px /
-        185px 70px 185px 70px;
+        185px 70px 185px 70px;*/
+
+        "col3 col4 col5 col6 col2" 70px /
+        185px 70px 185px 70px 80px;
     }
 
-    .fila1-Orden_Servicio {
+    /*.fila1-Orden_Servicio {
         grid-area: col1;
         width: 180px;
-    }
+    }*/
 
     .fila1-btn_regresar {
         grid-area: col2;
@@ -280,7 +285,7 @@ tr:active {
         display: grid;
      
         grid-template:
-        "fila1" 160px
+        "fila1" 90px
         "fila2" 400px
         "foot" 55px /
         99%; 
@@ -289,14 +294,17 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 auto auto" 70px 
+        /*"col1 col2 auto auto" 70px 
         "col3 col4 col5 col6" 70px /
-        115px 70px 115px 70px;
+        115px 70px 115px 70px;*/
+      
+        "col3 col4 col5 col6 col2" 70px /
+        115px 70px 115px 70px 80px;
     } 
-    .fila1-Orden_Servicio {
+    /*.fila1-Orden_Servicio {
         grid-area: col1;
         width: 110px;
-    }
+    }*/
 
     .fila1-btn_regresar {
         grid-area: col2;

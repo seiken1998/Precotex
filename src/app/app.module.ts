@@ -85,6 +85,9 @@ import { HttpErrorInterceptor } from './interceptors/http-error-response.service
 import { SeguridadControlMovimientosJabasAccionComponent } from './components/seguridad-control-movimientos-jabas/seguridad-control-movimientos-jabas-accion/seguridad-control-movimientos-jabas-accion.component';
 import { DialogRegistrarEstadoControlMovmientosJabasComponent } from './components/seguridad-control-movimientos-jabas/dialog-seguridad-control-movimientos-jabas/dialog-registrar-estado-control-movmientos-jabas/dialog-registrar-estado-control-movmientos-jabas.component';
 
+import { AgGridModule} from 'ag-grid-angular';
+import { DialogRegistroHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-registro-hoja-medida/dialog-registro-hoja-medida.component';
+import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component'
 
 @NgModule({
   declarations: [
@@ -152,7 +155,9 @@ import { DialogRegistrarEstadoControlMovmientosJabasComponent } from './componen
     DialogAdicionalComponent,
     SeguridadControlMovimientosJabasComponent,
     SeguridadControlMovimientosJabasAccionComponent,
-    DialogRegistrarEstadoControlMovmientosJabasComponent
+    DialogRegistrarEstadoControlMovmientosJabasComponent,
+    DialogRegistroHojaMedidaComponent,
+    DialogObservacionHojaMedidaComponent
    
     
  
@@ -167,6 +172,7 @@ import { DialogRegistrarEstadoControlMovmientosJabasComponent } from './componen
     ReactiveFormsModule,
     MaterialModule,
     TextMaskModule,
+    AgGridModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 10000,

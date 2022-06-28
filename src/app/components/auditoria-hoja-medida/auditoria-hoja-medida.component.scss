@@ -47,8 +47,8 @@
     display: grid;
 
     grid-template:
-        "fila1" 115px
-        "fila2" 400px
+        "fila1" 100px
+        "fila2" 490px
         "foot" 55px / 
         99%;
 }
@@ -79,16 +79,16 @@ mat-form-field {
     display: grid;
 
     grid-template:
-        "col1 col2 col3 col4 col5 col6" auto /
-        100px 200px 200px 400px 400px 200px  auto;
+    "col1 col2 col5 col6" auto/
+    270px 200px 200px 200px
 }
 
 
-.fila1-Codigo {
+.fila1-fecha {
     grid-area: col1;
      
 }
-.fila1-Cliente {
+.fila1-OP {
     grid-area: col2;
     
 }
@@ -96,15 +96,24 @@ mat-form-field {
     grid-area: col3;
     
 }
-.fila1-Prenda {
+.fila1-auditor {
     grid-area: col4;
     
 }
-.fila1-TipoPrenda {
+.fila1-buscar {
+    width: 100%;
     grid-area: col5;
+    height: 40px;
+    max-width: 280px;
+    margin: auto;
+    margin-top: 3px;
+    background-color: #3f51b5;
+    color: #ffffff;
+    width: 180px;
     
 }
-.fila1-buscar {
+
+.fila1-agregar {
     width: 100%;
     grid-area: col6;
     height: 40px;
@@ -114,7 +123,6 @@ mat-form-field {
     background-color: #3f51b5;
     color: #ffffff;
     width: 180px;
-    
 }
 
 
@@ -156,11 +164,17 @@ mat-form-field {
     color: #ffffff;
 }*/
 
-.mat-column-Codigo,
-.mat-column-Descripcion, 
-.mat-column-DesTelaCli,
-.mat-column-CodTarifadoCost,
+.mat-column-Cod_Hoja_Medida_Cab,
+.mat-column-Cod_OrdPro, 
+.mat-column-Cod_ColCli,
+.mat-column-Cod_LinPro,
+.mat-column-Supervisor,
+.mat-column-Auditor,
+.mat-column-Observacion,
+.mat-column-Flg_Estado,
+.mat-column-Fecha_Registro,
 .mat-column-Acciones
+//.mat-column-eliminar 
 {
 	text-align: center;
 	font-size: 13px;
@@ -169,21 +183,37 @@ mat-form-field {
    
 }
  
-.mat-column-Codigo{
+.mat-column-Cod_Hoja_Medida_Cab{
     width: 10px;
 }
-.mat-column-Descripcion{
+.mat-column-Cod_OrdPro{
     width: 120px;
 }
-.mat-column-DesTelaCli{
+.mat-column-Cod_ColCli{
     width: 120px;
 }
-.mat-column-CodTarifadoCost{
+.mat-column-Cod_LinPro{
+    width: 50px;
+}
+.mat-column-Supervisor{
+    width: 30px;
+}
+.mat-column-Auditor{
+    width: 150px;
+}
+.mat-column-Observacion{
+    width: 50px;
+}
+.mat-column-Flg_Estado{
+    width: 50px;
+}
+.mat-column-Fecha_Registro{
     width: 50px;
 }
 .mat-column-Acciones{
-    width: 30px;
+    width: 50px;
 }
+
 
 
 /* ------------------------- */
@@ -219,8 +249,8 @@ tr:active {
         display: grid;
     
         grid-template:
-        "fila1" 170px
-        "fila2" 535px
+        "fila1" 100px
+        "fila2" 560px
         "foot" 55px /
         99%;
     }
@@ -228,38 +258,38 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 col3" 70px
-        "col4 col5 col6" 70px/
-        150px 350px 350px;
-}
-
-
-.fila1-Codigo {
-    grid-area: col1;
-     
-}
-.fila1-Cliente {
-    grid-area: col2;
+        "col1 col2 col5 col6" auto/
+        270px 200px 150px 150px
+    }
     
-}
-.fila1-Estilo {
-    grid-area: col3;
-    
-}
-.fila1-Prenda {
-    grid-area: col4;
-    
-}
-.fila1-TipoPrenda {
-    grid-area: col5;
-    
-}
-.fila1-buscar {
- 
-    grid-area: col6;
+    .fila1-fecha {
+        grid-area: col1;
+         
+    }
+    .fila1-OP {
+        grid-area: col2;
+        
+    }
+    .fila1-Estilo {
+        grid-area: col3;
+        
+    }
+    .fila1-auditor {
+        grid-area: col4;
+        
+    }
 
-}
+    .fila1-buscar {
+      
+        grid-area: col5;
+        width: 130px;
+    }
 
+    .fila1-agregar {
+      
+        grid-area: col6;
+        width: 130px;
+    }
 }
 
 
@@ -272,7 +302,7 @@ tr:active {
     
         grid-template:
         "fila1" 170px
-        "fila2" 330px
+        "fila2" 510px
         "foot" 55px /
         99%;
     }
@@ -280,17 +310,16 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2 col3" 70px
-        "col4 col5 col6" 70px/
-        150px 300px 300px;
+        "col1 col2" 80px 
+        "col5 col6" 80px/
+        270px 200px;
     }
-
-
-    .fila1-Codigo {
+    
+    .fila1-fecha {
         grid-area: col1;
-        
+         
     }
-    .fila1-Cliente {
+    .fila1-OP {
         grid-area: col2;
         
     }
@@ -298,18 +327,21 @@ tr:active {
         grid-area: col3;
         
     }
-    .fila1-Prenda {
+    .fila1-auditor {
         grid-area: col4;
         
     }
-    .fila1-TipoPrenda {
-        grid-area: col5;
-        
-    }
-    .fila1-buscar {
-    
-        grid-area: col6;
 
+    .fila1-buscar {
+      
+        grid-area: col5;
+        width: 200px;
+    }
+
+    .fila1-agregar {
+      
+        grid-area: col6;
+        width: 200px;
     }
 
   }
@@ -332,29 +364,37 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2" 70px 
-        "col3 col4" 70px 
-        "col5 auto" 70px /
-        200px 200px;
+        "col1 col2" 80px 
+        "col5 col6" 80px/
+        270px 200px;
     } 
-    .fila1-Codigo {
+    .fila1-fecha {
         grid-area: col1;
-        width: 100px; 
+         width: 200px;
     }
-    .fila1-Cliente {
+    .fila1-OP {
         grid-area: col2;
-        
+        width: 200px;
     }
     .fila1-Estilo {
         grid-area: col3;
-        
+        width: 200px;
     }
-    .fila1-Prenda {
+    .fila1-auditor {
         grid-area: col4;
-        
+        width: 200px;
     }
-    .fila1-buscar {   
-        grid-area: col5;    
+
+    .fila1-buscar {
+      
+        grid-area: col5;
+        width: 200px;
+    }
+
+    .fila1-agregar {
+      
+        grid-area: col6;
+        width: 200px;
     }
 
   }

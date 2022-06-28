@@ -23,6 +23,7 @@ interface data_det {
   Nom_Cliente:    string,
   Cod_OrdPro :    string,
   Cod_EstCli:     string,
+  Cod_TemCli
   Cod_ColCli:     string,
   Total:          string,
   Cantidad_Total: string,
@@ -103,7 +104,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
 
 
 
-  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Color','Total','Especiales', 'Cant','modificar','detalle']
+  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Temporada','Color','Total','Especiales', 'Cant','modificar','detalle']
   dataSource: MatTableDataSource<data_det>;
   
 
@@ -230,7 +231,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
 
  /***************************** eliminar registros con el icono del tacho  ************************** */
  
-  EliminarRegistro(Num_Auditoria: number, Cod_Cliente: string, Cod_EstCli: string, Cod_ColCli: string){
+  EliminarRegistro(Num_Auditoria: number, Cod_Cliente: string,Cod_EstCli: string, Cod_TemCli: string, Cod_ColCli: string){
     let dialogRef =  this.dialog.open(DialogEliminarComponent, { disableClose: true, data:{nNum_Auditoria: Num_Auditoria} });
     dialogRef.afterClosed().subscribe(result =>{
     if(result == 'true'){
@@ -242,7 +243,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Fec_Auditoria  = this.formulario.get('fec_registro')?.value
       this.Total          = 0
       this.Cod_EstCli     = Cod_EstCli
-      this.Cod_TemCli     = ''
+      this.Cod_TemCli     = Cod_TemCli
       this.Cod_ColCli     = Cod_ColCli
       this.Glosa          = ''
       this.Cod_Talla      = ''

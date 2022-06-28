@@ -34,7 +34,13 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
  des_conductor = '';
  cod_accion = 'S';
  ope = '';
-
+ Ultimo_Fec_Registro = ''
+ Planta = ''
+ Accion = ''
+ Origen = ''
+ Destino = ''
+ Ultimo_Km = 0
+ Usuario = ''
 
   Visible_Registro_Personal: boolean = false
 
@@ -110,6 +116,13 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
 */
 
   BuscarVehiculo(){
+    this.Ultimo_Fec_Registro = ''
+    this.Planta     = ''
+    this.Accion     = ''
+    this.Origen     = ''
+    this.Destino    = ''
+    this.Ultimo_Km  = 0
+    this.Usuario    = ''
     this.codigo_vehiculo = this.formulario.get('vehiculo')?.value
 
     if  (this.codigo_vehiculo == null){
@@ -132,6 +145,13 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
         if(result[0].Dni_Conductor.length>0){
           this.formulario.controls['conductor'].setValue(result[0].Dni_Conductor);
           this.formulario.controls['nombre'].setValue(result[0].Nombres);
+          this.Ultimo_Fec_Registro = result[0].Ultimo_Fec_Registro
+          this.Planta     = result[0].Planta
+          this.Accion     = result[0].Accion
+          this.Origen     = result[0].Origen
+          this.Destino    = result[0].Destino
+          this.Ultimo_Km  = result[0].Ultimo_Km
+          this.Usuario    = result[0].Usuario 
           //this.BuscarConductor()
            
         }

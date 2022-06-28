@@ -24,7 +24,7 @@
                         <mat-label>Supervisor</mat-label>
                         <input matInput type="text"  #trigger="matAutocompleteTrigger" placeholder="Supervisor" formControlName="Supervisor"  [matAutocomplete]="autoDataSupervisor" />
                         <mat-autocomplete autoActiveFirstOption #autoDataSupervisor="matAutocomplete">
-                            <mat-option *ngFor="let option of filtroOperacionSupervisor | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodSupervisor(option.Cod_Auditor)">
+                            <mat-option *ngFor="let option of filtroOperacionSupervisor | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodSupervisor(option.Cod_Auditor, option.Tip_Trabajador)">
                                 {{option.Nom_Auditor}}
                             </mat-option> 
                         </mat-autocomplete>                            
@@ -46,7 +46,7 @@
                         <mat-label>Auditor</mat-label>
                         <input matInput type="text"  #trigger="matAutocompleteTrigger" placeholder="Auditor" formControlName="Auditor"  [matAutocomplete]="autoDataAuditor" />
                         <mat-autocomplete autoActiveFirstOption #autoDataAuditor="matAutocomplete">
-                            <mat-option *ngFor="let option of filtroOperacionAuditor | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodAuditor(option.Cod_Auditor)">
+                            <mat-option *ngFor="let option of filtroOperacionAuditor | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodAuditor(option.Cod_Auditor,option.Tip_Trabajador)">
                                 {{option.Nom_Auditor}}
                             </mat-option> 
                         </mat-autocomplete>                            

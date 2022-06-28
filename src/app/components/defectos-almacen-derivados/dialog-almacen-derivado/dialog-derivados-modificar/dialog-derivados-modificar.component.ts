@@ -96,9 +96,11 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
   flg_reset_estilo  = false
   num = 0
   Altertas_Caidas_Global  = ''
-  Total_Global = 0
+  Total_solicitado_Global = 0
+  Total_requerido_Global = 0
   Defectos_Global = 0
-  Caidas_Global = 0
+  Caidas_solicitado_Global = 0
+  Caidas_requerido_Global = 0
 
  
 
@@ -185,9 +187,9 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
 
 
   mostrarAlertaCaidas(){
-    this.Total_Global = 0
+    this.Total_solicitado_Global = 0
     this.Defectos_Global = 0
-    this.Caidas_Global = 0
+    this.Caidas_solicitado_Global = 0
 
     this.Cod_Accion     = 'C'
     this.Num_Auditoria  = this.data
@@ -228,9 +230,11 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
          /* console.log(result[0]['Total'])
           console.log(result[0]['Defectos'])
           console.log(result[0]['Caidas'])*/
-          this.Total_Global = result[0]['Total']
+          this.Total_solicitado_Global = result[0]['Total_solicitado']
+          this.Total_requerido_Global = result[0]['Total_requerido']
           this.Defectos_Global = result[0]['Defectos']
-          this.Caidas_Global = result[0]['Caidas']
+          this.Caidas_solicitado_Global = result[0]['Caidas_solicitado']
+          this.Caidas_requerido_Global = result[0]['Caidas_requerido']
 
           this.Altertas_Caidas_Global = result[0]['Alerta']
           this.EnviarAlertaTelegram()  
@@ -248,10 +252,11 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
     console.log(this.formulario.controls['sColor'].value)
     console.log(this.formulario.controls['sCliente'].value)
     console.log(this.formulario.controls['sTemporada'].value)
-    console.log(this.Total_Global)
+    console.log(this.Total_solicitado_Global)
+    console.log(this.Total_requerido_Global)
     console.log(this.Defectos_Global)
-    console.log(this.Caidas_Global)
-
+    console.log(this.Caidas_solicitado_Global)
+    console.log(this.Caidas_requerido_Global)
  
 
     this.defectosAlmacenDerivadosService.Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram(
@@ -261,9 +266,11 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
       this.formulario.controls['sCodTemp'].value,
       this.formulario.controls['sTemporada'].value,
       this.formulario.controls['sColor'].value,
-      this.Total_Global,
+      this.Total_solicitado_Global,
+      this.Total_requerido_Global,
       this.Defectos_Global,
-      this.Caidas_Global
+      this.Caidas_solicitado_Global,
+      this.Caidas_requerido_Global
     ).subscribe(
  
         (result: any) => {
@@ -430,8 +437,8 @@ BuscarMotivo(){
     this.Cod_Auditor    = ''
     this.Fec_Auditoria  = ''
     this.Total          = 0
-    this.Cod_EstCli     = ''
-    this.Cod_TemCli     = ''
+    this.Cod_EstCli     = this.formulario.get('sEstilo')?.value
+    this.Cod_TemCli     = this.formulario.controls['sCodTemp'].value
     this.Cod_ColCli     = ''
     this.Glosa          = ''
     this.Cod_Talla      = this.formulario.get('s')?.value
@@ -531,8 +538,8 @@ DeshabilitarCabcera(){
     this.Cod_Auditor    = ''
     this.Fec_Auditoria  = ''
     this.Total          = 0
-    this.Cod_EstCli     = ''
-    this.Cod_TemCli     = ''
+    this.Cod_EstCli     = this.formulario.get('sEstilo')?.value
+    this.Cod_TemCli     = this.formulario.controls['sCodTemp'].value
     this.Cod_ColCli     = ''
     this.Glosa          = ''
     this.Cod_Talla      = ''

@@ -102,7 +102,7 @@ export class AuditoriaInspeccionCosturaComponent implements OnInit {
     Estilo:       [''],
     fec_registro: [''],
     auditor:      [''],
-    CodAuditor:   ['']
+    CodAuditor:   [''] 
   })
 
 

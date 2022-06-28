@@ -23,11 +23,13 @@ interface data{
 interface Supervisor {
   Cod_Auditor: string;
   Nom_Auditor: string;
+  Tip_Trabajador: string;
 }
 
 interface Auditor {
   Cod_Auditor: string;
   Nom_Auditor: string;
+  Tip_Trabajador: string
 }
 
 @Component({
@@ -136,7 +138,9 @@ export class DialogRegistrarCabeceraComponent implements OnInit {
 /* --------------- REGISTRAR CABECERA ------------------------------------------ */
 
   submit(formDirective) :void {
-
+    console.log(this.formulario.get('CodSupervisor')?.value)
+    console.log(this.formulario.get('CodAuditor')?.value)
+    
     this.Cod_Accion         = 'I'
     this.Num_Auditoria      = 0
     if(this.Titulo != undefined){
@@ -257,8 +261,8 @@ export class DialogRegistrarCabeceraComponent implements OnInit {
 
   /* --------------- CAMBIAR VALOR DEL INPUT COD SUPERVISOR ------------------------------------------ */
 
-  CambiarValorCodSupervisor(Cod_Auditor: string){
-    this.formulario.controls['CodSupervisor'].setValue(Cod_Auditor)
+  CambiarValorCodSupervisor(Cod_Auditor: string, Tip_Trabajador: string){
+    this.formulario.controls['CodSupervisor'].setValue(Tip_Trabajador + '-' + Cod_Auditor)
   }
 
 
@@ -335,8 +339,8 @@ export class DialogRegistrarCabeceraComponent implements OnInit {
 
   /* --------------- CAMBIAR VALOR DEL INPUT COD SUPERVISOR ------------------------------------------ */
 
-  CambiarValorCodAuditor(Cod_Auditor: string){
-    this.formulario.controls['CodAuditor'].setValue(Cod_Auditor)
+  CambiarValorCodAuditor(Cod_Auditor: string, Tip_Trabajador: string){
+    this.formulario.controls['CodAuditor'].setValue(Tip_Trabajador + '-' +Cod_Auditor)
   }
   
 

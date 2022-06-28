@@ -24,7 +24,7 @@
                         <mat-label>Inspector</mat-label>
                         <input matInput type="text"  #trigger="matAutocompleteTrigger" placeholder="Inspector" formControlName="Inspector"  [matAutocomplete]="autoDataInspector" />
                         <mat-autocomplete autoActiveFirstOption #autoDataInspector="matAutocomplete">
-                            <mat-option *ngFor="let option of filtroOperacionInspector | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodInspector(option.Cod_Auditor)">
+                            <mat-option *ngFor="let option of filtroOperacionInspector | async" [value]="option.Nom_Auditor" (click)="CambiarValorCodInspector(option.Cod_Auditor, option.Tip_Trabajador)">
                                 {{option.Nom_Auditor}}
                             </mat-option> 
                         </mat-autocomplete>                            

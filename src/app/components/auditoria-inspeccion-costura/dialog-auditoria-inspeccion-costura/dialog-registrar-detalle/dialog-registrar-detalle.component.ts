@@ -30,6 +30,7 @@ interface data{
 interface Inspector {
   Cod_Auditor: string;
   Nom_Auditor: string;
+  Tip_Trabajador: string;
 }
 
 interface Color {
@@ -181,7 +182,7 @@ export class DialogRegistrarDetalleComponent implements OnInit {
           (result: any) => {
             if(result[0].Respuesta != 'OK'){
             this.formulario.controls['Inspector'].setValue(result[0].Nom_Auditor)
-            this.formulario.controls['CodInspector'].setValue(result[0].Cod_Inspector)
+            this.formulario.controls['CodInspector'].setValue(result[0].Tip_Trabajador_Inspector+'-'+result[0].Cod_Inspector)
             this.formulario.controls['OP'].setValue(result[0].Cod_OrdPro)
             this.buscarEstiloClientexOP()
             this.formulario.controls['Color'].setValue(result[0].Cod_Present)
@@ -309,7 +310,7 @@ export class DialogRegistrarDetalleComponent implements OnInit {
     this.formulario.controls['CodSupervisor'].setValue('')
     const filterValue = value.toLowerCase();
     return this.listar_operacionSupervisor.filter(option => option.Nom_Auditor.toLowerCase().includes(filterValue));
-  }*/
+  }*/ 
 
   private _filterOperacionInspector(value: string): Inspector[] {
     this.formulario.controls['CodInspector'].setValue('')
@@ -323,8 +324,8 @@ export class DialogRegistrarDetalleComponent implements OnInit {
 
   /* --------------- CAMBIAR VALOR DEL INPUT COD SUPERVISOR ------------------------------------------ */
 
-  CambiarValorCodInspector(Cod_Auditor: string){
-    this.formulario.controls['CodInspector'].setValue(Cod_Auditor)
+  CambiarValorCodInspector(Cod_Auditor: string, Tip_Trabajador:string){
+    this.formulario.controls['CodInspector'].setValue(Tip_Trabajador+'-'+Cod_Auditor)
   }
 
 

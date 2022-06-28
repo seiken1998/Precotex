@@ -11,13 +11,20 @@ import { startWith, map, debounceTime } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService }  from "ngx-spinner";
 import { DialogEliminarComponent} from 'src/app/components/dialogs/dialog-eliminar/dialog-eliminar.component'
+import { DialogObservacionHojaMedidaComponent} from 'src/app/components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component'
 import { GlobalVariable } from '../../VarGlobals'; //<==== this one
 
 interface data_det {
-  Version:              string
-  Cod_Tarifado_Costeo:  string
-  Descr:                string	 		
-  Des_Tela_Cliente:     string
+    Cod_Hoja_Medida_Cab:  number,
+    Cod_OrdPro:           string,
+    Cod_ColCli:           string,
+    Cod_LinPro:           string,
+    Supervisor:           string,
+    Auditor:              string,
+    Observacion:          string,
+    Flg_Estado:           string,
+    Fecha_Registro:       string 		
+
 }
  
 
@@ -42,22 +49,18 @@ interface Temporada {
 })
 export class AuditoriaHojaMedidaComponent implements OnInit {
 
+
   
-  listar_operacionEstilo: string[] = [''];
-  listar_operacionTemporada: Temporada[] = [];
-  listar_operacionCliente: Cliente[] = [];
-  
-  filtroOperacionCliente: Observable<Cliente[]> | undefined;
-  filtroOperacionEstilo: Observable<string[]> | undefined;
-
-  tallas:any = []
-
-
   public data_det = [{
-    Version:              "",
-    Cod_Tarifado_Costeo:  "",
-    Descr:                "",	 		
-    Des_Tela_Cliente:     ""
+    Cod_Hoja_Medida_Cab:   0,
+    Cod_OrdPro:           "",
+    Cod_ColCli:           "",
+    Cod_LinPro:           "",
+    Supervisor:           "",
+    Auditor:              "",
+    Observacion:          "",
+    Flg_Estado:           "",
+    Fecha_Registro:       "",
   }]
 
 
@@ -68,24 +71,38 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
   Cod_EstCli        = ''
   Cod_EstPro        = ''
   Cod_Version       = ''
+  Cod_OrdPro        = ''
+  Cod_ColCli          = ''
+  Cod_TemCli          = ''	 
+  Cod_Clientev2       = ''
+  Cod_Hoja_Medida_Cab = 0
+  Cod_LinPro          = ''
+  Observaciones       = ''
+  Flg_Estado          = ''
+  Cod_Supervisor      = ''
+  columnDefinitions   = [];
+  Cod_Auditor         = ''
 
+  Fecha_Auditoria    = ''
+  Fecha_Auditoria2   = ''
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
  
 
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
     //-----------NUEVO
-    inputCodigo:      [''],
-    inputCliente:     [''],
-    inputEstilo:      [''],
-    inputPrenda:      [''],
-    inputTipoPrenda:  [''],
+    OP:      [''],
   })
 
 
-  displayedColumns_cab: string[] = ['CodTarifadoCost', 'Codigo', 'Descripcion', 'DesTelaCli', 'Acciones']
+  displayedColumns_cab: string[] = ['Cod_Hoja_Medida_Cab', 'Cod_OrdPro', 'Cod_ColCli', 'Cod_LinPro', 'Supervisor', 'Auditor', 'Fecha_Registro', 'Flg_Estado', 'Observacion','Acciones']
   dataSource: MatTableDataSource<data_det>;
 
-
+ 
 
   constructor(private formBuilder: FormBuilder,
     private matSnackBar: MatSnackBar,
@@ -97,10 +114,10 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
 
   ngOnInit(): void { 
     //this.MostrarCabeceraAuditoria()
-    this.formulario.controls['inputPrenda'].disable()
-    this.formulario.controls['inputTipoPrenda'].disable()
-    this.CargarOperacionCliente()
+    GlobalVariable.Cod_Hoja_Medida_Cab = 0
+    this.listarCabecera()
     } 
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -118,239 +135,136 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
 
   }
  
-
-  /*openDialog() {
-
-   let dialogRef = this.dialog.open(DialogRegistrarCabeceraComponent, {
-      disableClose: true,
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-      if (result == 'false') {
-        this.MostrarCabeceraAuditoria()
-      }
+  clearDate(event) {
+    event.stopPropagation();
+    this.range.controls['start'].setValue('')
+    this.range.controls['end'].setValue('')
+  }
  
-    })
 
-  }*/
-
-
-  
-
-
-
-  MostrarVersiones() {
+  listarCabecera(){
     this.SpinnerService.show();
-    this.Cod_Accion = 'V'
+    this.Cod_Accion           = 'L'
+    this.Cod_Hoja_Medida_Cab
+    this.Cod_OrdPro           = this.formulario.get('OP')?.value
+    this.Cod_ColCli           = ''
+    this.Cod_Clientev2
+    this.Cod_EstCli           = ''
+    this.Cod_TemCli
     this.Cod_EstPro
-    this.auditoriaHojaMedidaService.AuditoriaHojaMedidaVersionesService(
-      this.Cod_Accion, 
-      this.Cod_EstPro
-    ).subscribe(
+    this.Cod_Version
+    this.Cod_LinPro            = ''
+    this.Cod_Supervisor        = ''
+    this.Cod_Auditor           = ''
+    this.Observaciones
+    this.Flg_Estado           = 'P',
+    this.Fecha_Auditoria    = this.range.get('start')?.value
+    this.Fecha_Auditoria2   = this.range.get('end')?.value
+    this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaCabecera(
+      this.Cod_Accion,         
+      this.Cod_Hoja_Medida_Cab,
+      this.Cod_OrdPro,
+      this.Cod_ColCli,
+      this.Cod_Clientev2,
+      this.Cod_EstCli,
+      this.Cod_TemCli,
+      this.Cod_EstPro,
+      this.Cod_Version,
+      this.Cod_LinPro,
+      this.Cod_Supervisor,
+      this.Cod_Auditor,
+      this.Observaciones,
+      this.Flg_Estado,
+      this.Fecha_Auditoria,
+      this.Fecha_Auditoria2
+      ).subscribe(
       (result: any) => {
-       console.log(result)
-       this.dataSource.data = result
-       this.SpinnerService.hide();  
-     
+        if (result[0].Respuesta == undefined) {
+          this.dataSource.data = result
+          this.SpinnerService.hide();
+        
+        }else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.dataSource.data = []
+          this.SpinnerService.hide();
+        }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
-  
+      
   }
 
 
-  EliminarRegistrocCabecera(Num_Auditoria: number, Cod_LinPro: string) {
+  asginarVGlobalAuditoriaHojaMedida(Cod_Hoja_Medida_Cab: number){
+   GlobalVariable.Cod_Hoja_Medida_Cab = Cod_Hoja_Medida_Cab
+  }
+
+  actualizarObservacion(Cod_Hoja_Medida_Cab: number){
+    let dialogRef =  this.dialog.open(DialogObservacionHojaMedidaComponent, 
+      { disableClose: true,
+        panelClass: 'my-class',
+        data: { Cod_Hoja_Medida_Cab: Cod_Hoja_Medida_Cab
+        }});  
+      dialogRef.afterClosed().subscribe(result => {
+          if (result == 'true') { 
+            this.listarCabecera()
+      }})
+  }
+
+
+  EliminarRegistrocCabecera(Cod_Hoja_Medida_Cab: number) {
     let dialogRef = this.dialog.open(DialogEliminarComponent, { disableClose: true, data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
+        this.Cod_Accion             = 'D'
+        this.Cod_Hoja_Medida_Cab    = Cod_Hoja_Medida_Cab
+        this.Cod_OrdPro             = ''
+        this.Cod_ColCli             = ''
+        this.Cod_Clientev2
+        this.Cod_EstCli             = ''
+        this.Cod_TemCli
+        this.Cod_EstPro
+        this.Cod_Version
+        this.Cod_LinPro             = ''
+        this.Cod_Supervisor         = ''
+        this.Cod_Auditor            = ''
+        this.Observaciones
+        this.Flg_Estado             = 'P'
+        this.Fecha_Auditoria        = ''
+        this.Fecha_Auditoria2       = ''
+        this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaCabecera(
+          this.Cod_Accion,         
+          this.Cod_Hoja_Medida_Cab,
+          this.Cod_OrdPro,
+          this.Cod_ColCli,
+          this.Cod_Clientev2,
+          this.Cod_EstCli,
+          this.Cod_TemCli,
+          this.Cod_EstPro,
+          this.Cod_Version,
+          this.Cod_LinPro,
+          this.Cod_Supervisor,
+          this.Cod_Auditor,
+          this.Observaciones,
+          this.Flg_Estado,
+          this.Fecha_Auditoria,
+          this.Fecha_Auditoria2
+          ).subscribe(
+          (result: any) => {
+            if (result[0].Respuesta == 'OK') {
+              this.listarCabecera()
+            }else{
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
+
       }
 
     }) 
   }
 
  
-  /******************** LLENAR SELECT DE CLIENTE ****************** */ 
-
-  CargarOperacionCliente(){
-
-    this.listar_operacionCliente = [];
-    this.Cod_Accion   = 'C'
-    this.Cod_Cliente  = ''
-    this.Cod_EstCli   = ''
-    this.Cod_EstPro   = ''
-    this.Cod_Version  = ''
-      this.auditoriaHojaMedidaService.AuditoriaHojaMedidaComplementoService(
-      this.Cod_Accion,
-      this.Cod_Cliente,
-      this.Cod_EstCli,
-      this.Cod_EstPro,
-      this.Cod_Version
-      ).subscribe(
-
-       (result: any) => {
-         console.log(result)
-         this.listar_operacionCliente = result
-         this.RecargarOperacionCliente()
-       },
-       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
-   
-       
-    }
- 
-   
-   RecargarOperacionCliente(){
- 
-     this.filtroOperacionCliente = this.formulario.controls['inputCliente'].valueChanges.pipe(
-       startWith(''),
-       map(option => (option ? this._filterOperacionCliente(option) : this.listar_operacionCliente.slice())),
-     );
-     
-   }
-   private _filterOperacionCliente(value: string): Cliente[] {
-     if (value == null || value == undefined ) {
-       value = ''
-       
-     }
-     if(this.flg_reset_estilo == false){
-     this.formulario.controls['inputEstilo'].setValue('');
-     }
-     const filterValue = value.toLowerCase();
- 
-     return this.listar_operacionCliente.filter(option => option.Nom_Cliente.toLowerCase().includes(filterValue));
-   }
- 
-    /******************** LLENAR SELECT DE CLIENTE ****************** */ 
- 
-   /******************** CAMBIAR VALOR DE LA VARIABLE COD_CLIENTE SEGUN LO QUE SELECCIONO EN EL COMBO ****************** */ 
-
-   CambiarValorCliente(Cod_Cliente: string, Abr: string){
-    this.Cod_Cliente = Cod_Cliente
-    console.log(this.Cod_Cliente)
-
-    this.formulario.controls['inputCodigo'].setValue(Abr);
-    this.Cod_Cliente = Cod_Cliente
   
-    this.CargarOperacionEstilo()
-  }
-
-  /******************** CAMBIAR VALOR DE LA VARIABLE COD_CLIENTE SEGUN LO QUE SELECCIONO EN EL COMBO ****************** */ 
-
-
-
-/*********************************ESTILO*************************************************** */
-CargarOperacionEstilo(){
- 
- 
-  this.listar_operacionEstilo = [];
-  this.Cod_Accion   = 'E'
-  this.Cod_EstCli   = ''
-  this.Cod_EstPro   = ''
-  this.Cod_Version  = ''
-  this.auditoriaHojaMedidaService.AuditoriaHojaMedidaComplementoService(
-    this.Cod_Accion,
-    this.Cod_Cliente,
-    this.Cod_EstCli,
-    this.Cod_EstPro,
-    this.Cod_Version).subscribe(
-    (result: any) => {
-
-      if(result.length >0){
-      for (let i = 0; i < result.length; i++) {
-        this.listar_operacionEstilo.push(result[i].Cod_Estcli.replace(/\s+/g, " ").trim()) 
-      }
-      this.RecargarOperacionEstilo() 
-    }
-    
-    },
-    (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-      duration: 1500,
-    }))
-
-  
-
-}
-
-
-private _filterOperacionEstilo(value: string): string[] {
-
-  if (value == null || value == undefined ) {
-    value = ''
-    
-  }
-
-  this.filterValue = value?.toLowerCase();
-
-  return this.listar_operacionEstilo.filter(option => option.toLowerCase().includes(this.filterValue) );
-
-}
-
-RecargarOperacionEstilo(){
-  this.filtroOperacionEstilo = this.formulario.controls['inputEstilo'].valueChanges.pipe(
-    debounceTime(100),
-    startWith(''),
-    map(value => this._filterOperacionEstilo(value))
-  );
-}
-
-/*********************************ESTILO*************************************************** */
-
-
-
-BuscarPrenda(){
-
-  this.Cod_Accion = '2'
-  this.Cod_Cliente
-  this.Cod_EstCli = this.formulario.get('inputEstilo')?.value
-  this.auditoriaHojaMedidaService.AuditoriaHojaMedidaPrendaService(
-    this.Cod_Accion, 
-    this.Cod_Cliente,
-    this.Cod_EstCli
-  ).subscribe(
-    (result: any) => {
-     console.log(result)
-     this.Cod_EstPro = result[0].Codigo
-     this.formulario.controls['inputPrenda'].setValue(result[0].Descripcion)
-     this.formulario.controls['inputTipoPrenda'].setValue(result[0].des_tippre)
-    },
-    (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
-
-  }
-
-
-  VerDetalle(Cod_Tarifado_Costeo: string, Version: string) {
-    GlobalVariable.Cod_ClienteG = this.Cod_Cliente
-    GlobalVariable.Cod_EstCliG =  this.formulario.get('inputEstilo')?.value
-    GlobalVariable.Cod_EstProG = Cod_Tarifado_Costeo
-    GlobalVariable.Cod_VersionG = Version
-
-  }
-
-
-/*************************************CARGAR SELECT TEMPORADA*********************************************** */
-
-  
-/*CargarOperacionTemporada(){
-
-  this.Cod_Accion = 'T'
-  this.Cod_Cliente
-  this.Cod_EstCli = this.formulario.get('inputEstilo')?.value
-  this.auditoriaHojaMedidaService.AuditoriaHojaMedidaComplementoService(
-    this.Cod_Accion, 
-    this.Cod_Cliente,
-    this.Cod_EstCli
-  ).subscribe(
-    (result: any) => {
-      this.listar_operacionTemporada = result
-    },
-    (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
-
-  }*/
-
-/*************************************CARGAR SELECT TEMPORADA*********************************************** */
-
-
- 
 
 
 }

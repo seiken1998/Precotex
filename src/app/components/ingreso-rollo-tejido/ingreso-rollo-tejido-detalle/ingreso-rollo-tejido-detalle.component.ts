@@ -76,7 +76,7 @@ export class IngresoRolloTejidoDetalleComponent implements OnInit {
     if(this.num_movstk != ''){
       this.ListarDetalleRolloTejido()
     }
-    this.formulario.controls['Orden_Servicio'].setValue(this.Orden_Servicio)
+    
   }
 
 
@@ -98,14 +98,15 @@ export class IngresoRolloTejidoDetalleComponent implements OnInit {
   AnadirBulto() {
 
     this.Cod_Accion = 'I';
-    this.Orden_Servicio = this.formulario.get('Orden_Servicio')?.value
+    //this.Orden_Servicio = this.formulario.get('Orden_Servicio')?.value
     this.Codigo_Barras = this.formulario.get('bulto_añadir')?.value
 
-    if (this.Orden_Servicio.length < 5) {
+   /* if (this.Orden_Servicio.length < 5) {
       this.ReproducirError();
       this.matSnackBar.open("Partida Longitud Incorrecta", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
     }
-    else if (this.Codigo_Barras.length >= 5) {
+    else*/
+     if (this.Codigo_Barras.length >= 5) {
 
       if (this.num_movstk.length == 0) {
         //creamos el movimiento
@@ -131,7 +132,7 @@ export class IngresoRolloTejidoDetalleComponent implements OnInit {
   GenerarMovimiento() {
     this.num_movstk = '';
 
-    this.ingresoRolloTejidoService.GenerarMovimientoRolloTejidoService(this.Orden_Servicio, this.Codigo_Barras).subscribe(
+    this.ingresoRolloTejidoService.GenerarMovimientoRolloTejidoService(this.Codigo_Barras).subscribe(
       (result: any) => {
         if (result[0].Respuesta == 'OK') {
           this.num_movstk = result[0].Num_Movstk

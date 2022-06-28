@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-material.css';
+
+
+.ag-theme-material .ag-overlay-loading-center{
+    display: none
+}
+
+.ag-theme-balham .ag-row-selected { background-color: #4abbff; } .ag-theme-balham .ag-ltr .ag-row-focus { border: 1px solid red; }
+
+
 
 * {
     box-sizing: border-box;
