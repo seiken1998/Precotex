@@ -104,9 +104,9 @@
                             <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0" [routerLink]="['/AuditoriaHojaMedidaDetalle']" (click)="asginarVGlobalAuditoriaHojaMedida(data_det.Cod_Hoja_Medida_Cab)">
                                 <mat-icon color="primary">assignment</mat-icon>
                             </a>
-                            <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0">
+                            <!--<a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0">
                                 <mat-icon color="primary">print</mat-icon>
-                            </a>
+                            </a>-->
                             <a mat-icon-button *ngIf="data_det.Cod_OrdPro.length>0" (click)="EliminarRegistrocCabecera(data_det.Cod_Hoja_Medida_Cab)">
                                 <mat-icon color="warn">delete</mat-icon>
                             </a> 

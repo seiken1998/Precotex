@@ -65,7 +65,7 @@ export class DialogRegistroHojaMedidaComponent implements OnInit {
   Medida5:            ['']
  }) 
 
- NumPattern = "^[0-9+/-]{1,5}$";
+ NumPattern = "^[0-9Aa+/-]{1,5}$";
  constructor(private formBuilder: FormBuilder,
              private matSnackBar: MatSnackBar, 
              private auditoriaHojaMedidaService: AuditoriaHojaMedidaService,
@@ -73,11 +73,11 @@ export class DialogRegistroHojaMedidaComponent implements OnInit {
  {
 
    this.formulario = formBuilder.group({
-    Medida1:            ['', [Validators.required, Validators.pattern(this.NumPattern)]],
-    Medida2:            ['', [Validators.required, Validators.pattern(this.NumPattern)]],
-    Medida3:            ['', [Validators.required, Validators.pattern(this.NumPattern)]],
-    Medida4:            ['', [Validators.required, Validators.pattern(this.NumPattern)]],
-    Medida5:            ['', [Validators.required, Validators.pattern(this.NumPattern)]],
+    Medida1:            ['', [Validators.pattern(this.NumPattern)]],
+    Medida2:            ['', [Validators.pattern(this.NumPattern)]],
+    Medida3:            ['', [Validators.pattern(this.NumPattern)]],
+    Medida4:            ['', [Validators.pattern(this.NumPattern)]],
+    Medida5:            ['', [Validators.pattern(this.NumPattern)]],
        
    });
    

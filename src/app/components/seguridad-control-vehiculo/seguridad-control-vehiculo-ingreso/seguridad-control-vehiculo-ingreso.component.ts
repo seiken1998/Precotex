@@ -55,6 +55,8 @@ export class SeguridadControlVehiculoIngresoComponent implements OnInit {
   Destino = ''
   Ultimo_Km = 0
   Usuario = ''
+  Fecha_Registro = ''
+  sAccion = ''
  
  
  
@@ -233,7 +235,10 @@ export class SeguridadControlVehiculoIngresoComponent implements OnInit {
   Guardar() {
 
     console.log(this.formulario.get('ope')?.value)
-    
+    this.sAccion = 'I'
+    if(this.Fecha_Registro != ''){
+      this.sAccion = 'U'
+    }
 
     if(this.formulario.get('vehiculo')?.value =='' ||
       this.formulario.get('conductor')?.value =='' ||
@@ -242,8 +247,9 @@ export class SeguridadControlVehiculoIngresoComponent implements OnInit {
       this.formulario.get('ope')?.value == ''){
         this.matSnackBar.open('Rellene todos los campos!!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
     }
-    else{
+    else{ 
     this.seguridadControlVehiculoService.GuardarService(
+      this.sAccion,
       this.cod_accion,
       this.nNum_Planta, 
       this.formulario.get('vehiculo')?.value,
@@ -251,13 +257,18 @@ export class SeguridadControlVehiculoIngresoComponent implements OnInit {
       this.formulario.get('origen')?.value,
       this.formulario.get('kilometraje')?.value,
       this.formulario.get('glosa')?.value,
-      this.formulario.get('ope')?.value).subscribe(
+      this.formulario.get('ope')?.value,
+      this.Fecha_Registro).subscribe(
 
         (result: any) => {
           if (result[0].Respuesta == 'OK') {
             this.matSnackBar.open('Proceso Correcto !!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-
+            this.Fecha_Registro = ''
             this.Limpiar()
+            this.formulario.controls['origen'].enable()
+            this.formulario.controls['ope'].enable()
+            this.formulario.controls['glosa'].enable()
+            this.formulario.controls['vehiculo'].enable()
            // this.ListarGuia()
           }
           else {
@@ -279,5 +290,48 @@ export class SeguridadControlVehiculoIngresoComponent implements OnInit {
   } 
 
 
+
+  CompletarInfo(){
+    if(this.formulario.get('vehiculo')?.value == ''){
+      this.matSnackBar.open('Ingresa el codigo del vehiculo..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+    }
+    else{
+      this.sAccion = 'T'
+      this.seguridadControlVehiculoService.GuardarService(
+        this.sAccion,
+        this.cod_accion,
+        this.nNum_Planta = 0, 
+        this.formulario.get('vehiculo')?.value,
+        this.formulario.get('conductor')?.value,
+        0,
+        0,
+        this.formulario.get('glosa')?.value,
+        this.formulario.get('ope')?.value,
+        this.Fecha_Registro).subscribe(
+          (result: any) => {
+    
+          if(result.length > 0){
+          this.formulario.controls['vehiculo'].setValue(result[0].Cod_Barras)
+          this.formulario.controls['conductor'].setValue(result[0].Dni_Conductor)
+          this.formulario.controls['nombre'].setValue(result[0].Nombre)
+          this.formulario.controls['origen'].setValue(result[0].Num_Planta_Origen)
+          this.formulario.controls['kilometraje'].setValue(result[0].Num_Kilometraje)
+          this.formulario.controls['glosa'].setValue(result[0].Observacion)
+          this.formulario.controls['ope'].setValue(result[0].Operacion) 
+          this.des_vehiculo = result[0].Descripcion
+          this.formulario.controls['origen'].disable()
+          this.formulario.controls['ope'].disable()
+          this.formulario.controls['glosa'].disable()
+          this.formulario.controls['vehiculo'].disable()
+          this.Fecha_Registro = result[0].FECHA
+          }
+          else{
+            this.matSnackBar.open('No se encontraron resultados..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+          }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })   
+          )
+        }
+      }
 }
  

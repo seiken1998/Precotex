@@ -41,6 +41,8 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
  Destino = ''
  Ultimo_Km = 0
  Usuario = ''
+ Fecha_Registro = ''
+ sAccion = ''
 
   Visible_Registro_Personal: boolean = false
 
@@ -203,14 +205,21 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
  //nNum_Planta_Ref: number, nNum_kilometraje: number,sGlosa: string
   
   Guardar() { 
+    this.sAccion = 'I'
+
+    if(this.Fecha_Registro != ''){
+      this.sAccion = 'U'
+    }
 
     if(this.formulario.get('vehiculo')?.value =='' ||
     this.formulario.get('conductor')?.value =='' ||
     this.formulario.get('destino')?.value == ''||
     this.formulario.get('kilometraje')?.value == ''){
       this.matSnackBar.open('Rellene todos los campos!!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+
   }else{
     this.seguridadControlVehiculoService.GuardarService(
+      this.sAccion,
       this.cod_accion, 
       this.nNum_Planta,
       this.formulario.get('vehiculo')?.value,
@@ -218,13 +227,18 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
       this.formulario.get('destino')?.value,
       this.formulario.get('kilometraje')?.value,
       this.formulario.get('glosa')?.value,
-      this.ope).subscribe(
+      this.ope,
+      this.Fecha_Registro).subscribe(
 
         (result: any) => {
           if (result[0].Respuesta == 'OK') {
             this.matSnackBar.open('Proceso Correcto !!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-
+            this.Fecha_Registro = ''
             this.Limpiar()
+            this.formulario.controls['destino'].enable()
+            this.formulario.controls['glosa'].enable()
+            this.formulario.controls['vehiculo'].enable()
+  
           
           }
           else {
@@ -243,6 +257,47 @@ Limpiar(){
   this.des_conductor = '';
   this.formulario.controls['nombre'].setValue('');
 } 
- 
+
+
+CompletarInfo(){
+  if(this.formulario.get('vehiculo')?.value == ''){
+    this.matSnackBar.open('Ingresa el codigo del vehiculo..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+  }
+  else{    
+  this.sAccion = 'T'
+  this.seguridadControlVehiculoService.GuardarService(
+    this.sAccion,
+    this.cod_accion,
+    this.nNum_Planta = 0, 
+    this.formulario.get('vehiculo')?.value,
+    this.formulario.get('conductor')?.value,
+    0,
+    0,
+    this.formulario.get('glosa')?.value,
+    this.formulario.get('ope')?.value,
+    this.Fecha_Registro).subscribe(
+      (result: any) => {
+       console.log(result)
+       if(result.length > 0){
+      this.formulario.controls['vehiculo'].setValue(result[0].Cod_Barras)
+      this.formulario.controls['conductor'].setValue(result[0].Dni_Conductor)
+      this.formulario.controls['nombre'].setValue(result[0].Nombre)
+      this.formulario.controls['destino'].setValue(result[0].Num_Planta_Origen)
+      this.formulario.controls['kilometraje'].setValue(result[0].Num_Kilometraje)
+      this.formulario.controls['glosa'].setValue(result[0].Observacion)
+      this.des_vehiculo = result[0].Descripcion
+      this.formulario.controls['destino'].disable()
+      this.formulario.controls['glosa'].disable()
+      this.formulario.controls['vehiculo'].disable()
+      this.Fecha_Registro = result[0].FECHA
+      }
+      else{
+        this.matSnackBar.open('No se encontraron resultados..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+      }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })   
+      )
+    }
+  }
 
 }
