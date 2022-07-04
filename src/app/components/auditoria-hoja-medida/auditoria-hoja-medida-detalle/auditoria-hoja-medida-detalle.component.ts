@@ -18,6 +18,7 @@ import { CellClickedEvent, ColDef } from 'ag-grid-community';
 import { DialogRegistroHojaMedidaComponent} from 'src/app/components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-registro-hoja-medida/dialog-registro-hoja-medida.component';
 import { DialogConfirmacionComponent } from '../../dialogs/dialog-confirmacion/dialog-confirmacion.component';
 import {Router} from '@angular/router';
+import { AgGridAngular } from 'ag-grid-angular';
 
 interface data_det {
   SEC_MEDIDA:    string
@@ -52,10 +53,31 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
  
   listar_operacionColor: Color[] = [];
 
-  rowData;
-  columnDefs;
+  /*rowData;
+  columnDefs;*/
+
+  @ViewChild('gGridEmpty') gGridEmpty!: AgGridAngular;
   
- 
+
+  columnDefs0 = [
+  ];
+
+
+
+
+  gridOptions = {
+
+    defaultColDef: {
+        sortable: false,
+        //filter: 'agTextColumnFilter',
+        resizable: false,
+        width: 100,
+        
+    },
+
+    columnDefs: this.columnDefs0,
+    pagination: false,
+  };
 
 
   listar_operacionSupervisor:   Supervisor[] = [];
@@ -144,6 +166,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
   displayedColumns_cab: string[] = []
   dataSource: MatTableDataSource<data_det>; 
   columnsToDisplay: string[] = this.displayedColumns_cab.slice();
+  rowData: any[];
 
   constructor(private formBuilder: FormBuilder,
     private matSnackBar: MatSnackBar,
@@ -204,6 +227,16 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.verificarEstadoFicha()
    
     } 
+
+ 
+  }
+
+
+  generar(){
+ 
+    
+     
+ 
   }
  
   generateColumns(data: any[]) {
@@ -458,7 +491,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         let dialogRef =  this.dialog.open(DialogRegistroHojaMedidaComponent, 
           { disableClose: true,
             panelClass: 'my-class',
-            data: { Cod_Talla: e.colDef.headerName, 
+            data: { Cod_Talla: e.colDef.field, 
                     Des_Medida: e.data.DES_MEDIDA,
                     Sec: e.data.ORDEN,
                     Tip_Medida: e.data.DES_TIPMEDIDA,
@@ -472,7 +505,42 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
                     Medida5: this.Medida5*/
             }});  
           dialogRef.afterClosed().subscribe(result => {
-              if (result == 'true') { 
+            
+              if (result == 'false') { 
+
+              }else{
+                  //console.log(params.value)
+                  console.log(result.data)
+                  params.newValue = result.data
+                  //params.value = params.newValue; // assign to new adjacent column
+                  const focusedCell =  params.api.getFocusedCell();
+                  console.log("focusedCell")
+                  console.log(focusedCell)
+                  const column = focusedCell.column.colDef.field;
+                  console.log("column")
+                  console.log(column)
+                  const rowNode = params.api.getRowNode(focusedCell.rowIndex);
+                  console.log("rowNode")
+                  console.log(rowNode)
+                  console.log(params.node.isSelected())
+                  console.log(params.api.getRowNode())
+                 //params.event.pointerId
+                  rowNode.setDataValue(column,params.newValue)
+                
+
+              
+                  //focusedCell.value =  params.newValue;
+                 
+                  //rowNode.setDataValue(focusedCell,params.newValue)
+                  //params.api.refreshCells({columns : [column]}) ;
+                  //console.log(params.value)
+                  
+                  //params.data[params.event.pointerId] = params.newValue 
+                  params.api.refreshCells({
+                    force: true,
+                    columns: [column],
+                    rowNodes: [params.api.getRowNode(focusedCell.rowIndex)]
+                });
 
                 /*console.log(params)
                 const focusedCell =  params.api.getFocusedCell();
@@ -574,12 +642,6 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Cod_Version
     ).subscribe( 
       (result: any) => { 
-
-      /*var dataForExcel = []
-       result.forEach((row: any) => {
-        dataForExcel.push(Object.values(row)) 
-      })
-      console.log(dataForExcel)*/
       if(result.length > 0){
         //TRAE TODOS LOS NOMBRES DE LOS INDICES DE UN ARREGLO
        
@@ -587,16 +649,61 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
           console.log(Object.keys(result[0])[index])
           this.displayedColumns_cab.push(Object.keys(result[0])[index])
           this.columnDefs.push({field : Object.keys(result[0])[index]})
-          
           //keys.forEach(key => colDefs.push({field : key}));
-          
         })
         console.log(this.columnDefs)
         this.columnsToDisplay = this.displayedColumns_cab.slice()
         this.dataSource.data = result
         this.rowData = result*/
+
         this.rowData = result
-        this.columnDefs = this.generateColumns(this.rowData);
+        const colDefs= this.gGridEmpty.api.getColumnDefs() ;
+        colDefs!.length=0;
+        const keys = Object.keys(result[0])
+        delete keys[0]
+        let cont = 5
+        let contadorGeneral = keys.length - cont
+        keys.forEach((currentValue, index) => {  
+          if(index == cont)
+          {
+            for (let j = 0; j < contadorGeneral; j++) {
+             
+            let inicializador = (1+cont)
+            let final =  (inicializador + 5)
+            let medida = 1
+            console.log(keys[cont])
+            for (let i = inicializador; i < final; i++) {
+              keys.splice(i, 0, (keys[cont].trim())+medida);
+              medida++
+              if(i + 1 == final){
+                cont = final
+              }
+            }
+          }
+            
+          }
+        });
+
+        // agregamos cada key a colDefs con el valor de field
+        keys.forEach((currentValue, index) => {  
+          if(index == 3){
+            colDefs!.push({field : keys[index], suppressMovable: true, pinned: 'left', lockPinned: true, cellClass: 'lock-pinned',width: 300, resizable: true})
+          }
+          else if(index == 4){
+            colDefs!.push({field : keys[index], suppressMovable: true, pinned: 'left', lockPinned: true, cellClass: 'lock-pinned'})
+          }
+          else{
+          colDefs!.push({field : keys[index], suppressMovable: true})
+          }
+        })
+      
+        this.gGridEmpty.api.setColumnDefs(colDefs!);
+        // el name del field lo mapeamos al rowData
+        //console.log(this.gGridEmpty)
+        //console.log(this.gGridEmpty.api)
+        console.log(this.rowData)
+        this.gGridEmpty.api.setRowData(this.rowData)
+       
         this.SpinnerService.hide();
 
       }else {

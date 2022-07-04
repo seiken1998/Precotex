@@ -172,7 +172,7 @@
 
                 </table>-->
 
-                <ag-grid-angular
+               <!-- <ag-grid-angular
                 style="width: 100%; height: 100%"
                 class="ag-theme-material"
                 [rowData]="rowData"
@@ -182,6 +182,15 @@
                 (cellClicked)="onCellClicked($event,$event)"
                 >
 
+                </ag-grid-angular>-->
+                <ag-grid-angular 
+                    #gGridEmpty
+                    style="width: 100%; height: 100%;" 
+                    class="ag-theme-material"
+                    [suppressDragLeaveHidesColumns]="true"
+                    (cellClicked)="onCellClicked($event,$event)"
+                    [gridOptions]="gridOptions"
+                    >
                 </ag-grid-angular>
 
                <!-- <mat-paginator  class="paginador" #paginator [pageSizeOptions]="[50, 100, 150]" showFirstLastButtons aria-label="Select page of periodic elements">
