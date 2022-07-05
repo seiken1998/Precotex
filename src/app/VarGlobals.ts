@@ -31,8 +31,11 @@
 
     Cant_PrendasG: 0,
     Cod_Hoja_Medida_Cab: 0,
+    Cod_EstProHojaMedida: '',
+    Cod_VersionHojaMedida: '',
+    Accion: '',
 
-    Accion: ''
+    Arr_Medidas: []
     //baseUrl: "https://gestion.precotex.com/ws_android"
     //... more of your variables
  }

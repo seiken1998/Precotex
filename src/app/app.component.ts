@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
           GlobalVariable.vusu  = this.loginForm.get('user').value
           this.usuario =  GlobalVariable.vusu  
           GlobalVariable.vCod_Rol = result[0].Cod_Rol
-
+          
           //this.router.navigate(['/principal']);
         }
         else {

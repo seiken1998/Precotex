@@ -41,8 +41,8 @@ AuditoriaHojaMedidaVersionesService(Cod_Accion: string, Cod_EstPro: string){
   return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Versiones.php?Accion=${Cod_Accion}&Cod_EstPro=${Cod_EstPro}&Cod_Usuario=${this.sCod_Usuario}`);                                             
 }
 
-AuditoriaHojaMedidaCargaMedidaService(Cod_EstPro: string, Cod_Version: string){
-  return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Carga_Medida.php?Cod_EstPro=${Cod_EstPro}&Cod_Version=${Cod_Version}`);                                             
+AuditoriaHojaMedidaCargaMedidaService(Cod_EstPro: string, Cod_Version: string, Cod_Hoja_Medida_Cab: number){
+  return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Carga_Medida.php?Cod_EstPro=${Cod_EstPro}&Cod_Version=${Cod_Version}&Cod_Hoja_Medida_Cab=${Cod_Hoja_Medida_Cab}`);                                             
 }
 
 
@@ -77,8 +77,8 @@ AuditoriaHojaMedidaCargaMedidaService(Cod_EstPro: string, Cod_Version: string){
   }
 
   MantenimientoAuditoriaHojaMedidaDetalle(  Cod_Accion: string, Cod_Hoja_Medida_Det: number, Cod_Hoja_Medida_Cab: number, Sec: number, Tip_Medida: string, Sec_Medida: string,
-                                            Cod_Talla: string, Medida1: string, Medida2: string, Medida3: string, Medida4: string, Medida5: string){
-      return this.http.get(`${this.baseUrl}/app_Man_Auditoria_Hoja_Medida_Det.php?Accion=${Cod_Accion}&Cod_Hoja_Medida_Det=${Cod_Hoja_Medida_Det}&Cod_Hoja_Medida_Cab=${Cod_Hoja_Medida_Cab}&Sec=${Sec}&Tip_Medida=${Tip_Medida}&Sec_Medida=${Sec_Medida}&Cod_Talla=${Cod_Talla}&Medida1=${Medida1}&Medida2=${Medida2}&Medida3=${Medida3}&Medida4=${Medida4}&Medida5=${Medida5}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+                                            Cod_Talla: string, ColumnHeader: string, medida: string){
+      return this.http.get(`${this.baseUrl}/app_Man_Auditoria_Hoja_Medida_Det.php?Accion=${Cod_Accion}&Cod_Hoja_Medida_Det=${Cod_Hoja_Medida_Det}&Cod_Hoja_Medida_Cab=${Cod_Hoja_Medida_Cab}&Sec=${Sec}&Tip_Medida=${Tip_Medida}&Sec_Medida=${Sec_Medida}&Cod_Talla=${Cod_Talla}&ColumnHeader=${ColumnHeader}&Medida=${medida}&Cod_Usuario=${this.sCod_Usuario}`);                                                
 }
 
 }

@@ -195,3 +195,11 @@ tr:active {
 }
 
   }
+
+  ::ng-deep mat-dialog-container{
+    padding: 5px;
+}
+
+::ng-deep .my-class .mat-dialog-container{
+ padding: 5px;
+ }

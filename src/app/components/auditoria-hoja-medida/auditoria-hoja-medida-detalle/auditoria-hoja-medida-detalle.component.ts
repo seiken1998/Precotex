@@ -197,6 +197,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.CargarOperacionMedida()
     this.formulario.controls['inputCliente'].disable()
     this.formulario.controls['inputEstCli'].disable()
     this.formulario.controls['inputEstPro'].disable()
@@ -206,13 +207,13 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
     this.formulario.controls['CodAuditor'].disable()
     this.CargarOperacionSupervisor()
     this.CargarOperacionAuditor()
-
-    if(GlobalVariable.Cod_Hoja_Medida_Cab == 0){
+    
+    if(GlobalVariable.Cod_Hoja_Medida_Cab == 0 && GlobalVariable.vCod_Rol != 6){
       this.Cod_Hoja_Medida_Cab = 0
       GlobalVariable.Cod_Hoja_Medida_Cab = 0
       this.Flg_Color = false
     }
-    else if(GlobalVariable.Cod_Hoja_Medida_Cab != 0){
+    else if(GlobalVariable.Cod_Hoja_Medida_Cab != 0 && GlobalVariable.vCod_Rol != 6){
       this.Flg_Color = true
       this.formulario.controls['OP'].disable()
       this.formulario.controls['inputCliente'].disable()
@@ -224,21 +225,28 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.formulario.controls['Auditor'].disable() 
       this.Cod_Hoja_Medida_Cab = GlobalVariable.Cod_Hoja_Medida_Cab
       this.traerInfoCabecera()
-      this.verificarEstadoFicha()
-   
+      this.verificarEstadoFicha()   
     } 
 
+
+    else if(GlobalVariable.vCod_Rol == 6){
+      this.Flg_Color = true
+      this.formulario.controls['OP'].disable()
+      this.formulario.controls['inputCliente'].disable()
+      this.formulario.controls['inputEstCli'].disable()
+      this.formulario.controls['inputEstPro'].disable()
+      this.formulario.controls['Linea'].disable()
+      this.formulario.controls['Color'].disable()
+      this.formulario.controls['Supervisor'].disable()
+      this.formulario.controls['Auditor'].disable() 
+      this.Cod_Hoja_Medida_Cab = GlobalVariable.Cod_Hoja_Medida_Cab
+      this.traerInfoCabecera()
+      this.Flg_Enable = false
+    }
+
  
   }
 
-
-  generar(){
- 
-    
-     
- 
-  }
- 
   generateColumns(data: any[]) {
     this.columnDefinitions = [];
 
@@ -452,19 +460,16 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Sec_Medida,
       this.Cod_Talla,
       this.Medida1,
-      this.Medida2,
-      this.Medida3,
-      this.Medida4,
-      this.Medida5,
+      this.Medida2
         ).subscribe(
         (result: any) => {
           if(result.lenght > 0){
-            console.log(result)
-            this.Medida1 = result[0].Medida1
+            //console.log(result)
+            /*this.Medida1 = result[0].Medida1
             this.Medida2 = result[0].Medida2
             this.Medida3 = result[0].Medida3
             this.Medida4 = result[0].Medida4
-            this.Medida5 = result[0].Medida5
+            this.Medida5 = result[0].Medida5*/
     
           }else{
             
@@ -479,16 +484,15 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   onCellClicked(e: CellClickedEvent, params): void {
-  //onCellClicked( e: CellClickedEvent): void {
+ 
     
     console.log('cellClicked', e);
-    /*console.log(e.value)
-    console.log(e.data.SEC_MEDIDA)
-    console.log(e.colDef.headerName)*/
-    if(e.colDef.headerName == 'TOLERANCIA' || e.colDef.headerName == 'DES_MEDIDA' || e.colDef.headerName == 'SEC_MEDIDA' || e.colDef.headerName == 'ORDEN' || e.colDef.headerName == 'DES_TIPMEDIDA'){
-    }else{
-        //this.traerRegistrosDetalle(this.Cod_Hoja_Medida_Cab, e.data.ORDEN, e.data.DES_TIPMEDIDA, e.data.SEC_MEDIDA, e.colDef.headerName)
-        let dialogRef =  this.dialog.open(DialogRegistroHojaMedidaComponent, 
+   
+      let ultimoCaracter = e.colDef.field.charAt(e.colDef.field.length-1)
+      console.log(ultimoCaracter)
+    if(this.Flg_Enable == true ){
+    if( ultimoCaracter == '1'|| ultimoCaracter == '2'|| ultimoCaracter == '3'|| ultimoCaracter == '4'|| ultimoCaracter == '5'){
+         let dialogRef =  this.dialog.open(DialogRegistroHojaMedidaComponent, 
           { disableClose: true,
             panelClass: 'my-class',
             data: { Cod_Talla: e.colDef.field, 
@@ -510,25 +514,21 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
               }else{
                   //console.log(params.value)
-                  console.log(result.data)
+                  //console.log(result.data)
                   params.newValue = result.data
                   //params.value = params.newValue; // assign to new adjacent column
                   const focusedCell =  params.api.getFocusedCell();
-                  console.log("focusedCell")
-                  console.log(focusedCell)
+                  /*console.log("focusedCell")
+                  console.log(focusedCell)*/
                   const column = focusedCell.column.colDef.field;
-                  console.log("column")
-                  console.log(column)
+                  /*console.log("column")
+                  console.log(column)*/
                   const rowNode = params.api.getRowNode(focusedCell.rowIndex);
-                  console.log("rowNode")
-                  console.log(rowNode)
-                  console.log(params.node.isSelected())
-                  console.log(params.api.getRowNode())
+                  /*console.log("rowNode")
+                  console.log(rowNode)*/
                  //params.event.pointerId
                   rowNode.setDataValue(column,params.newValue)
                 
-
-              
                   //focusedCell.value =  params.newValue;
                  
                   //rowNode.setDataValue(focusedCell,params.newValue)
@@ -540,6 +540,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
                     force: true,
                     columns: [column],
                     rowNodes: [params.api.getRowNode(focusedCell.rowIndex)]
+
                 });
 
                 /*console.log(params)
@@ -557,10 +558,11 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
                     rowNodes: [params.api.getRowNode(focusedCell.rowIndex)]
                 });*/
 
- 
-
           }})
-    } 
+    } else{
+
+    }
+  }
 
   }
  
@@ -568,7 +570,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
     this.Cod_Accion   = 'M'
     this.Cod_Cliente  = ''
-    console.log(this.Cod_Cliente)
+    //console.log(this.Cod_Cliente)
     this.Cod_EstCli   = ''
     this.Cod_EstPro
     this.Cod_Version
@@ -580,8 +582,8 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Cod_Version
       ).subscribe(
        (result: any) => {
-        console.log(result)
-        console.log(result[0].CLIENTE)
+        //console.log(result)
+        //console.log(result[0].CLIENTE)
          this.formulario.controls['inputCliente'].setValue(result[0].CLIENTE)
          this.formulario.controls['inputEstCli'].setValue(result[0].ESTILO)
          this.formulario.controls['inputEstPro'].setValue(result[0].EP)
@@ -634,12 +636,22 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   MostrarCargaMedida() {
+    
     this.SpinnerService.show();
+
+    if(GlobalVariable.Cod_EstProHojaMedida != '' && GlobalVariable.Cod_VersionHojaMedida != ''){
+      this.Cod_EstPro   = GlobalVariable.Cod_EstProHojaMedida
+      this.Cod_Version  = GlobalVariable.Cod_VersionHojaMedida
+      this.Cod_Hoja_Medida_Cab = GlobalVariable.Cod_Hoja_Medida_Cab
+    }
+    
     this.Cod_EstPro
     this.Cod_Version
+    this.Cod_Hoja_Medida_Cab
     this.auditoriaHojaMedidaService.AuditoriaHojaMedidaCargaMedidaService(
       this.Cod_EstPro,
-      this.Cod_Version
+      this.Cod_Version,
+      this.Cod_Hoja_Medida_Cab
     ).subscribe( 
       (result: any) => { 
       if(result.length > 0){
@@ -661,7 +673,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         colDefs!.length=0;
         const keys = Object.keys(result[0])
         delete keys[0]
-        let cont = 5
+        /*let cont = 5
         let contadorGeneral = keys.length - cont
         keys.forEach((currentValue, index) => {  
           if(index == cont)
@@ -671,7 +683,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
             let inicializador = (1+cont)
             let final =  (inicializador + 5)
             let medida = 1
-            console.log(keys[cont])
+            //console.log(keys[cont])
             for (let i = inicializador; i < final; i++) {
               keys.splice(i, 0, (keys[cont].trim())+medida);
               medida++
@@ -682,7 +694,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
           }
             
           }
-        });
+        });*/
 
         // agregamos cada key a colDefs con el valor de field
         keys.forEach((currentValue, index) => {  
@@ -698,9 +710,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         })
       
         this.gGridEmpty.api.setColumnDefs(colDefs!);
-        // el name del field lo mapeamos al rowData
-        //console.log(this.gGridEmpty)
-        //console.log(this.gGridEmpty.api)
+
         console.log(this.rowData)
         this.gGridEmpty.api.setRowData(this.rowData)
        
@@ -715,6 +725,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
       
+
   }
 
 
@@ -910,6 +921,10 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
           this.formulario.controls['Color'].disable()
           this.formulario.controls['Supervisor'].disable()
           this.formulario.controls['Auditor'].disable() 
+          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
+          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
+          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
+          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
         this.matSnackBar.open('Proceso correcto..!!', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
         }else{
           this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
@@ -978,6 +993,36 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
   }
 
 
+
+
+  CargarOperacionMedida(){  
+    this.Cod_Accion   = 'M'
+    this.Cod_Hoja_Medida_Det
+    this.Cod_Hoja_Medida_Cab 
+    this.Sec = 0
+    this.Tip_Medida = ''
+    this.Sec_Medida = ''
+    this.Cod_Talla = ''
+    this.Medida1 = ''
+    this.Medida2 = ''
+   this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaDetalle(
+    this.Cod_Accion,
+    this.Cod_Hoja_Medida_Det,
+    this.Cod_Hoja_Medida_Cab,
+    this.Sec,
+    this.Tip_Medida,
+    this.Sec_Medida,
+    this.Cod_Talla,
+    this.Medida1,
+    this.Medida2
+    ).subscribe(
+      (result: any) => { 
+        GlobalVariable.Arr_Medidas = result
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
+  }
 
 
 }

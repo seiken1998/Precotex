@@ -13,10 +13,13 @@ import { NgxSpinnerService }  from "ngx-spinner";
 import { DialogEliminarComponent} from 'src/app/components/dialogs/dialog-eliminar/dialog-eliminar.component'
 import { DialogObservacionHojaMedidaComponent} from 'src/app/components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component'
 import { GlobalVariable } from '../../VarGlobals'; //<==== this one
+import { ExceljsService } from 'src/app/services/exceljs.service';
 
 interface data_det {
     Cod_Hoja_Medida_Cab:  number,
     Cod_OrdPro:           string,
+    Cod_EstPro:           string,
+    Cod_Version:          string,
     Cod_ColCli:           string,
     Cod_LinPro:           string,
     Supervisor:           string,
@@ -86,11 +89,14 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
   Fecha_Auditoria    = ''
   Fecha_Auditoria2   = ''
 
+  Flg_Btn_Registrar = true
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
  
+  dataForExcel = [];
 
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
@@ -108,7 +114,8 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
     private matSnackBar: MatSnackBar,
     private auditoriaHojaMedidaService: AuditoriaHojaMedidaService,
     public dialog: MatDialog,
-    private SpinnerService: NgxSpinnerService) { this.dataSource = new MatTableDataSource(); }
+    private SpinnerService: NgxSpinnerService,
+    private exceljsService:ExceljsService) { this.dataSource = new MatTableDataSource(); }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -116,6 +123,10 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
     //this.MostrarCabeceraAuditoria()
     GlobalVariable.Cod_Hoja_Medida_Cab = 0
     this.listarCabecera()
+
+    if(GlobalVariable.vCod_Rol == 6){
+      this.Flg_Btn_Registrar = false
+    }
     } 
 
 
@@ -181,6 +192,7 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
       (result: any) => {
         if (result[0].Respuesta == undefined) {
           this.dataSource.data = result
+          console.log(result)
           this.SpinnerService.hide();
         
         }else{
@@ -194,8 +206,10 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
   }
 
 
-  asginarVGlobalAuditoriaHojaMedida(Cod_Hoja_Medida_Cab: number){
+  asginarVGlobalAuditoriaHojaMedida(Cod_Hoja_Medida_Cab: number, Cod_EstPro: string, Cod_Verion: string){
    GlobalVariable.Cod_Hoja_Medida_Cab = Cod_Hoja_Medida_Cab
+   GlobalVariable.Cod_EstProHojaMedida = Cod_EstPro
+   GlobalVariable.Cod_VersionHojaMedida = Cod_Verion
   }
 
   actualizarObservacion(Cod_Hoja_Medida_Cab: number){
@@ -265,7 +279,33 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
 
  
   
+  generateExcel(Cod_Hoja_Medida_Cab: number, Cod_EstPro: string, Cod_Verion: string) {
+   
+    this.SpinnerService.show();
 
+    this.auditoriaHojaMedidaService.AuditoriaHojaMedidaCargaMedidaService(
+      Cod_EstPro,
+      Cod_Verion,
+      Cod_Hoja_Medida_Cab
+    ).subscribe( 
+      (result: any) => { 
+        
+        result.forEach((row: any) => {
+          this.dataForExcel.push(Object.values(row)) 
+        })
+    
+        let reportData = {
+          title: 'REPORTE REGISTRO HOJA DE MEDIDA - COSTURA',
+          data: this.dataForExcel,
+          headers: Object.keys(result[0])
+        }
+    
+        this.exceljsService.exportExcel(reportData);
+        this.SpinnerService.hide();
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
+      
+  }
 
 }
 

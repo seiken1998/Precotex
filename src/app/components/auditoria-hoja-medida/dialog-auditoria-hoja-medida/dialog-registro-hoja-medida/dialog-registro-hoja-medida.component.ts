@@ -63,7 +63,8 @@ export class DialogRegistroHojaMedidaComponent implements OnInit {
  }
 
  ngOnInit(): void {  
-  this.CargarOperacionMedida()
+  //this.CargarOperacionMedida()
+  this.dataSource.data = GlobalVariable.Arr_Medidas
   this.Cod_Talla            = this.data.Cod_Talla
   this.Des_Medida           = this.data.Des_Medida
   this.Sec                  = this.data.Sec
@@ -90,6 +91,51 @@ selectMedida(medida: string){
     if(this.Menos == '-'){
       medida = medida.replace('+','-')
     }
+
+  //console.log(this.Cod_Talla.substring(0, this.Cod_Talla.length - 1))
+  let ColumnHeader = this.Cod_Talla.substring(0, this.Cod_Talla.length - 1)
+  let ultimoCaracter = this.Cod_Talla.charAt(this.Cod_Talla.length-1)
+  let ColumnHeaderSave = this.Cod_Talla.replace(this.Cod_Talla,'Medida')+ultimoCaracter
+  console.log(ColumnHeader)
+  console.log(ColumnHeaderSave)
+  console.log(this.Des_Medida)
+  console.log(this.Sec)
+  console.log(this.Tip_Medida)
+  console.log(this.Sec_Medida)
+  console.log(this.Cod_Hoja_Medida_Cab)
+  
+  
+
+  this.Cod_Accion   = 'I'
+      this.Cod_Hoja_Medida_Det
+      this.Cod_Hoja_Medida_Cab = this.data.Cod_Hoja_Medida_Cab
+      this.Sec = this.data.Sec
+      this.Tip_Medida = this.data.Tip_Medida
+      this.Sec_Medida = this.data.Sec_Medida
+      this.Cod_Talla = ColumnHeader
+     this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaDetalle(
+      this.Cod_Accion,
+      this.Cod_Hoja_Medida_Det,
+      this.Cod_Hoja_Medida_Cab,
+      this.Sec,
+      this.Tip_Medida,
+      this.Sec_Medida,
+      this.Cod_Talla,
+      ColumnHeaderSave,
+      medida
+      ).subscribe(
+        (result: any) => { 
+          this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+          duration: 1500,
+        }))
+
+
+
+
+
+
   this.dialogRef.close({data:medida});
   this.Menos = ''
 }
@@ -105,9 +151,6 @@ selectMedida(medida: string){
       this.Cod_Talla = ''
       this.Medida1 = ''
       this.Medida2 = ''
-      this.Medida3 = ''
-      this.Medida4 = ''
-      this.Medida5 = ''
      this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaDetalle(
       this.Cod_Accion,
       this.Cod_Hoja_Medida_Det,
@@ -117,10 +160,7 @@ selectMedida(medida: string){
       this.Sec_Medida,
       this.Cod_Talla,
       this.Medida1,
-      this.Medida2,
-      this.Medida3,
-      this.Medida4,
-      this.Medida5,
+      this.Medida2
       ).subscribe(
         (result: any) => { 
           this.dataSource.data = result
