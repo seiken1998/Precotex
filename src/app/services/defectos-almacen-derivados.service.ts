@@ -89,7 +89,13 @@ export class DefectosAlmacenDerivadosService {
 
     return this.http.get(`${this.baseUrl}/app_Mostrar_Reporte_Detallado_Derivados.php?Accion=${Accion}&Cod_Cliente=${Cod_Cliente}&Cod_Auditor=${Nom_Auditor}&Cod_EstCli=${Cod_EstCli}&Cod_ColCli=${Cod_ColCli}`);
   }
+  ListarReporteDetallado2Service(Accion: string, Cod_Cliente: string, Cod_EstCli: string,
+    Cod_ColCli: string, Nom_Auditor:string) {
 
+  
+
+    return this.http.get(`${this.baseUrl}/app_Mostrar_Reporte_Detallado2_Derivados.php?Accion=${Accion}&Cod_Cliente=${Cod_Cliente}&Cod_Auditor=${Nom_Auditor}&Cod_EstCli=${Cod_EstCli}&Cod_ColCli=${Cod_ColCli}`);
+  }
 
   
 

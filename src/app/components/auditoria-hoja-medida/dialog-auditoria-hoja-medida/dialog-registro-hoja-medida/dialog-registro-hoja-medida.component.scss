@@ -169,6 +169,7 @@ tr:active {
    
   mat-dialog-container{
        padding: 15px;
+       height: auto;
    }
 
    .mat-dialog-container{
@@ -198,8 +199,10 @@ tr:active {
 
   ::ng-deep mat-dialog-container{
     padding: 5px;
+    height: auto;
 }
 
 ::ng-deep .my-class .mat-dialog-container{
  padding: 5px;
+ height: auto;
  }

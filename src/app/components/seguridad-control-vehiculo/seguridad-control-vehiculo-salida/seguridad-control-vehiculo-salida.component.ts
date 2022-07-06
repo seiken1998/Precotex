@@ -91,9 +91,9 @@ export class SeguridadControlVehiculoSalidaComponent implements OnInit {
       this.des_planta = 'Huachipa Sede II'
     } else if (GlobalVariable.num_planta == 5) {
       this.des_planta = 'Independencia'
-    } else if (GlobalVariable.num_planta == 6) {
+    } else if (GlobalVariable.num_planta == 13) {
       this.des_planta = 'Santa Rosa'
-    }else if (GlobalVariable.num_planta == 7) {
+    }else if (GlobalVariable.num_planta == 11) {
       this.des_planta = 'VyD'
     } else {
       this.des_planta = ''

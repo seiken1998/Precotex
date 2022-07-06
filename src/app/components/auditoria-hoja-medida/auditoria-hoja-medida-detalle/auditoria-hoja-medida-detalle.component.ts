@@ -643,10 +643,11 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Cod_EstPro   = GlobalVariable.Cod_EstProHojaMedida
       this.Cod_Version  = GlobalVariable.Cod_VersionHojaMedida
       this.Cod_Hoja_Medida_Cab = GlobalVariable.Cod_Hoja_Medida_Cab
+    }else{
+      this.Cod_EstPro =  this.Cod_EstPro
+      this.Cod_Version = this.formulario.get('inputVersion')?.value
     }
     
-    this.Cod_EstPro
-    this.Cod_Version
     this.Cod_Hoja_Medida_Cab
     this.auditoriaHojaMedidaService.AuditoriaHojaMedidaCargaMedidaService(
       this.Cod_EstPro,
@@ -654,6 +655,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Cod_Hoja_Medida_Cab
     ).subscribe( 
       (result: any) => { 
+   
       if(result.length > 0){
         //TRAE TODOS LOS NOMBRES DE LOS INDICES DE UN ARREGLO
        
@@ -673,6 +675,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         colDefs!.length=0;
         const keys = Object.keys(result[0])
         delete keys[0]
+        
         /*let cont = 5
         let contadorGeneral = keys.length - cont
         keys.forEach((currentValue, index) => {  
@@ -711,14 +714,19 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       
         this.gGridEmpty.api.setColumnDefs(colDefs!);
 
-        console.log(this.rowData)
+        //console.log(this.rowData)
         this.gGridEmpty.api.setRowData(this.rowData)
        
         this.SpinnerService.hide();
-
+        GlobalVariable.Cod_EstProHojaMedida = ''
+        GlobalVariable.Cod_VersionHojaMedida = ''
+        GlobalVariable.Cod_Hoja_Medida_Cab = 0
       }else {
         this.matSnackBar.open("No existen registros..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
         this.SpinnerService.hide();
+        GlobalVariable.Cod_EstProHojaMedida = ''
+        GlobalVariable.Cod_VersionHojaMedida = ''
+        GlobalVariable.Cod_Hoja_Medida_Cab = 0
       }
 
      

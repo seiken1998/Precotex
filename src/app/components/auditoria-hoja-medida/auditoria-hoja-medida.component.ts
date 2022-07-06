@@ -18,6 +18,8 @@ import { ExceljsService } from 'src/app/services/exceljs.service';
 interface data_det {
     Cod_Hoja_Medida_Cab:  number,
     Cod_OrdPro:           string,
+    Cod_EstCli:           string,
+    Cod_TemCli:           string,
     Cod_EstPro:           string,
     Cod_Version:          string,
     Cod_ColCli:           string,
@@ -105,7 +107,7 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
   })
 
 
-  displayedColumns_cab: string[] = ['Cod_Hoja_Medida_Cab', 'Cod_OrdPro', 'Cod_ColCli', 'Cod_LinPro', 'Supervisor', 'Auditor', 'Fecha_Registro', 'Flg_Estado', 'Observacion','Acciones']
+  displayedColumns_cab: string[] = ['Cod_Hoja_Medida_Cab', 'Cod_OrdPro', 'Cod_TemCli','Cod_ColCli', 'Cod_LinPro', 'Supervisor', 'Auditor', 'Fecha_Registro', 'Flg_Estado', 'Observacion','Acciones']
   dataSource: MatTableDataSource<data_det>;
 
  

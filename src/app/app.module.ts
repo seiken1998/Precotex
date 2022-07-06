@@ -87,7 +87,8 @@ import { DialogRegistrarEstadoControlMovmientosJabasComponent } from './componen
 
 import { AgGridModule} from 'ag-grid-angular';
 import { DialogRegistroHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-registro-hoja-medida/dialog-registro-hoja-medida.component';
-import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component'
+import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component';
+import { ControlActivoFijoComponent } from './components/control-activo-fijo/control-activo-fijo.component'
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoj
     SeguridadControlMovimientosJabasAccionComponent,
     DialogRegistrarEstadoControlMovmientosJabasComponent,
     DialogRegistroHojaMedidaComponent,
-    DialogObservacionHojaMedidaComponent
+    DialogObservacionHojaMedidaComponent,
+    ControlActivoFijoComponent
    
     
  

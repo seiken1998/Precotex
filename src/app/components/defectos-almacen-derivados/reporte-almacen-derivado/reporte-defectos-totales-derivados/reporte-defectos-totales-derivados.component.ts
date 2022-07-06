@@ -105,7 +105,8 @@ export class ReporteDefectosTotalesDerivadosComponent implements OnInit {
   })  
 
   dataForExcel = [];
-  
+  dataForExcel2 = [];
+
   dataSource: MatTableDataSource<data_det>;
   displayedColumns: string[] = ['Descripcion','Total'];
   //displayedColumns: string[] = []
@@ -169,6 +170,55 @@ export class ReporteDefectosTotalesDerivadosComponent implements OnInit {
   }
   }
 
+
+  generateExcel2() {
+
+    this.SpinnerService.show();
+    
+    if(this.formulario.get('sCliente')?.value == ''){
+      this.vCliente = ''
+    }
+    this.vEstilo = this.formulario.get('sEstilo')?.value
+    this.vColor = this.formulario.get('sColor')?.value
+    this.vAuditor = this.formulario.get('sAuditor')?.value
+    this.vCod_Accion = 'L'
+    this.defectosAlmacenDerivadosService.ListarReporteDetallado2Service(
+      this.vCod_Accion,
+      this.vCliente,
+      this.vEstilo, 
+      this.vColor,
+      this.vAuditor 
+      ).subscribe(
+        (result: any) => {
+          console.log(result[0].Respuesta)
+        if(result[0].Respuesta){
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+          this.SpinnerService.hide();
+          
+        }else{
+          result.forEach((row: any) => {
+            this.dataForExcel2.push(Object.values(row)) 
+          })
+      
+          let reportData = {
+            title: 'REPORTE DE DEFECTOS DERIVADOS - PCP',
+            data: this.dataForExcel2,
+            headers: Object.keys(result[0])
+          }
+      
+          this.exceljsService.exportExcel(reportData);
+          this.dataForExcel2 = []
+          this.SpinnerService.hide();
+        }
+
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+          duration: 1500,
+        }))
+
+
+  
+  }
 
   exportAsXLSX():void {
    

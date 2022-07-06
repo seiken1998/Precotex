@@ -166,6 +166,7 @@ mat-form-field {
 
 .mat-column-Cod_Hoja_Medida_Cab,
 .mat-column-Cod_OrdPro, 
+.mat-column-Cod_TemCli,
 .mat-column-Cod_ColCli,
 .mat-column-Cod_LinPro,
 .mat-column-Supervisor,
@@ -187,6 +188,9 @@ mat-form-field {
     width: 10px;
 }
 .mat-column-Cod_OrdPro{
+    width: 120px;
+}
+.mat-column-Cod_TemCli{
     width: 120px;
 }
 .mat-column-Cod_ColCli{
