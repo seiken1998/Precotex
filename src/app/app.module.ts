@@ -88,7 +88,9 @@ import { DialogRegistrarEstadoControlMovmientosJabasComponent } from './componen
 import { AgGridModule} from 'ag-grid-angular';
 import { DialogRegistroHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-registro-hoja-medida/dialog-registro-hoja-medida.component';
 import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component';
-import { ControlActivoFijoComponent } from './components/control-activo-fijo/control-activo-fijo.component'
+import { ControlActivoFijoComponent } from './components/control-activo-fijo/control-activo-fijo.component';
+import { DespachoOpIncompletaComponent } from './components/despacho-op-incompleta/despacho-op-incompleta.component';
+import { DialogDespachoOpIncompletaComponent } from './components/despacho-op-incompleta/dialog-despacho-op-incompleta/dialog-despacho-op-incompleta.component';
 
 @NgModule({
   declarations: [
@@ -159,7 +161,9 @@ import { ControlActivoFijoComponent } from './components/control-activo-fijo/con
     DialogRegistrarEstadoControlMovmientosJabasComponent,
     DialogRegistroHojaMedidaComponent,
     DialogObservacionHojaMedidaComponent,
-    ControlActivoFijoComponent
+    ControlActivoFijoComponent,
+    DespachoOpIncompletaComponent,
+    DialogDespachoOpIncompletaComponent
    
     
  

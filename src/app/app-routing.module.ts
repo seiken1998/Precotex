@@ -5,18 +5,22 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 
 import { AuditoriaLineaCosturaComponent } from './components/auditoria-linea-costura/auditoria-linea-costura.component';
+
 import { SeguridadControlGuiaComponent } from  './components/seguridad-control-guia/seguridad-control-guia.component';
 import { SeguridadControlGuiaAccionComponent} from './components/seguridad-control-guia/seguridad-control-guia-accion/seguridad-control-guia-accion.component';
 import { SeguridadControlGuiaSalidaComponent } from './components/seguridad-control-guia/seguridad-control-guia-salida/seguridad-control-guia-salida.component'
 import { SeguridadControlGuiaInternoComponent } from './components/seguridad-control-guia/seguridad-control-guia-interno/seguridad-control-guia-interno.component'
 import { SeguridadControlGuiaExternoComponent } from './components/seguridad-control-guia/seguridad-control-guia-externo/seguridad-control-guia-externo.component'
 import { SeguridadControlGuiaHistorialComponent } from './components/seguridad-control-guia/seguridad-control-guia-historial/seguridad-control-guia-historial.component'
+import { SeguridadControlMemorandumComponent } from './components/seguridad-control-guia/seguridad-control-memorandum/seguridad-control-memorandum.component';
+import { SeguridadControlMemorandumDetalleComponent } from './components/seguridad-control-guia/seguridad-control-memorandum/seguridad-control-memorandum-detalle/seguridad-control-memorandum-detalle.component';
+
 import { DespachoTelaCrudaComponent } from './components/despacho-tela-cruda/despacho-tela-cruda.component'
 import { DespachoTelaCrudaDetalleComponent } from './components/despacho-tela-cruda/despacho-tela-cruda-detalle/despacho-tela-cruda-detalle.component'
 
 import { PrincipalComponent } from './components/principal/principal.component';
-import { SeguridadControlMemorandumComponent } from './components/seguridad-control-guia/seguridad-control-memorandum/seguridad-control-memorandum.component';
-import { SeguridadControlMemorandumDetalleComponent } from './components/seguridad-control-guia/seguridad-control-memorandum/seguridad-control-memorandum-detalle/seguridad-control-memorandum-detalle.component';
+
+
 import { SeguridadControlVehiculoComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo.component';
 import { SeguridadControlVehiculoAccionComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-accion/seguridad-control-vehiculo-accion.component';
 import { SeguridadControlVehiculoIngresoComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-ingreso/seguridad-control-vehiculo-ingreso.component';
@@ -24,6 +28,7 @@ import { SeguridadControlVehiculoSalidaComponent } from './components/seguridad-
 import { SeguridadControlVehiculoHistorialComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-historial/seguridad-control-vehiculo-historial.component';
 import { SeguridadControlVehiculoRegistroVehiculoComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-registro-vehiculo/seguridad-control-vehiculo-registro-vehiculo.component';
 import { SeguridadControlVehiculoReporteComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-reporte/seguridad-control-vehiculo-reporte.component';
+import { SeguridadControlVehiculoRegistroConductorComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-registro-conductor/seguridad-control-vehiculo-registro-conductor.component';
 
 import { SeguridadControlJabasComponent } from './components/seguridad-control-jabas/seguridad-control-jabas.component';
 import { SeguridadControlJabasAccionComponent } from './components/seguridad-control-jabas/seguridad-control-jabas-accion/seguridad-control-jabas-accion.component';
@@ -34,14 +39,14 @@ import { SeguridadControlJabasHistorialComponent } from './components/seguridad-
 
 
 import { DefectosAlmacenDerivadosComponent } from './components/defectos-almacen-derivados/defectos-almacen-derivados.component';
-import { SeguridadControlVehiculoRegistroConductorComponent } from './components/seguridad-control-vehiculo/seguridad-control-vehiculo-registro-conductor/seguridad-control-vehiculo-registro-conductor.component';
 import { ReporteDefectosAlmacenDerivadosComponent } from './components/defectos-almacen-derivados/reporte-almacen-derivado/reporte-defectos-almacen-derivados/reporte-defectos-almacen-derivados.component';
 import { ReporteDefectosTotalesDerivadosComponent} from  './components/defectos-almacen-derivados/reporte-almacen-derivado/reporte-defectos-totales-derivados/reporte-defectos-totales-derivados.component'
+import { AuditoriaDefectoDerivadoComponent} from './components/auditoria-defecto-derivado/auditoria-defecto-derivado.component'
+
 
 import { MovimientoInspeccionComponent } from './components/movimiento-inspeccion/movimiento-inspeccion.component';
 import { AuditoriaInspeccionCosturaComponent } from './components/auditoria-inspeccion-costura/auditoria-inspeccion-costura.component';
 
-import { AuditoriaDefectoDerivadoComponent} from './components/auditoria-defecto-derivado/auditoria-defecto-derivado.component'
 
 import { IngresoRolloTejidoComponent} from './components/ingreso-rollo-tejido/ingreso-rollo-tejido.component'
 import { IngresoRolloTejidoDetalleComponent} from './components/ingreso-rollo-tejido/ingreso-rollo-tejido-detalle/ingreso-rollo-tejido-detalle.component';
@@ -54,6 +59,10 @@ import { RegistrarSeguridadControlJabaComponent} from './components/seguridad-co
 import { RegistrarDetalleSeguridadControlJabaComponent} from './components/seguridad-control-jaba/registrar-detalle-seguridad-control-jaba/registrar-detalle-seguridad-control-jaba.component'
 import { SeguridadControlMovimientosJabasComponent} from './components/seguridad-control-movimientos-jabas/seguridad-control-movimientos-jabas.component'
 import { SeguridadControlMovimientosJabasAccionComponent} from './components/seguridad-control-movimientos-jabas/seguridad-control-movimientos-jabas-accion/seguridad-control-movimientos-jabas-accion.component'
+
+import { DespachoOpIncompletaComponent} from './components/despacho-op-incompleta/despacho-op-incompleta.component'
+
+import { ControlActivoFijoComponent} from './components/control-activo-fijo/control-activo-fijo.component'
 
 const routes: Routes = [
   { path: "root", component: AppComponent },
@@ -93,12 +102,10 @@ const routes: Routes = [
   { path: "DefectosAlamacenDerivados", component:DefectosAlmacenDerivadosComponent},
   { path: "ReporteDefectosAlmacenDerivados", component:ReporteDefectosAlmacenDerivadosComponent},
   { path: "ReporteDefectosTotalesDerivados", component:ReporteDefectosTotalesDerivadosComponent},
+  { path: "AuditoriaDefectoDerivado", component: AuditoriaDefectoDerivadoComponent},
 
   { path: "MovimientoInspeccion" , component:MovimientoInspeccionComponent},
-
   { path: "AuditoriaInspeccionCostura", component: AuditoriaInspeccionCosturaComponent},
-
-  { path: "AuditoriaDefectoDerivado", component: AuditoriaDefectoDerivadoComponent},
 
   { path: "IngresoRolloTejido", component: IngresoRolloTejidoComponent},
   { path: "IngresoRolloTejidoDetalle", component: IngresoRolloTejidoDetalleComponent},
@@ -111,6 +118,10 @@ const routes: Routes = [
   { path: "RegistrarDetalleSeguridadControlJaba", component: RegistrarDetalleSeguridadControlJabaComponent},
   { path: "SeguridadControlMovimientosJabas", component: SeguridadControlMovimientosJabasComponent},
   { path: "SeguridadControlMovimientosJabasAccion", component: SeguridadControlMovimientosJabasAccionComponent},
+
+  { path: "GiradoPartidaIncompleta", component: DespachoOpIncompletaComponent},
+
+  { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
   
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz
   //{ path: "**", component: AuditoriaLineaCosturaComponent }

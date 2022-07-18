@@ -76,8 +76,8 @@ export class SeguridadControlMemorandumDetalleComponent implements OnInit {
       this.des_planta = 'Huachipa Sede II'
     } else if (GlobalVariable.num_planta == 5) {
       this.des_planta = 'Independencia'
-    } else if (GlobalVariable.num_planta == 6) {
-      this.des_planta = 'Pamer'
+    } else if (GlobalVariable.num_planta == 13) {
+      this.des_planta = 'Santa Rosa'
     } else {
       this.des_planta = ''
     }

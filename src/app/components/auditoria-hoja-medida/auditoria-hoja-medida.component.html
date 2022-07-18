@@ -105,7 +105,7 @@
                         <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
                         <td mat-cell *matCellDef="let data_det">
 
-                            <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0" (click)="generateExcel(data_det.Cod_Hoja_Medida_Cab,data_det.Cod_EstPro, data_det.Cod_Version)">
+                            <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0" (click)="generateExcel(data_det.Cod_Hoja_Medida_Cab,data_det.Cod_EstPro, data_det.Cod_OrdPro,data_det.Cod_Version)">
                                 <mat-icon color="primary">print</mat-icon>
                             </a>
 

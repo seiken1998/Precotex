@@ -281,13 +281,14 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
 
  
   
-  generateExcel(Cod_Hoja_Medida_Cab: number, Cod_EstPro: string, Cod_Verion: string) {
+  generateExcel(Cod_Hoja_Medida_Cab: number, Cod_EstPro: string, Cod_OrdPro: string,Cod_Verion: string) {
    
     this.SpinnerService.show();
 
     this.auditoriaHojaMedidaService.AuditoriaHojaMedidaCargaMedidaService(
       Cod_EstPro,
       Cod_Verion,
+      Cod_OrdPro,
       Cod_Hoja_Medida_Cab
     ).subscribe( 
       (result: any) => { 

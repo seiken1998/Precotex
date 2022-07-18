@@ -91,10 +91,17 @@
                             autocomplete="off" formControlName="sGlosa">
                     </mat-form-field>
 
+                    <mat-form-field appearance="fill" class="fila1-tipo-dialog">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="Tipo">
+                          <mat-option *ngFor="let Tipo of Tipos" [value]="Tipo.Cod_Tipo">
+                            {{Tipo.Nom_Tipo}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     
                     <button type="button" (click)="RegistrarCabecera()" [disabled]="!flg_btn_cabecera" class="fila1-RegistrarCabecera-dialog" mat-flat-button >
-                        <mat-icon aria-label="person">save
-                        </mat-icon>Registrar
+                        Registrar
                     </button>
                       
             </div> 

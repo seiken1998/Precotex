@@ -101,7 +101,7 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
   Defectos_Global = 0
   Caidas_solicitado_Global = 0
   Caidas_requerido_Global = 0
-
+  Tipo_Registro  = ''
  
 
 
@@ -205,7 +205,7 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0 
     this.Op             = ''
-
+    this.Tipo_Registro  = ''
     /*console.log( this.Cod_Cliente)
     console.log( this.Cod_EstCli)
     console.log( this.Cod_TemCli)*/
@@ -224,6 +224,7 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
     ).subscribe(
         (result: any) => {
           if(result[0]['Alerta'] !=undefined){
@@ -298,7 +299,7 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0
     this.Op             = ''
-
+    this.Tipo_Registro  = ''
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -314,6 +315,7 @@ export class DialogDerivadosModificarComponent implements OnInit,AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
     ).subscribe(
  
         (result: any) => {
@@ -445,7 +447,7 @@ BuscarMotivo(){
     this.Cod_Motivo     = this.formulario.controls['Cod_Motivo'].value
     this.Can_Defecto    = this.formulario.get('cant')?.value
     this.Op             = ''
-
+    this.Tipo_Registro  = ''
     console.log(this.Cod_Talla)
     console.log(this.Cod_Motivo)
     console.log(this.Can_Defecto)
@@ -466,6 +468,7 @@ BuscarMotivo(){
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
       ).subscribe(
         (result: any) => {
           if(result[0].Respuesta == 'OK'){
@@ -546,7 +549,7 @@ DeshabilitarCabcera(){
     this.Cod_Motivo     = this.Codigo_Defecto_Eliminar
     this.Can_Defecto    = 0
     this.Op             = ''
-   
+    this.Tipo_Registro  = ''
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -562,6 +565,7 @@ DeshabilitarCabcera(){
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
     ).subscribe(
 
         (result: any) => {

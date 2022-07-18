@@ -41,8 +41,8 @@ AuditoriaHojaMedidaVersionesService(Cod_Accion: string, Cod_EstPro: string){
   return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Versiones.php?Accion=${Cod_Accion}&Cod_EstPro=${Cod_EstPro}&Cod_Usuario=${this.sCod_Usuario}`);                                             
 }
 
-AuditoriaHojaMedidaCargaMedidaService(Cod_EstPro: string, Cod_Version: string, Cod_Hoja_Medida_Cab: number){
-  return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Carga_Medida.php?Cod_EstPro=${Cod_EstPro}&Cod_Version=${Cod_Version}&Cod_Hoja_Medida_Cab=${Cod_Hoja_Medida_Cab}`);                                             
+AuditoriaHojaMedidaCargaMedidaService(Cod_EstPro: string, Cod_Version: string, Cod_OrdPro: string,Cod_Hoja_Medida_Cab: number){
+  return this.http.get(`${this.baseUrl}/app_Auditoria_Hoja_Medida_Carga_Medida.php?Cod_EstPro=${Cod_EstPro}&Cod_Version=${Cod_Version}&Cod_OrdPro=${Cod_OrdPro}&Cod_Hoja_Medida_Cab=${Cod_Hoja_Medida_Cab}`);                                             
 }
 
 

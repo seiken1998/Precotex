@@ -27,6 +27,7 @@ interface data_det {
   Cod_ColCli:     string,
   Total:          string,
   Cantidad_Total: string,
+  Tipo_Registro: string
   
 }
 
@@ -71,7 +72,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
     Cod_EstCli:     "",
     Cod_ColCli:     "",
     Cantidad_Total: "",
- 
+    Tipo_Registro:  ""
    }] 
    
   Cod_Accion      = ''
@@ -92,7 +93,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
   Nom_Cliente     = ''
 
   Codigo_Auditoria_a_Modificar = ''
-
+  Tipo_Registro  = ''
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
    sCliente:      [''],
@@ -104,7 +105,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
 
 
 
-  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Temporada','Color','Total','Especiales', 'Cant','modificar','detalle']
+  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Temporada','Color','Total','Especiales', 'Cant','Tipo','modificar','detalle']
   dataSource: MatTableDataSource<data_det>;
   
 
@@ -188,7 +189,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0
     this.Op             = this.formulario.get('sAuditor')?.value
-   
+    this.Tipo_Registro  = ''
 
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
@@ -205,6 +206,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
       ).subscribe(
         (result: any) => {
           if(result.length>0){
@@ -250,6 +252,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Cod_Motivo     = ''
       this.Can_Defecto    = 0
       this.Op             = ''
+      this.Tipo_Registro  = ''
      this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -265,6 +268,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
       ).subscribe(
         (result: any) => {
           if (result[0].Respuesta == 'OK') {

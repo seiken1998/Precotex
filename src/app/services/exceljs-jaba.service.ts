@@ -46,8 +46,8 @@ export class ExceljsService {
 
  
     //Add Row and formatting
-    worksheet.mergeCells('C1', 'G4');
-    let titleRow = worksheet.getCell('C1');
+    worksheet.mergeCells('F1', 'I4');
+    let titleRow = worksheet.getCell('F1');
     titleRow.value = title
     titleRow.font = {
       name: 'Calibri',
@@ -59,11 +59,11 @@ export class ExceljsService {
     titleRow.alignment = { vertical: 'middle', horizontal: 'center' }
 
     // Date
-    worksheet.mergeCells('H1:L4');
+    worksheet.mergeCells('J1:M2');
     let d = new Date();
     let date = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
-    let dateCell = worksheet.getCell('H1');
-    dateCell.value = date;
+    let dateCell = worksheet.getCell('J1');
+    dateCell.value =  'Fecha de Registro: '+excelData.Fec_Registro;
     dateCell.font = {
       name: 'Calibri',
       size: 12,
@@ -71,13 +71,24 @@ export class ExceljsService {
     }
     dateCell.alignment = { vertical: 'middle', horizontal: 'center' }
 
+
+    worksheet.mergeCells('J3:M4');
+    let totalCell = worksheet.getCell('J3');
+    totalCell.value = 'Cantidad Total de Prendas: '+excelData.Total;
+    totalCell.font = {
+      name: 'Calibri',
+      size: 12,
+      bold: true
+    }
+    totalCell.alignment = { vertical: 'middle', horizontal: 'center' }
+
     //Add Image
-    worksheet.mergeCells('A1:B4');
+    worksheet.mergeCells('D1:E4');
     let myLogoImage = workbook.addImage({
       base64: logo.imgBase64,
       extension: 'jpeg',
     });
-    worksheet.addImage(myLogoImage, 'A1:B3');
+    worksheet.addImage(myLogoImage, 'D1:E3');
     //let imageRow = worksheet.getCell('A1');
     //imageRow.alignment = { vertical: 'middle', horizontal: 'center' }
     
@@ -134,19 +145,19 @@ export class ExceljsService {
     }
     );
     
-    worksheet.getColumn(1).width = 15;
-    worksheet.getColumn(2).width = 15;
-    worksheet.getColumn(3).width = 40;
-    worksheet.getColumn(4).width = 10;
-    worksheet.getColumn(5).width = 20;
+    worksheet.getColumn(1).width = 0;
+    worksheet.getColumn(2).width = 0;
+    worksheet.getColumn(3).width = 0;
+    worksheet.getColumn(4).width = 15;
+    worksheet.getColumn(5).width = 15;
     worksheet.getColumn(6).width = 20;
     worksheet.getColumn(7).width = 20;
-    worksheet.getColumn(8).width = 10;
-    worksheet.getColumn(9).width = 10;
-    worksheet.getColumn(10).width = 15;
-    worksheet.getColumn(11).width = 10;
-    worksheet.getColumn(12).width = 10;
-
+    worksheet.getColumn(8).width = 20;
+    worksheet.getColumn(9).width = 30;
+    worksheet.getColumn(10).width = 10;
+    worksheet.getColumn(11).width = 12;
+    worksheet.getColumn(12).width = 12;
+    worksheet.getColumn(13).width = 15;
 
     
     //worksheet.addRow([]);
@@ -165,10 +176,25 @@ export class ExceljsService {
       color: { argb: 'FFFFFF' },
       size: 12
     }
-
+    var r = data.length + 6;
+    console.log(r);
     //Merge Cells
     worksheet.mergeCells(``+abcIni+`${footerRow.number}:`+abcFin+`${footerRow.number}`);
+    worksheet.pageSetup.orientation = 'landscape'
+    worksheet.pageSetup.printArea = ('A1:M'+r);
+    worksheet.pageSetup.scale.toPrecision(85);
+    worksheet.pageSetup.fitToHeight = 1
+    worksheet.pageSetup.fitToWidth = 1
+    worksheet.pageSetup.scale = 1
+    worksheet.pageSetup.fitToPage = true
+    worksheet.pageSetup.paperSize = 9; // B5 (JIS)
+    worksheet.pageSetup.horizontalCentered = true;
 
+    worksheet.pageSetup.margins = {
+    left: 0, right: 0,
+    top: 0, bottom: 0,
+    header: 0, footer: 0
+};
     //Generate & Save Excel File
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });

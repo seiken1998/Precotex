@@ -377,7 +377,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         this.Cod_Version = result[0].Cod_Version
 
         this.buscarPorOp()
-        this.MostrarCabeceraCargaMedida()
+        //this.MostrarCabeceraCargaMedida()
         this.MostrarCargaMedida()
 
         this.SpinnerService.hide();
@@ -405,17 +405,27 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
         this.Cod_OrdPro
       ).subscribe(
         (result: any) => {
-
+          console.log(result)
+          console.log(result.length)
+          if(result.length > 0){
          this.Cod_EstPro  = result[0].Codigo
          this.Cod_Version = result[0].Cod_Version
          this.Cod_Cliente = result[0].Cod_Cliente
          this.Cod_Clientev2 = result[0].Cod_Cliente
          this.Cod_EstCli  = result[0].Cod_EstCli
          this.Cod_TemCli  = result[0].Cod_TemCli
-
+         this.formulario.controls['inputCliente'].setValue(result[0].Nom_Cliente)
+         this.formulario.controls['inputEstCli'].setValue(result[0].Cod_EstCli)
+         this.formulario.controls['inputEstPro'].setValue(result[0].Cod_EstProVersion)
+         this.formulario.controls['inputVersion'].setValue(result[0].Cod_Version)
          
          this.CargarOperacionColor()
-         this.MostrarCabeceraCargaMedida()
+         //this.MostrarCabeceraCargaMedida()
+     
+        }else{
+          this.matSnackBar.open('No hay datos con la OP ingresada...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          
+        }
          /*this.MostrarOrdenesCargaMedida()*/
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
@@ -582,7 +592,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.Cod_Version
       ).subscribe(
        (result: any) => {
-        //console.log(result)
+        console.log(result)
         //console.log(result[0].CLIENTE)
          this.formulario.controls['inputCliente'].setValue(result[0].CLIENTE)
          this.formulario.controls['inputEstCli'].setValue(result[0].ESTILO)
@@ -652,6 +662,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
     this.auditoriaHojaMedidaService.AuditoriaHojaMedidaCargaMedidaService(
       this.Cod_EstPro,
       this.Cod_Version,
+      this.formulario.get('OP')?.value,
       this.Cod_Hoja_Medida_Cab
     ).subscribe( 
       (result: any) => { 
@@ -705,7 +716,7 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
             colDefs!.push({field : keys[index], suppressMovable: true, pinned: 'left', lockPinned: true, cellClass: 'lock-pinned',width: 300, resizable: true})
           }
           else if(index == 4){
-            colDefs!.push({field : keys[index], suppressMovable: true, pinned: 'left', lockPinned: true, cellClass: 'lock-pinned'})
+            colDefs!.push({field : keys[index], suppressMovable: true, pinned: 'left', lockPinned: true, cellClass: 'lock-pinned',width: 120})
           }
           else{
           colDefs!.push({field : keys[index], suppressMovable: true})
@@ -1034,4 +1045,4 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
 }
- 
+  

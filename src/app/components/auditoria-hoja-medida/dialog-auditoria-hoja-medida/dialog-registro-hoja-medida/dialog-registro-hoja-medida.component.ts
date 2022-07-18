@@ -85,6 +85,9 @@ doAction(){
 
 
 selectMedida(medida: string){
+  if(medida == 'Eliminar'){
+    medida = ''
+  }
   if(medida == '-'){
     this.Menos = medida
   }else{

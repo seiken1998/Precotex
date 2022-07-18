@@ -81,8 +81,11 @@ mat-form-field {
     grid-template:
     /*"col1 col2 col3 col4 col7" 70px /
      180px 80px 185px 80px 70px*/
-    "col1 col2 col3 col4 col5 col6" 70px /
-     180px 80px 185px 65px 100px 80px
+    /*"col1 col2 col3 col4 col5 col6" 70px /
+     180px 80px 185px 65px 100px 80px*/
+
+     "col1 col2 col5 col6" 70px/
+     180px 80px  100px 80px
 }
 
 
@@ -245,7 +248,7 @@ tr:active {
         display: grid;
      
         grid-template:
-        "fila1" 220px
+        "fila1" 140px
         "fila2" 400px
         "foot" 55px /
         99%; 
@@ -263,9 +266,8 @@ tr:active {
         "col7 col7" 70px /
         270px 80px;*/
         "col1 col2" 70px 
-        "col3 col4" 70px 
-        "col5 col5" 70px /
-        270px 80px;
+        "col6 col5" 70px/
+        270px 70px;
     } 
     .fila1-anadir {
         grid-area: col1;
@@ -288,11 +290,16 @@ tr:active {
     
     .fila1-btn_regresar {
         grid-area: col5;
-        width: 165px;
+        width: 75px;
         display: flex;
         justify-content: center;
         align-items: center;
        
+    }
+
+    .fila1-btn_baja{
+        grid-area: col6;
+        width:230px;
     }
 
    

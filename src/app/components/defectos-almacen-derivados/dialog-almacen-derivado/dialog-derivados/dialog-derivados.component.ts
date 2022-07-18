@@ -50,6 +50,10 @@ interface Color {
   Nom_ColCli: string;
 }
 
+interface Tipo {
+  Cod_Tipo: string;
+  Nom_Tipo: string;
+}
 
 @Component({
   selector: 'app-dialog-derivados',
@@ -59,6 +63,12 @@ interface Color {
 
 
 export class DialogDerivadosComponent implements OnInit, AfterViewInit {
+
+  Tipos: Tipo[] = [
+    {Cod_Tipo: 'P', Nom_Tipo: 'Produccion'},
+    {Cod_Tipo: 'R', Nom_Tipo: 'Recuperacion'} 
+  ];
+
   sCod_Usuario = GlobalVariable.vusu;
 
   listar_operacionEstilo: string[] = [''];
@@ -101,6 +111,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   Caidas_solicitado_Global = 0
   Caidas_requerido_Global = 0
   Nom_TemCli = ''
+  Tipo_Registro = ''
 
 
   myControl = new FormControl();
@@ -125,7 +136,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     sIngreso:   [''],
     Cod_Motivo: [''],
     sCodCli:    [''],
-    sCodEst:    ['']
+    sCodEst:    [''],
+    Tipo:    ['']
     /*sCodTemp:   [''],
     sCodCli:    [''],
     sCodEst:    ['']
@@ -255,6 +267,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sOP'].setValue('')
     this.formulario.controls['sIngreso'].setValue('')
     this.formulario.controls['sGlosa'].setValue('')
+    this.formulario.controls['Tipo'].setValue('')
     this.dataSource.data = []
     this.tallas = []
     this.Num_Auditoria = 0
@@ -396,6 +409,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0 
     this.Op             = ''
+    this.Tipo_Registro  = ''
 
     /*console.log( this.Cod_Cliente)
     console.log( this.Cod_EstCli)
@@ -415,6 +429,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
     ).subscribe(
         (result: any) => {
           if(result[0]['Alerta'] !=undefined){
@@ -493,6 +508,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Cod_Motivo     = this.formulario.controls['Cod_Motivo'].value
     this.Can_Defecto    = this.formulario.get('cant')?.value
     this.Op             = ''
+    this.Tipo_Registro  = ''
 
 
     if(this.Cod_Talla != '' && this.Cod_Motivo != '' && this.Can_Defecto != 0 && this.Can_Defecto != null ){
@@ -512,6 +528,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
       ).subscribe(
         (result: any) => {
           if(result[0].Respuesta == 'OK'){
@@ -559,13 +576,14 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Cod_Talla      = ''
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0
-    this.Op             = this.formulario.get('sOP')?.value 
+    this.Op             = this.formulario.get('sOP')?.value
+    this.Tipo_Registro  = this.formulario.get('Tipo')?.value 
 
     if(this.Total == 0 || this.Total == null){
       this.Total = 0
     }
   
-    if(this.Cod_Cliente != '' && this.Fec_Auditoria != '' && this.Cod_EstCli != '' && this.Cod_TemCli != '' && this.Cod_ColCli != ''){
+    if(this.Cod_Cliente != '' && this.Fec_Auditoria != '' && this.Cod_EstCli != '' && this.Cod_TemCli != '' && this.Cod_ColCli != '' && this.Tipo_Registro != ''){
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -581,6 +599,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto, 
       this.Op,
+      this.Tipo_Registro
       ).subscribe(
         (result: any) => {
           if(result[0].Respuesta == 'OK'){
@@ -626,6 +645,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sColor'].disable()
     this.formulario.controls['sIngreso'].disable()
     this.formulario.controls['sGlosa'].disable()
+    this.formulario.controls['Tipo'].disable()
     this.flg_btn_cabecera = false
   }
   /*****************DESHABILITAR INPUTS DE LA CABECERA************************ */
@@ -639,6 +659,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sCliente'].enable()
     this.formulario.controls['sIngreso'].enable()
     this.formulario.controls['sGlosa'].enable()
+    this.formulario.controls['Tipo'].enable()
     this.inputAbr.nativeElement.focus()
     this.flg_btn_cabecera = true
   }
@@ -681,7 +702,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Cod_Motivo     = this.Codigo_Defecto_Eliminar
     this.Can_Defecto    = 0
     this.Op             = ''
-   
+    this.Tipo_Registro  = ''
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -697,6 +718,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
+      this.Tipo_Registro
     ).subscribe(
 
         (result: any) => {

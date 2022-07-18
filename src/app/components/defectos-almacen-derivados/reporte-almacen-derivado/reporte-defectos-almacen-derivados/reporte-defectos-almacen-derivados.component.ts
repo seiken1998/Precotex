@@ -17,7 +17,6 @@ interface data_det {
   Cod_EstCli: string,
   Cod_ColCli: string,
   Cantidad_Total: string,
-  
 }
 
 interface Cliente {

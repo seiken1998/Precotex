@@ -1,1 +1,112 @@
-<p>control-activo-fijo works!</p>
+<!--DefectosAlamacenDerivados-->
+  
+  
+<div class="container"> 
+    <!-- ventana nro 4 - historial --> 
+    <div class="grid-container"> 
+ 
+        <div class="title">Control de Activos Fijos</div>
+
+        <form class="container-cuerpo" [formGroup]="formulario">
+
+            <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                     Cabecera
+                    </mat-panel-title>
+                    <!--<mat-panel-description>
+                       <mat-icon>assignment</mat-icon>
+                    </mat-panel-description>-->
+                   
+                  </mat-expansion-panel-header>
+                  <div class="container-cuerpo-fila1">
+                
+                    <mat-form-field class="fila1-Empresa" appearance="fill"> 
+                        <mat-label>Empresa</mat-label>
+                        <input matInput type="text"  placeholder="Empresa" value=""
+                            autocomplete="off" formControlName="Empresa" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Sede" appearance="fill"> 
+                        <mat-label>Sede</mat-label>
+                        <input matInput type="text"  placeholder="Sede" value=""
+                            autocomplete="off" formControlName="Sede" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Piso" appearance="fill"> 
+                        <mat-label>Piso</mat-label>
+                        <input matInput type="text"  placeholder="Piso" value=""
+                            autocomplete="off" formControlName="Piso" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Ccosto" appearance="fill"> 
+                        <mat-label>C. Costo</mat-label>
+                        <input matInput type="text"  placeholder="C. Costo" value=""
+                            autocomplete="off" formControlName="Ccosto" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-Responsable" appearance="fill"> 
+                        <mat-label>Responsable</mat-label>
+                        <input matInput type="text"  placeholder="Responsable" value=""
+                            autocomplete="off" formControlName="Responsable" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-CodAct" appearance="fill"> 
+                        <mat-label>Cod. Act.</mat-label>
+                        <input matInput type="text"  placeholder="Cod. Act." value=""
+                            autocomplete="off" formControlName="CodAct" >
+                    </mat-form-field>
+
+                    <mat-form-field class="fila1-ClaseAct" appearance="fill"> 
+                        <mat-label>Clase Act.</mat-label>
+                        <input matInput type="text"  placeholder="Clase Act." value=""
+                            autocomplete="off" formControlName="ClaseAct" >
+                    </mat-form-field>
+                 
+                    <div class="fila1-Fijar" appearance="fill"> 
+                        <mat-checkbox class="example-margin" [(ngModel)]="disabled" formControlName="Fijar">Fijar</mat-checkbox>
+                    </div>
+               
+
+             
+            
+                <!--<button type="button" class="fila1-buscar" mat-flat-button >                    
+                    <mat-icon aria-label="person">search</mat-icon>Buscar
+                </button>
+
+                <button type="button" class="fila1-agregar" mat-flat-button >
+                    <mat-icon aria-label="person">add
+                    </mat-icon>  Agregar
+                </button>-->
+ 
+
+            </div> 
+                
+              
+                </mat-expansion-panel>
+                </mat-accordion>
+
+
+            
+            
+            
+ 
+            <!-- hora	tipo	num_guia	cod_proveedor	des_proveedor	cod_usuario -->
+            <div class="container-cuerpo-fila2">
+                <table mat-table #table   class="mat-elevation-z8" >
+                    
+
+                </table>
+
+            </div>
+
+        </form>
+
+    </div>
+ 
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin">  
+    <p style="color: white; text-align: center; " >Cargando... </p>  
+</ngx-spinner>       
