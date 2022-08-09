@@ -23,12 +23,12 @@ interface data_det {
   Nom_Cliente:    string,
   Cod_OrdPro :    string,
   Cod_EstCli:     string,
-  Cod_TemCli
+  Cod_TemCli:     string,
   Cod_ColCli:     string,
   Total:          string,
   Cantidad_Total: string,
-  Tipo_Registro: string
-  
+  Tipo_Registro: string,
+  Clasificacion: string
 }
 
 interface Cliente {
@@ -91,7 +91,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
   Op              = ''
   Abr             = ''
   Nom_Cliente     = ''
-
+  Clasificacion  = ''
   Codigo_Auditoria_a_Modificar = ''
   Tipo_Registro  = ''
   //* Declaramos formulario para obtener los controles */
@@ -105,7 +105,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
 
 
 
-  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Temporada','Color','Total','Especiales', 'Cant','Tipo','modificar','detalle']
+  displayedColumns_cab: string[] = ['nAuditoria','Fecha','Auditor', 'Cliente', 'OP' ,'Estilo', 'Temporada','Color','Total','Especiales', 'Cant','Tipo','Clasificacion','detalle']
   dataSource: MatTableDataSource<data_det>;
   
 
@@ -154,6 +154,9 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
   openDialog() {
     let dialogRef =  this.dialog.open(DialogDerivadosComponent, { 
       disableClose: true,
+      panelClass: 'my-class',
+      maxWidth: '98vw',
+      maxHeight: '98vh',
       height: '100%',
       width: '100%',
     });
@@ -190,6 +193,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
     this.Can_Defecto    = 0
     this.Op             = this.formulario.get('sAuditor')?.value
     this.Tipo_Registro  = ''
+    this.Clasificacion  = ''
 
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
@@ -206,7 +210,8 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion 
       ).subscribe(
         (result: any) => {
           if(result.length>0){
@@ -253,6 +258,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Can_Defecto    = 0
       this.Op             = ''
       this.Tipo_Registro  = ''
+      this.Clasificacion  = ''
      this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -268,7 +274,8 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion 
       ).subscribe(
         (result: any) => {
           if (result[0].Respuesta == 'OK') {
@@ -341,6 +348,9 @@ AsignarNumAuditoriaModificar(cod: string){
   this.Codigo_Auditoria_a_Modificar = cod
   let dialogRef =  this.dialog.open(DialogDerivadosModificarComponent, { 
     disableClose: true,
+    panelClass: 'my-class',
+    maxWidth: '98vw',
+    maxHeight: '98vh',
     height: '100%',
     width: '100%',
     data: cod

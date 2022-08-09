@@ -194,6 +194,7 @@ mat-form-field {
 .mat-column-Total,
 .mat-column-Especiales,
 .mat-column-Tipo,
+.mat-column-Clasificacion,
 .mat-column-modificar,
 .mat-column-detalle {
 	text-align: center;
@@ -212,8 +213,9 @@ mat-form-field {
 .mat-column-Color {width: 80px !important;text-align: center}
 .mat-column-Total {width: 80px !important;text-align: center}
 .mat-column-Especiales {width: 80px !important;text-align: center}
-.mat-column-Cant {width: 80px !important;text-align: center;}
+.mat-column-Cant {width: 80px !important;text-align: center}
 .mat-column-Tipo {width: 80px !important;text-align: center}
+.mat-column-Clasificacion {width: 80px !important;text-align: center}
 .mat-column-modificar {width: 30px !important;text-align: center}
 .mat-column-detalle {width: 30px !important;text-align: center}
 .mat-header-cell {text-align: center; }

@@ -435,22 +435,22 @@ tr:active {
         grid-template:
         "col1 col2 col3 col4" 60px
         "col5 col6 col7 col8"/
-        150px 150px 190px 220px;
+        220px 220px 220px 220px;
 
       
     }
     .fila1-abr-dialog {
         grid-area: col1;
-       width: 100px;
+       width: 220px;
     } 
     .fila1-cliente-dialog {
         grid-area: col2;
-        width: 150px;
+        width: 220px;
     }
 
     .fila1-estilo-dialog {
         grid-area: col3;
-        width: 190px;
+        width: 220px;
     }
     .fila1-temporada-dialog {
         grid-area: col4;
@@ -460,16 +460,16 @@ tr:active {
     
     .fila1-color-dialog {
         grid-area: col5;
-        width: 150px;
+        width: 220px;
     }
     .fila1-fecha-dialog {
         grid-area: col6;
-        width: 150px;
+        width: 220px;
     }
     
     .fila1-auditor-dialog {
         grid-area: col7;
-        width: 190px;
+        width: 220px;
     }
     .fila1-alerta-dialog {
         grid-area: col8;

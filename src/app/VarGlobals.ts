@@ -35,7 +35,9 @@
     Cod_VersionHojaMedida: '',
     Accion: '',
 
-    Arr_Medidas: []
+    Arr_Medidas: [],
+
+    wsHuachipa: ''
     //baseUrl: "https://gestion.precotex.com/ws_android"
     //... more of your variables
  }

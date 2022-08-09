@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import * as _moment from 'moment';
 import { Observable } from 'rxjs';
-import { AuditoriaInspeccionCosturaService } from 'src/app/services/auditoria-inspeccion-costura.service';
+import { ControlActivoFijoService } from 'src/app/services/control-activo-fijo.service';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService }  from "ngx-spinner";
@@ -31,11 +31,11 @@ interface data_det {
 }
  
 
-
-interface Auditor {
-  Cod_Auditor: string;
-  Nom_Auditor: string;
+interface Clase {
+  Cod_Categoria: number;
+  Nombre_Categoria: string;
 }
+
 
 @Component({
   selector: 'app-control-activo-fijo',
@@ -44,7 +44,7 @@ interface Auditor {
 })
 export class ControlActivoFijoComponent implements OnInit {
 
-  
+  listar_operacionClase: Clase[] = [];
   @ViewChild(MatAccordion) accordion: MatAccordion;
   
   public data_det = [{
@@ -64,27 +64,23 @@ export class ControlActivoFijoComponent implements OnInit {
 
 
 
- 
+
 
  // nuevas variables
-  Cod_Accion        =   ""
-  Num_Auditoria     =   0
-  Cod_Supervisor    =   ""
-  Nom_Supervisor    =   ""
-  Cod_Auditor       =   ""
-  Nom_Auditor       =   ""
-  Fecha_Auditoria   =   ""
-  Fecha_Auditoria2  =   ""
-  Cod_LinPro        =   ""
-  Observacion       =   ""
-  Flg_Status        =   ""
-  Cod_Usuario       =   ""
-  Cod_Equipo        =   ""
-  Fecha_Reg         =   ""	 	
-  Cod_OrdPro        =   ""
-  Cod_EstCli        =   ""
-  Can_Lote          = 0
-  Cod_Motivo        = ''
+  panelOpenState = false;
+  PanelVehiculo = false;
+  PanelMueble = false;
+  PanelEquipo = false;
+
+  Cod_Accion        = ""
+  Cod_Empresa				= ""
+  Planta						= 0
+  Piso						  = 0
+  Cod_CenCost				= ""
+  Cod_Activo				= ""
+  Clase_Activo			= 0
+
+      
 
   disabled = false;
 
@@ -98,45 +94,128 @@ export class ControlActivoFijoComponent implements OnInit {
     Responsable:      [''],
     CodAct:           [''],
     ClaseAct:         [''],
-    Fijar:            ['']
+    Fijar:            [''],
+
+    
+    Descripcion:      [''],
+    Marca:            [''],
+    Modelo:           [''],
+    Serie:            [''],
+    Estado:           [''],
+    Uso:              [''],
+    Observacion:      [''],
+    Color:            [''],
+    Medidas:          [''],
+    Motor:            [''],
+    Chasis:           [''],
+    Placa:            [''],
+    Combustible:      [''],
+    Caja:             [''],
+    Asiento:          [''],
+    Fabricacion:      [''],
+    Ejes:             [''],
   })
 
 
 
   constructor(private formBuilder: FormBuilder,
     private matSnackBar: MatSnackBar,
-    private auditoriaInspeccionCosturaService: AuditoriaInspeccionCosturaService,
+    private controlActivoFijoService: ControlActivoFijoService,
     public dialog: MatDialog,
     private SpinnerService: NgxSpinnerService) {  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void { 
-   
+   this.formulario.controls['Responsable'].setValue(GlobalVariable.vusu)
+   this.formulario.controls['Responsable'].disable()
+   this.CargarOperacionClase()
+  }
+
+  FijarCabecera(){
+    console.log(this.formulario.get('Fijar')?.value)
+    if(this.formulario.get('Fijar')?.value == true){
+      this.HabilitarCabecera()
+    }
+    else{
+      this.DeshabilitarCabecera()
+    }
+  }
+ 
+
+  DeshabilitarCabecera(){
+    this.formulario.controls['Empresa'].disable()
+    this.formulario.controls['Sede'].disable()
+    this.formulario.controls['Piso'].disable()
+    this.formulario.controls['Ccosto'].disable()
+    //this.formulario.controls['Responsable'].disable()
+    this.formulario.controls['CodAct'].disable()
+    this.formulario.controls['ClaseAct'].disable()
+  }
+
+  HabilitarCabecera(){
+    this.formulario.controls['Empresa'].enable()
+    this.formulario.controls['Sede'].enable()
+    this.formulario.controls['Piso'].enable()
+    this.formulario.controls['Ccosto'].enable()
+    //this.formulario.controls['Responsable'].enable()
+    this.formulario.controls['CodAct'].enable()
+    this.formulario.controls['ClaseAct'].enable()
   }
 
 
-  MostrarCabeceraAuditoria() {
-    
+  CargarOperacionClase(){
+    this.Cod_Accion         = "C"
+    this.Cod_Empresa				= ""
+    this.Planta						  = 0
+    this.Piso						    = 0
+    this.Cod_CenCost				= ""
+    this.Cod_Activo				  = ""
+    this.Clase_Activo			  = 0
+    this.controlActivoFijoService.MantenimientoControlActivoFijo(
+      this.Cod_Accion,   
+      this.Cod_Empresa,
+      this.Planta,
+      this.Piso,
+      this.Cod_CenCost,
+      this.Cod_Activo	,
+      this.Clase_Activo,
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+        this.listar_operacionClase = result
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
+  
+    }
 
-   
-  }
-
-
-  openDialogDetalle(Cod_LinPro: string, Num_Auditoria: number, Flg_Status: string){
-    
-  }
-
+    CambiarContenidoDetalle(Cod_Categoria: number){
+      console.log(Cod_Categoria)
+      const Vehiculo = [1];
+      const Mueble = [2];
+      const Equipo = [3, 4, 5, 6, 7, 8, 9];
+      if(Vehiculo.includes(Cod_Categoria) == true){
+        this.PanelVehiculo = true
+        this.panelOpenState = true
+        this.PanelMueble = false
+        this.PanelEquipo = false
+      }
+      else if (Mueble.includes(Cod_Categoria) == true){
+        this.PanelMueble = true
+        this.panelOpenState = true
+        this.PanelVehiculo = false
+        this.PanelEquipo = false
+      }
+      else if (Equipo.includes(Cod_Categoria) == true){
+        this.PanelEquipo = true
+        this.panelOpenState = true
+        this.PanelVehiculo = false
+        this.PanelMueble = false
+      }
+    }
 
   
-  /* --------------- LLENAR SELECT AUDITOR ------------------------------------------ */
-
-  CargarOperacionAuditor(){
-
-    
-  }
-  
   
 
-}
+} 
 

@@ -34,6 +34,20 @@ export class DespachoOpIncompletaService {
       return this.http.get(`${this.baseUrl}/app_Man_Despacho_Op_Incompleta.php?Accion=${Cod_Accion}&Cod_Ordtra=${Cod_Ordtra}&IdMotivo=${IdMotivo}&Cod_Usuario=${this.sCod_Usuario}`);                                                
 }
 
+ReporteDespachoOpIncompleta(Cod_Accion: string, Fec_Inicio: string, Fec_Fin: string){
+
+  if (!_moment(Fec_Inicio).isValid()) {
+    Fec_Inicio = '01/01/1900';
+  }
+  if (!_moment(Fec_Fin).isValid()) {
+    Fec_Fin = '01/01/1900';
+  }                                                
+  Fec_Inicio = _moment(Fec_Inicio.valueOf()).format('DD/MM/YYYY'); 
+  Fec_Fin = _moment(Fec_Fin.valueOf()).format('DD/MM/YYYY'); 
+
+  return this.http.get(`${this.baseUrl}/app_Reporte_Despacho_Op_Incompleta.php?Accion=${Cod_Accion}&Fec_Inicio=${Fec_Inicio}&Fec_Fin=${Fec_Fin}`);                                                
+}
+
 ListarMotivoDespachoOpIncompleta(){
   return this.http.get(`${this.baseUrl}/app_Listar_Motivo_Despacho_Op_Incompleta.php`);                                                
 }

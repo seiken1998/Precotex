@@ -99,6 +99,15 @@
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
+
+                      <mat-form-field appearance="fill" class="fila1-clasificacion-dialog">
+                        <mat-label>Clasificacion</mat-label>
+                        <mat-select formControlName="Clasificacion">
+                          <mat-option *ngFor="let Clasificacion of Clasificaciones" [value]="Clasificacion.Cod_Clasificacion">
+                            {{Clasificacion.Nom_Clasificacion}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     
                     <button type="button" (click)="RegistrarCabecera()" [disabled]="!flg_btn_cabecera" class="fila1-RegistrarCabecera-dialog" mat-flat-button >
                         Registrar

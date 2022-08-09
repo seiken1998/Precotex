@@ -13,7 +13,7 @@ import { NgxSpinnerService }  from "ngx-spinner";
 import { DialogEliminarComponent} from 'src/app/components/dialogs/dialog-eliminar/dialog-eliminar.component'
 import { DialogObservacionHojaMedidaComponent} from 'src/app/components/auditoria-hoja-medida/dialog-auditoria-hoja-medida/dialog-observacion-hoja-medida/dialog-observacion-hoja-medida.component'
 import { GlobalVariable } from '../../VarGlobals'; //<==== this one
-import { ExceljsService } from 'src/app/services/exceljs.service';
+import { ExceljsHojaMedidaService } from 'src/app/services/exceljs-hoja-medida.service';
 
 interface data_det {
     Cod_Hoja_Medida_Cab:  number,
@@ -117,7 +117,7 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
     private auditoriaHojaMedidaService: AuditoriaHojaMedidaService,
     public dialog: MatDialog,
     private SpinnerService: NgxSpinnerService,
-    private exceljsService:ExceljsService) { this.dataSource = new MatTableDataSource(); }
+    private exceljsHojaMedidaService:ExceljsHojaMedidaService) { this.dataSource = new MatTableDataSource(); }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -217,7 +217,7 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
   actualizarObservacion(Cod_Hoja_Medida_Cab: number){
     let dialogRef =  this.dialog.open(DialogObservacionHojaMedidaComponent, 
       { disableClose: true,
-        panelClass: 'my-class',
+        panelClass: 'my-class', 
         data: { Cod_Hoja_Medida_Cab: Cod_Hoja_Medida_Cab
         }});  
       dialogRef.afterClosed().subscribe(result => {
@@ -298,12 +298,15 @@ export class AuditoriaHojaMedidaComponent implements OnInit {
         })
     
         let reportData = {
-          title: 'REPORTE REGISTRO HOJA DE MEDIDA - COSTURA',
+          title: 'REPORTE REGISTRO HOJA DE MEDIDA - COSTURA Nº'+Cod_Hoja_Medida_Cab,
           data: this.dataForExcel,
+          Cod_EstPro: Cod_EstPro,
+          Cod_Verion: Cod_Verion,
+          Cod_OrdPro: Cod_OrdPro,
           headers: Object.keys(result[0])
         }
     
-        this.exceljsService.exportExcel(reportData);
+        this.exceljsHojaMedidaService.exportExcel(reportData);
         this.SpinnerService.hide();
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))

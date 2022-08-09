@@ -121,15 +121,16 @@
 
             
                     
-                      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                      <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
                       <!--<tr mat-row *matRowDef="let row; columns: columnsToDisplay;">(click)="EliminarRegistro(row.Abr_Motivo)"</tr>
                       <tr mat-row (click)="AsignarCodRegistroVariableEliminar(row.Cod_Motivo)" *matRowDef="let row; columns: columnsToDisplay;"></tr>-->
                       <tr mat-row  *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                    
                 </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                <!--<mat-paginator [pageSizeOptions]="[5, 10, 20]"
                 showFirstLastButtons 
                 aria-label="Select page of periodic elements">
-               </mat-paginator>
+               </mat-paginator>-->
             </div>
 
  

@@ -152,6 +152,7 @@ export class AuditoriaInspeccionCosturaComponent implements OnInit {
 
    let dialogRef = this.dialog.open(DialogRegistrarCabeceraComponent, {
       disableClose: true,
+      
       data: {}
     });
 
@@ -288,6 +289,9 @@ export class AuditoriaInspeccionCosturaComponent implements OnInit {
     if(Flg_Status == 'P' || GlobalVariable.vusu.toUpperCase() == 'RHUAYANA' || GlobalVariable.vusu.toUpperCase() == 'SISTEMAS'){
     let dialogRef = this.dialog.open(DialogListaDetalleComponent, {
       disableClose: true,
+      panelClass: 'my-class',
+      maxWidth: '98vw',
+      maxHeight: '98vh',
       data: {Cod_LinPro: Cod_LinPro, Num_Auditoria: Num_Auditoria}
     });
 

@@ -8,6 +8,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { GlobalVariable } from '../VarGlobals';
 
 @Injectable()
 export class HttpErrorInterceptor extends HttpErrorResponse {

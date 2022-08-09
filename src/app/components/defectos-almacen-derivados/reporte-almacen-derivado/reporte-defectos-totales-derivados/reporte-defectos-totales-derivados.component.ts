@@ -237,7 +237,7 @@ export class ReporteDefectosTotalesDerivadosComponent implements OnInit {
   buscarDefectosDerivados(){
     this.SpinnerService.show();
     this.dataSource.data = []
-    this.displayedColumns  = ['Descripcion','Total'];
+    this.displayedColumns  = ['Descripcion','Total Produccion','Total Recuperado'];
     this.columnsToDisplay = this.displayedColumns.slice();
     if(this.formulario.get('sCliente')?.value == ''){
       this.vCliente = ''

@@ -41,9 +41,9 @@ export class DespachoOpIncompletaComponent implements OnInit {
     Cod_Usuario:              "",
     Fec_Creacion:             "",
     Cod_Usuario_Aprobacion:   "",
-    Fec_Creacion_Aprobacion:  ""
+    Fec_Creacion_Aprobacion:  "" 
   }]
-
+ 
 
   Cod_Accion              = ''
   Cod_Ordtra              = ''
@@ -54,10 +54,14 @@ export class DespachoOpIncompletaComponent implements OnInit {
   Cod_Usuario_Aprobacion  = ''
   Fec_Creacion_Aprobacion = ''
   Id_Motivo: 0
-
-
-   
-
+  Fec_Inicio: ''
+  Fec_Fin: ''
+  dataForExcel = [];
+    
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
@@ -83,7 +87,53 @@ export class DespachoOpIncompletaComponent implements OnInit {
   ngOnInit(): void { 
       this.listarCabecera()
     } 
- 
+  
+  clearDate(event) {
+    event.stopPropagation();
+    this.range.controls['start'].setValue('')
+    this.range.controls['end'].setValue('')
+  }
+
+  generateExcel(){
+    this.SpinnerService.show();
+
+    this.Cod_Accion     = 'V'
+    this.Fec_Inicio     = this.range.get('start')?.value
+    this.Fec_Fin        = this.range.get('end')?.value
+    this.despachoOpIncompletaService.ReporteDespachoOpIncompleta(
+      this.Cod_Accion,
+      this.Fec_Inicio,
+      this.Fec_Fin  
+      ).subscribe(
+        (result: any) => {
+          console.log(result)
+        if(result[0].Respuesta){
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+          this.SpinnerService.hide();
+          
+        }else{
+          result.forEach((row: any) => {
+            this.dataForExcel.push(Object.values(row)) 
+          })
+      
+          let reportData = {
+            title: 'REPORTE GIRADO PARTIDA INCOMPLETA',
+            data: this.dataForExcel,
+            headers: Object.keys(result[0])
+          }
+      
+          this.exceljsService.exportExcel(reportData);
+          this.dataForExcel = []
+          this.SpinnerService.hide();
+        }
+
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+          duration: 1500,
+        }))
+
+
+  }
 
   listarCabecera(){
     this.SpinnerService.show();
@@ -112,15 +162,19 @@ export class DespachoOpIncompletaComponent implements OnInit {
   }
 
 
-  aprobarDespacho(Cod_Ordtra: string){
+  aprobarDespacho(Cod_Ordtra: string, Flg_Aprobado: string){
     let dialogRef =  this.dialog.open(DialogDespachoOpIncompletaComponent, { 
       disableClose: true,
       panelClass: 'my-class',
-      data: { Cod_Ordtra: Cod_Ordtra
+      maxWidth: '98vw',
+      maxHeight: '98vh',
+      
+      data: { Cod_Ordtra: Cod_Ordtra,
+              Estado: Flg_Aprobado
   }});
     dialogRef.afterClosed().subscribe(result =>{
     if(result == 'true'){
-      this.listarCabecera()
+      this.listarCabecera() 
     }})
   }
 

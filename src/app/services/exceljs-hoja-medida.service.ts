@@ -6,12 +6,9 @@ import * as logo from './mylogo.js';
 @Injectable({
   providedIn: 'root'
 })
-export class ExceljsService {
- 
-  constructor() {
-  }
+export class ExceljsHojaMedidaService {
 
-
+  
   public exportExcel(excelData) {
 
     //Title, Header & Data
@@ -46,8 +43,8 @@ export class ExceljsService {
 
  
     //Add Row and formatting
-    worksheet.mergeCells('F1', 'I4');
-    let titleRow = worksheet.getCell('F1');
+    worksheet.mergeCells('F1', 'O4');
+    let titleRow = worksheet.getCell('H1');
     titleRow.value = title
     titleRow.font = {
       name: 'Calibri',
@@ -59,11 +56,11 @@ export class ExceljsService {
     titleRow.alignment = { vertical: 'middle', horizontal: 'center' }
 
     // Date
-    worksheet.mergeCells('J1:M2');
+    worksheet.mergeCells('P1:V2');
     let d = new Date();
     let date = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
-    let dateCell = worksheet.getCell('J1');
-    dateCell.value =  'Fecha de Registro: '+excelData.Fec_Registro;
+    let dateCell = worksheet.getCell('Q1');
+    dateCell.value =  'OP: '+excelData.Cod_OrdPro;
     dateCell.font = {
       name: 'Calibri',
       size: 12,
@@ -72,9 +69,9 @@ export class ExceljsService {
     dateCell.alignment = { vertical: 'middle', horizontal: 'center' }
 
 
-    worksheet.mergeCells('J3:M4');
-    let totalCell = worksheet.getCell('J3');
-    totalCell.value = 'Cantidad Total de Prendas: '+excelData.Total;
+    worksheet.mergeCells('P3:V4');
+    let totalCell = worksheet.getCell('Q3');
+    totalCell.value = 'Estilo Propio/Version: '+excelData.Cod_EstPro +'/'+excelData.Cod_Verion;
     totalCell.font = {
       name: 'Calibri',
       size: 12,
@@ -83,12 +80,12 @@ export class ExceljsService {
     totalCell.alignment = { vertical: 'middle', horizontal: 'center' }
 
     //Add Image
-    worksheet.mergeCells('D1:E4');
+    worksheet.mergeCells('C1:E4');
     let myLogoImage = workbook.addImage({
       base64: logo.imgBase64,
       extension: 'jpeg',
     });
-    worksheet.addImage(myLogoImage, 'D1:E3');
+    worksheet.addImage(myLogoImage, 'C1:D3');
     //let imageRow = worksheet.getCell('A1');
     //imageRow.alignment = { vertical: 'middle', horizontal: 'center' }
     
@@ -147,17 +144,10 @@ export class ExceljsService {
     
     worksheet.getColumn(1).width = 0;
     worksheet.getColumn(2).width = 0;
-    worksheet.getColumn(3).width = 0;
-    worksheet.getColumn(4).width = 15;
-    worksheet.getColumn(5).width = 15;
-    worksheet.getColumn(6).width = 20;
-    worksheet.getColumn(7).width = 20;
-    worksheet.getColumn(8).width = 20;
-    worksheet.getColumn(9).width = 30;
-    worksheet.getColumn(10).width = 10;
-    worksheet.getColumn(11).width = 12;
-    worksheet.getColumn(12).width = 12;
-    worksheet.getColumn(13).width = 15;
+    worksheet.getColumn(3).width = 10;
+    worksheet.getColumn(4).width = 40;
+    worksheet.getColumn(5).width = 13;
+     
 
     
     //worksheet.addRow([]);
@@ -181,7 +171,7 @@ export class ExceljsService {
     //Merge Cells
     worksheet.mergeCells(``+abcIni+`${footerRow.number}:`+abcFin+`${footerRow.number}`);
     worksheet.pageSetup.orientation = 'landscape'
-    worksheet.pageSetup.printArea = ('A1:M'+r);
+    worksheet.pageSetup.printArea = ('A1:AI'+r);
     worksheet.pageSetup.scale.toPrecision(85);
     worksheet.pageSetup.fitToHeight = 1
     worksheet.pageSetup.fitToWidth = 1

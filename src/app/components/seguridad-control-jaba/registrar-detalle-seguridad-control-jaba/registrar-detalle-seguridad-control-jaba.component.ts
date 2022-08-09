@@ -239,6 +239,8 @@ export class RegistrarDetalleSeguridadControlJabaComponent implements OnInit {
 
   CargarOperacionColor(){
     
+    
+    
 
     this.Cod_OrdPro             = this.formulario.get('OP')?.value
     if(this.Cod_OrdPro.length == 5){

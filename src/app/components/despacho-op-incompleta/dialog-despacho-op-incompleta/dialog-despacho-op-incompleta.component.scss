@@ -12,6 +12,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-family: corbel, arial;
     font-size: 15px;
     margin: 0; 
+    min-width: 350px;
 }
   
 .grid-container {
@@ -82,7 +83,8 @@ mat-form-field {
 .container-cuerpo-fila1 {
     display: grid;
     grid-template:
-    "col1 col2 col3 col4" 70px/200px 200px 200px 300px
+    "col1 col2 col3 col4 col5" 70px/
+    200px 200px 200px 300px 200px
 }
 
     .fila1-Partida {
@@ -99,10 +101,21 @@ mat-form-field {
     }
     .fila1-Motivo {
         grid-area: col4;
-        width: 200px;
+        width: 300px;
     }
     
-
+    .fila1-button-agregar-motivo{
+        width: 100%;
+        grid-area: col5;
+        height: 40px;
+        max-width: 280px;
+        margin: auto;
+        margin-top: 3px;
+        background-color: #3f51b5;
+        color: #ffffff;
+        width: 180px;
+        
+    }
 
 
 
@@ -146,8 +159,7 @@ mat-form-field {
     width: 100%;
 }
 
-.mat-column-Tela,
-.mat-column-Des_Comb,
+
 .mat-column-Tipo, 
 .mat-column-Ancho_Acab,
 .mat-column-Ancho_Reposo,
@@ -166,10 +178,13 @@ mat-form-field {
 .mat-column-Encogimiento_Tramo_Izquierdo,
 .mat-column-Encogimiento_Tramo_Centro,
 .mat-column-Gramaje_Lavado,
-.mat-column-Nom_Auditor,
 .mat-column-Flg_Status_Apro,
 .mat-column-Fec_Registro,
-.mat-column-Observaciones
+.mat-column-Estado
+
+.mat-column-Kgs_Req_Acabado,
+.mat-column-Kgs_Tenidos_1ras
+
 //.mat-column-eliminar 
 {
 	text-align: center;
@@ -178,10 +193,72 @@ mat-form-field {
     padding: 15px;
    
 }
+
+.mat-column-Tela,
+.mat-column-Des_Comb,
+.mat-column-Nom_Auditor,
+.mat-column-Observaciones,
+.mat-column-Cliente,
+.mat-column-OP,
+.mat-column-Estilo,
+.mat-column-Tela2,
+.mat-column-Comb{
+    text-align: left;
+	font-size: 13px;
+    font-family: arial;
+    padding: 15px;
+}
+//tabla1
+.mat-column-Cliente{
+    width: 130px;
+    min-width: 130px;
+}
+.mat-column-OP{
+    width: 130px;
+    min-width: 130px;
+}
+.mat-column-Estilo{
+    width: 130px;
+    min-width: 130px;
+}
+.mat-column-Tela2{
+    width: 830px;
+    min-width: 830px;
+}
+.mat-column-Comb{
+    width: 200px;
+    min-width: 200px;
+}
+.mat-column-Kgs_Req_Acabado{
+    width: 130px;
+    min-width: 130px;
+}
+.mat-column-Kgs_Tenidos_1ras{
+    width: 130px;
+    min-width: 130px;
+}
+.mat-column-Estado{
+    width: 130px;
+    //min-width: 130px;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 0px;
+}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 0;
+}
+th.mat-header-cell:last-of-type{
+    padding-right: 0;
+}
+//tabla2
+
+
 .mat-column-Tela{
     width: 300px;
     min-width: 300px;
 }
+
 .mat-column-Des_Comb{
     width: 150px;
     min-width: 150px;
@@ -230,18 +307,18 @@ tr:active {
 }
 
 
-@media screen and (max-width: 1100px){
+@media screen and (max-width: 1160px){
     .grid-container{
         min-width: 0px;
-        min-height: 800px;
-        height: 800px;
+        min-height: 780px;
+        height: 780px;
     }
 
     .container-cuerpo {
         display: grid;
         grid-template:
         "fila1" 220px
-        "fila2" 450px
+        "fila2" 440px
         "foot" 55px / 
         99%;
     }
@@ -251,7 +328,7 @@ tr:active {
     .container-cuerpo-fila1 {
         display: grid;
         grid-template:
-        "col1 col1" 70px
+        "col1 col5" 70px
         "col2 col3" 70px
         "col4 col4" 70px/
         150px 150px;  
@@ -268,10 +345,15 @@ tr:active {
         .fila1-Kgtenido {
             grid-area: col3;
             
-        }
+        } 
         .fila1-Motivo {
             grid-area: col4;
             width: 300px;
+        }
+
+        .fila1-button-agregar-motivo{
+            grid-area: col5;
+            width: 130px;
         }
  
 
@@ -290,7 +372,9 @@ tr:active {
     ::ng-deep .mat-input-element:disabled{
         color: #222;
     }
-
+    ::ng-deep .mat-select-value-text{
+        color: #222,
+    }
   /*@media screen and (max-width: 688px){
    .grid-container{
        height: 510px;

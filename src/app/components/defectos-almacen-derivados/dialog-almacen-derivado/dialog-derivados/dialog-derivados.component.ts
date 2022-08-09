@@ -55,6 +55,11 @@ interface Tipo {
   Nom_Tipo: string;
 }
 
+interface Clasificacion{
+  Cod_Clasificacion: string;
+  Nom_Clasificacion: string
+}
+
 @Component({
   selector: 'app-dialog-derivados',
   templateUrl: './dialog-derivados.component.html',
@@ -67,6 +72,14 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   Tipos: Tipo[] = [
     {Cod_Tipo: 'P', Nom_Tipo: 'Produccion'},
     {Cod_Tipo: 'R', Nom_Tipo: 'Recuperacion'} 
+  ];
+
+  Clasificaciones:Clasificacion[] = [
+    {Cod_Clasificacion: 'S', Nom_Clasificacion: 'Segundas'},
+    {Cod_Clasificacion: 'M', Nom_Clasificacion: 'Mercado Local'},
+    {Cod_Clasificacion: 'T', Nom_Clasificacion: 'Terceras'},
+    {Cod_Clasificacion: 'E', Nom_Clasificacion: 'Especiales'},   
+    {Cod_Clasificacion: 'O', Nom_Clasificacion: 'Otros'} 
   ];
 
   sCod_Usuario = GlobalVariable.vusu;
@@ -112,7 +125,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   Caidas_requerido_Global = 0
   Nom_TemCli = ''
   Tipo_Registro = ''
-
+  Clasificacion = ''
 
   myControl = new FormControl();
   fec_registro = new FormControl(new Date())
@@ -137,7 +150,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     Cod_Motivo: [''],
     sCodCli:    [''],
     sCodEst:    [''],
-    Tipo:    ['']
+    Tipo:       [''],
+    Clasificacion: ['']
     /*sCodTemp:   [''],
     sCodCli:    [''],
     sCodEst:    ['']
@@ -268,6 +282,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sIngreso'].setValue('')
     this.formulario.controls['sGlosa'].setValue('')
     this.formulario.controls['Tipo'].setValue('')
+    this.formulario.controls['Clasificacion'].setValue('')
     this.dataSource.data = []
     this.tallas = []
     this.Num_Auditoria = 0
@@ -410,7 +425,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Can_Defecto    = 0 
     this.Op             = ''
     this.Tipo_Registro  = ''
-
+    this.Clasificacion  = ''
     /*console.log( this.Cod_Cliente)
     console.log( this.Cod_EstCli)
     console.log( this.Cod_TemCli)*/
@@ -429,7 +444,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion
     ).subscribe(
         (result: any) => {
           if(result[0]['Alerta'] !=undefined){
@@ -509,7 +525,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Can_Defecto    = this.formulario.get('cant')?.value
     this.Op             = ''
     this.Tipo_Registro  = ''
-
+    this.Clasificacion  = ''
 
     if(this.Cod_Talla != '' && this.Cod_Motivo != '' && this.Can_Defecto != 0 && this.Can_Defecto != null ){
    
@@ -528,7 +544,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion
       ).subscribe(
         (result: any) => {
           if(result[0].Respuesta == 'OK'){
@@ -578,7 +595,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Can_Defecto    = 0
     this.Op             = this.formulario.get('sOP')?.value
     this.Tipo_Registro  = this.formulario.get('Tipo')?.value 
-
+    this.Clasificacion  = this.formulario.get('Clasificacion')?.value
     if(this.Total == 0 || this.Total == null){
       this.Total = 0
     }
@@ -599,7 +616,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto, 
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion
       ).subscribe(
         (result: any) => {
           if(result[0].Respuesta == 'OK'){
@@ -646,6 +664,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sIngreso'].disable()
     this.formulario.controls['sGlosa'].disable()
     this.formulario.controls['Tipo'].disable()
+    this.formulario.controls['Clasificacion'].disable()
     this.flg_btn_cabecera = false
   }
   /*****************DESHABILITAR INPUTS DE LA CABECERA************************ */
@@ -660,6 +679,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.formulario.controls['sIngreso'].enable()
     this.formulario.controls['sGlosa'].enable()
     this.formulario.controls['Tipo'].enable()
+    this.formulario.controls['Clasificacion'].enable()
     this.inputAbr.nativeElement.focus()
     this.flg_btn_cabecera = true
   }
@@ -703,6 +723,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Can_Defecto    = 0
     this.Op             = ''
     this.Tipo_Registro  = ''
+    this.Clasificacion  = ''
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
       this.Num_Auditoria, 
@@ -718,7 +739,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.Cod_Motivo,
       this.Can_Defecto,
       this.Op,
-      this.Tipo_Registro
+      this.Tipo_Registro,
+      this.Clasificacion
     ).subscribe(
 
         (result: any) => {

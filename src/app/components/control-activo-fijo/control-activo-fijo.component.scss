@@ -48,7 +48,7 @@
 
     grid-template:
         "fila1" 115px
-        "fila2" 400px
+        "fila2" 115px
         "foot" 55px / 
         99%;
 }
@@ -57,11 +57,17 @@
     grid-area: fila1;
     margin-top: 15px;
 }
-.container-cuerpo-fila2 {
+.container-cuerpo-panel1 {
     grid-area: fila2;
-    overflow: auto;
-    margin-bottom: 10px;
-    width: 100%;
+    margin-top: 15px;
+}
+.container-cuerpo-panel2 {
+    grid-area: fila2;
+    margin-top: 15px;
+}
+.container-cuerpo-panel3 {
+    grid-area: fila2;
+    margin-top: 15px;
 }
 .container-cuerpo-foot {
     grid-area: foot;
@@ -123,6 +129,138 @@ mat-form-field {
     align-items: center;  
 }
 
+.container-cuerpo-panel1 {
+    display: grid;
+    grid-template:
+        "col1 col2 col3 col4 col5 col6 col7" auto /
+        120px 120px 120px 120px 120px 120px auto;
+}
+.fila1-Descripcion-Equipo {
+    grid-area: col1;
+    width: 120px;
+}
+.fila1-Marca-Equipo {
+    grid-area: col2;
+    width: 120px; 
+}
+.fila1-Modelo-Equipo {
+    grid-area: col3;
+    width: 120px;
+}
+.fila1-Serie-Equipo {
+    grid-area: col4;
+    width: 120px;
+}
+.fila1-Estado-Equipo {
+    grid-area: col5;
+    width: 120px;
+}
+.fila1-Uso-Equipo {
+    grid-area: col6;
+    width: 120px;
+}
+.fila1-Observacion-Equipo {
+    grid-area: col7;
+    width: 120px;   
+}
+
+.container-cuerpo-panel2 {
+    display: grid;
+    grid-template:
+        "col1 col2 col3 col4 col5 col6" auto /
+        120px 120px 120px 120px 120px auto;
+}
+.fila1-Descripcion-Mueble {
+    grid-area: col1;
+    width: 120px;
+}
+.fila1-Color-Mueble {
+    grid-area: col2;
+    width: 120px; 
+}
+.fila1-Medidas-Mueble {
+    grid-area: col3;
+    width: 120px;
+}
+.fila1-Estado-Mueble {
+    grid-area: col4;
+    width: 120px;
+}
+.fila1-Uso-Mueble {
+    grid-area: col5;
+    width: 120px;
+}
+.fila1-Observacion-Mueble {
+    grid-area: col6;
+    width: 120px;
+}
+
+.container-cuerpo-panel3 {
+    display: grid;
+    grid-template:
+    "col1 col2 col3 col4 col5 col6 col7" auto
+    "col8 col9 col10 col11 col12 col13 col13" auto /
+    120px 120px 120px 120px 120px 120px 120px auto;
+}
+.fila1-Descripcion-Vehiculo {
+    grid-area: col1;
+    width: 120px;
+}
+.fila1-Marca-Vehiculo {
+    grid-area: col2;
+    width: 120px; 
+}
+.fila1-Modelo-Vehiculo {
+    grid-area: col3;
+    width: 120px;
+}
+.fila1-Motor-Vehiculo {
+    grid-area: col4;
+    width: 120px;
+}
+.ffila1-Chasis-Vehiculo {
+    grid-area: col5;
+    width: 120px;
+}
+.fila1-Placa-Vehiculo {
+    grid-area: col6;
+    width: 120px;
+}
+.fila1-Color-Vehiculo {
+    grid-area: col7;
+    width: 120px;
+}
+
+.fila1-Combustible-Vehiculo {
+    grid-area: col8;
+    width: 120px;
+}
+
+.fila1-Caja-Vehiculo {
+    grid-area: col9;
+    width: 120px;
+}
+
+.fila1-Asiento-Vehiculo {
+    grid-area: col10;
+    width: 120px;
+}
+
+.fila1-Fabricacion-Vehiculo {
+    grid-area: col11;
+    width: 120px;
+}
+
+.fila1-Ejes-Vehiculo {
+    grid-area: col12;
+    width: 120px;
+}
+
+.fila1-Observacion-Vehiculo {
+    grid-area: col13;
+    width: 120px;
+}
+
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -133,9 +271,9 @@ mat-form-field {
   align-items: center;
 }
 
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}
+//.example-headers-align .mat-form-field + .mat-form-field {
+  //margin-left: 8px;
+//}
 /*.fila2-buscar {
     width: 100%;
     grid-area: col5;
@@ -189,6 +327,7 @@ mat-form-field {
   
   .example-margin {
     margin: 0 10px;
+    margin-bottom: 20px;
   }
 
 mat-checkbox-inner-container{
@@ -232,73 +371,6 @@ mat-checkbox-inner-container{
     background-color: #d32f2f;
     color: #ffffff;
 }*/
-
-.mat-column-Num_Auditoria,
-.mat-column-Nom_Supervisor, 
-.mat-column-Nom_Auditor,
-.mat-column-Fecha_Auditoria,
-.mat-column-Cod_LinPro,
-.mat-column-Observacion,
-.mat-column-Flg_Status,
-.mat-column-Acciones
-//.mat-column-eliminar 
-{
-	text-align: center;
-	font-size: 13px;
-    font-family: arial;
-    padding: 10px;
-   
-}
- 
-.mat-column-Num_Auditoria{
-    width: 10px;
-}
-.mat-column-Nom_Supervisor{
-    width: 120px;
-}
-.mat-column-Nom_Auditor{
-    width: 120px;
-}
-.mat-column-Fecha_Auditoria{
-    width: 50px;
-}
-.mat-column-Cod_LinPro{
-    width: 30px;
-}
-.mat-column-Observacion{
-    width: 150px;
-}
-.mat-column-Flg_Status{
-    width: 50px;
-}
-.mat-column-Acciones{
-    width: 50px;
-}
-
-
-
-/* ------------------------- */
-/* TABLA */
-/* ------------------------- */
-
-.mat-elevation-z8 {
-    width: 100%;
-	font-family: arial;
-	font-size: 10px;
- 
-}
-.paginador{
-    width: auto
-}
-
-tr:hover {
-    border-color: currentColor;
-    background: #E1E1E1;
-}
-  
-tr:active {
-    background: #efefef;
-}
 
 
 @media screen and (max-width: 1513px){
@@ -411,7 +483,7 @@ tr:active {
   @media screen and (max-width: 683px){
  
    .grid-container{
-       height: 680px;
+       height: 995px;
    } 
     .container-cuerpo {
         display: grid;
@@ -424,7 +496,6 @@ tr:active {
     }
     .container-cuerpo-fila1{
         display: grid;
-        
         grid-template:
         "col1 col2" 70px 
         "col3 col4" 70px
@@ -467,15 +538,159 @@ tr:active {
            
     }
 
-    ::ng-deep mat-expansion-panel-body{
-        padding: 0 4px 2px;
-    }
-    ::ng-deep mat-expansion-panel-body{
-        padding: 0 4px 2px;
-    }
 
-    ::ng-deep mat-expansion-panel-header{
-        height: 40px;
+    .container-cuerpo-panel1{
+        display: grid;
+        
+        grid-template:
+        "col1 col2" 70px 
+        "col3 col4" 70px
+        "col5 col6" 70px  
+        "col7 col7" 70px /
+        175px 175px;
+    
+    .fila1-Descripcion-Equipo {
+        grid-area: col1;
+        width: 175px;
     }
-  }
+    .fila1-Marca-Equipo {
+        grid-area: col2;
+        width: 175px;
+    }
+    .fila1-Modelo-Equipo {
+        grid-area: col3;
+        width: 175px;
+    }
+    .fila1-Serie-Equipo {
+        grid-area: col4;
+        width: 175px;
+    }
+    .fila1-Estado-Equipo {
+        grid-area: col5;
+        width: 175px;
+    }
+    .fila1-Uso-Equipo {
+        grid-area: col6;
+        width: 175px;
+    }
+    .fila1-Observacion-Equipo {
+        grid-area: col7;
+        width: 350px;
+    }
+}
+
+
+    .container-cuerpo-panel2{
+        display: grid;
+        
+        grid-template:
+        "col1 col2" 70px 
+        "col3 col4" 70px
+        "col5 col5" 70px
+        "col6 col6" 70px/
+        175px 175px;
+    
+    .fila1-Descripcion-Mueble {
+        grid-area: col1;
+        width: 175px;
+    }
+    .fila1-Color-Mueble {
+        grid-area: col2;
+        width: 175px;
+    }
+    .fila1-Medidas-Mueble {
+        grid-area: col3;
+        width: 175px;
+    }
+    .fila1-Estado-Mueble {
+        grid-area: col4;
+        width: 175px;
+    }
+    .fila1-Uso-Mueble {
+        grid-area: col5;
+        width: 175px;
+    }
+    .fila1-Observacion-Mueble {
+        grid-area: col6;
+        width: 350px;
+    }
+} 
+
+    .container-cuerpo-panel3{
+        display: grid;
+        
+        grid-template:
+        "col1 col2" 70px 
+        "col3 col4" 70px
+        "col5 col6" 70px 
+        "col7 col8" 70px
+        "col9 col10" 70px
+        "col11 col12" 70px
+        "col13 col13" 70px/
+        175px 175px;
+    
+    .fila1-Descripcion-Vehiculo {
+        grid-area: col1;
+        width: 175px;
+    }
+    .fila1-Marca-Vehiculo {
+        grid-area: col2;
+        width: 175px;
+    }
+    .fila1-Modelo-Vehiculo {
+        grid-area: col3;
+        width: 175px;
+    }
+    .fila1-Motor-Vehiculo {
+        grid-area: col4;
+        width: 175px;
+    }
+    .ffila1-Chasis-Vehiculo {
+        grid-area: col5;
+        width: 175px;
+    }
+    .fila1-Placa-Vehiculo {
+        grid-area: col6;
+        width: 175px;
+    }
+    .fila1-Color-Vehiculo {
+        grid-area: col7;
+        width: 175px;
+    }
+    
+    .fila1-Combustible-Vehiculo {
+        grid-area: col8;
+        width: 175px;
+    }
+    
+    .fila1-Caja-Vehiculo {
+        grid-area: col9;
+        width: 175px;
+    }
+    
+    .fila1-Asiento-Vehiculo {
+        grid-area: col10;
+        width: 175px;
+    }
+    
+    .fila1-Fabricacion-Vehiculo {
+        grid-area: col11;
+        width: 175px;
+    }
+    
+    .fila1-Ejes-Vehiculo {
+        grid-area: col12;
+        width: 175px;
+    }
+    
+    .fila1-Observacion-Vehiculo {
+        grid-area: col13;
+        width: 350px;
+    }
+}
+}
+
+::ng-deep .mat-input-element:disabled{
+    color: #222;
+}
 

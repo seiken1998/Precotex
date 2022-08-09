@@ -22,10 +22,10 @@ html, body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    overscroll-behavior: contain;}
 
 
 .mat-form-field-appearance-fill .mat-form-field-flex{border-radius:4px 4px 0 0;padding:0 0 0 0!important; background: none;}
@@ -34,6 +34,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top:2px
 }
 
+.mat-expansion-panel-content > .mat-expansion-panel-header{
+    padding: 0 8px!important;
+}
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 /*@media screen and (max-width: 650px){
 .my-class .mat-dialog-container{
     height: 100% !important;

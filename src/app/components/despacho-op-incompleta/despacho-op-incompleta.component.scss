@@ -79,31 +79,20 @@ mat-form-field {
     display: grid;
 
     grid-template:
-    "col1 col2" auto/
-    200px 200px
+    "col1 col2 col3 col4" auto/
+    265px 200px 200px 200px
 }
 
-
+.fila1-fecha{
+    grid-area: col1;
+}
 
 .fila1-OP {
-    grid-area: col1;
+    grid-area: col2;
     
 }
 
 .fila1-buscar {
-    width: 100%;
-    grid-area: col2;
-    height: 40px;
-    max-width: 280px;
-    margin: auto;
-    margin-top: 3px;
-    background-color: #3f51b5;
-    color: #ffffff;
-    width: 180px;
-    
-}
-
-.fila1-agregar {
     width: 100%;
     grid-area: col3;
     height: 40px;
@@ -113,20 +102,29 @@ mat-form-field {
     background-color: #3f51b5;
     color: #ffffff;
     width: 180px;
+    
 }
 
-.fila1-revertir {
+.fila1-excel{
+
     width: 100%;
     grid-area: col4;
     height: 40px;
-    max-width: 280px;
+    max-width: 180px;
     margin: auto;
     margin-top: 3px;
-    background-color: #d32f2f;
+    background-color: #0e740e;
     color: #ffffff;
-    width: 180px;
 }
 
+.maticon-date{
+    position: absolute;
+    float: right;
+    top: -6px;
+    margin-left: 190px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.54);
+}
 
 
 //fila foot
@@ -231,35 +229,48 @@ tr:active {
 }
 
 
-@media screen and (max-width: 683px){
+@media screen and (max-width: 878px){
     
     .grid-container{
-        height: 710px;
+        height: 755px;
     }
     .container-cuerpo {
         display: grid;
     
         grid-template:
-        "fila1" 100px
-        "fila2" 560px
+        "fila1" 210px
+        "fila2" 500px
         "foot" 55px /
         99%;
     }
     .container-cuerpo-fila1{
         display: grid;  
         grid-template:
-        "col1 col2" auto/
-        150px 150px
+        "col1 col1" auto
+        "col2 col2" auto
+        "col3 col4" auto/
+        180px 180px
     }
 
-    .fila1-OP {
+    .fila1-fecha {
         grid-area: col1;
+        width: 350px;
         
     }
-    .fila1-buscar {
+    .fila1-OP {
         grid-area: col2;
-        width: 130px;
+        width: 350px;
     }
+    .fila1-buscar {
+        grid-area: col3;
+        width: 170px;
+    }
+    
+    .fila1-excel{
+        grid-area: col4;
+        width: 170px;
+    }
+    
 
     th.mat-cell{
         width: 120px;
@@ -268,5 +279,14 @@ tr:active {
     td.mat-cell{
         width: 120px;
         min-width: 120px;   
+    }
+    
+    .maticon-date{
+        position: absolute;
+        float: right;
+        top: -6px;
+        margin-left: 270px;
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.54);
     }
 }

@@ -125,14 +125,14 @@ export class DefectosAlmacenDerivadosService {
                               Cod_Auditor: string,  Fec_Auditoria: string,  Total: number,
                               Cod_EstCli: string,   Cod_TemCli: string,     Cod_ColCli: string,
                               Glosa:string,         Cod_Talla: string,      Cod_Motivo:string,
-                              Can_Defecto: number,  Op:string, Tipo_Registro:string){
+                              Can_Defecto: number,  Op:string, Tipo_Registro:string, Clasificacion:string){
 
   if (!_moment(Fec_Auditoria).isValid()) {
       Fec_Auditoria = '01/01/1900'; 
   }                                                       
   Fec_Auditoria = _moment(Fec_Auditoria.valueOf()).format('DD/MM/YYYY');
 
-  return this.http.get(`${this.baseUrl}/app_Cf_Mantenimiento_Auditoria_Derivados.php?Accion=${Cod_Accion}&Num_Auditoria=${Num_Auditoria}&Cod_Cliente=${Cod_Cliente}&Cod_Auditor=${this.sCod_Usuario}&Fec_Auditoria=${Fec_Auditoria}&Total=${Total}&Cod_EstCli=${Cod_EstCli}&Cod_TemCli=${Cod_TemCli}&Cod_ColCli=${Cod_ColCli}&Glosa=${Glosa}&Cod_Talla=${Cod_Talla}&Cod_Motivo=${Cod_Motivo}&Can_Defecto=${Can_Defecto}&Op=${Op}&Tipo_Registro=${Tipo_Registro}`);
+  return this.http.get(`${this.baseUrl}/app_Cf_Mantenimiento_Auditoria_Derivados.php?Accion=${Cod_Accion}&Num_Auditoria=${Num_Auditoria}&Cod_Cliente=${Cod_Cliente}&Cod_Auditor=${this.sCod_Usuario}&Fec_Auditoria=${Fec_Auditoria}&Total=${Total}&Cod_EstCli=${Cod_EstCli}&Cod_TemCli=${Cod_TemCli}&Cod_ColCli=${Cod_ColCli}&Glosa=${Glosa}&Cod_Talla=${Cod_Talla}&Cod_Motivo=${Cod_Motivo}&Can_Defecto=${Can_Defecto}&Op=${Op}&Tipo_Registro=${Tipo_Registro}&Clasificacion=${Clasificacion}`);
   }
 
 
