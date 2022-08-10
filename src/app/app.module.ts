@@ -91,6 +91,8 @@ import { DialogObservacionHojaMedidaComponent } from './components/auditoria-hoj
 import { ControlActivoFijoComponent } from './components/control-activo-fijo/control-activo-fijo.component';
 import { DespachoOpIncompletaComponent } from './components/despacho-op-incompleta/despacho-op-incompleta.component';
 import { DialogDespachoOpIncompletaComponent } from './components/despacho-op-incompleta/dialog-despacho-op-incompleta/dialog-despacho-op-incompleta.component';
+import { InspeccionPrendaComponent } from './components/inspeccion-prenda/inspeccion-prenda.component';
+import { DialogDefectoComponent } from './components/inspeccion-prenda/dialog-inspeccion-prenda/dialog-defecto/dialog-defecto.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +165,9 @@ import { DialogDespachoOpIncompletaComponent } from './components/despacho-op-in
     DialogObservacionHojaMedidaComponent,
     ControlActivoFijoComponent,
     DespachoOpIncompletaComponent,
-    DialogDespachoOpIncompletaComponent
+    DialogDespachoOpIncompletaComponent,
+    InspeccionPrendaComponent,
+    DialogDefectoComponent
    
     
  

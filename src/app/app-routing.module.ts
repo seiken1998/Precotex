@@ -64,6 +64,8 @@ import { DespachoOpIncompletaComponent} from './components/despacho-op-incomplet
 
 import { ControlActivoFijoComponent} from './components/control-activo-fijo/control-activo-fijo.component'
 
+import { InspeccionPrendaComponent} from './components/inspeccion-prenda/inspeccion-prenda.component'
+
 const routes: Routes = [
   { path: "root", component: AppComponent },
   { path: "principal", component: PrincipalComponent },
@@ -122,6 +124,8 @@ const routes: Routes = [
   { path: "GiradoPartidaIncompleta", component: DespachoOpIncompletaComponent},
 
   { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
+
+  {path: "InspeccionPrenda", component: InspeccionPrendaComponent},
   
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz
   //{ path: "**", component: AuditoriaLineaCosturaComponent }

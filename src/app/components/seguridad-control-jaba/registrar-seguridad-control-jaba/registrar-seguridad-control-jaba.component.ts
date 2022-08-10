@@ -17,7 +17,7 @@ import { Router} from '@angular/router';
 interface data_det {
   Cod_Registro_Cab: number
   Observacion:      string,
-  Cod_Registro_Det: string,
+  Cod_Registro_Det: string, 
   Cod_Jaba:         string,
   Des_Jaba:         string,
   Total:            number,
