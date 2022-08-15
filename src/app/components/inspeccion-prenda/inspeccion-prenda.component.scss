@@ -20,7 +20,7 @@
     //padding-bottom: 10px;
     min-width: 350px;
     min-height: 400px;
-    height: 640px;
+    height: 500px;
     //position: absolute;  
 }
   
@@ -37,7 +37,6 @@
 
 .container-cuerpo {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 10px 0;
     justify-content: center;
@@ -47,10 +46,10 @@
     display: grid;
 
     grid-template:
-        "fila1" 140px
-        "fila2" 400px
-        "fila3" 200px
-        "foot" 55px / 
+        "fila1" 250px
+        "fila2" 190px
+        "fila3" 0px
+        "foot" 0px / 
         99%;
 }
 
@@ -86,41 +85,10 @@ mat-form-field {
 
 }
 
-//fila 1 
-.container-cuerpo-fila1 {
-    display: grid;
-
-    grid-template:
-    "col1 col2 col3 col4" 70px /
-    180px 180px 180px 180px;
-}
-
-.fila1-Codigo {
-    grid-area: col1;
-    width: 180px; 
-    
-}
-
-.fila1-OP {
-    grid-area: col2;
-    width: 180px; 
-    
-}
-
-.fila1-Color {
-    grid-area: col3;
-    width: 180px; 
-    
-}
-
-.fila1-Talla {
-    grid-area: col4;
-    width: 180px; 
-    
-}
 
 
-.fila1-btn_anadir {
+
+/*.fila1-btn_anadir {
     grid-area: col2;
     width: 100%;
     height: 40px;
@@ -167,41 +135,102 @@ mat-form-field {
     background-color: #3f51b5;
     color: #ffffff;
     width: 70px; 
-}
+}*/
 
 .sub-container{
    display: flex;
    width: 100%;
 }
 
-.sub-container-cuerpo1{
-    width: 50%;
-}
+    .sub-container-cuerpo1{
+        width: 33%;
+    }
 
-.sub-container-cuerpo2{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
 
-.example-card{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+        //fila 1 
+        .container-cuerpo-fila1 {
+            display: grid;
 
+            grid-template:
+            "col1 col2"
+            "col3 col4" 70px/
+            49% 49%;
+        }
+
+        .fila1-Codigo {
+            grid-area: col1;
+            width: 100%; 
+            
+        }
+
+        .fila1-OP {
+            grid-area: col2;
+            width: 100%; 
+            
+        }
+
+        .fila1-Color {
+            grid-area: col3;
+            width: 100%; 
+            
+            
+        }
+
+        .fila1-Talla {
+            grid-area: col4;
+            width: 100%; 
+            
+        }
+
+
+    .sub-container-cuerpo2{
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+        .example-card{
+            max-width: 100%;
+            width: 80%;
+            max-height: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    .sub-container-cuerpo3{
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+        .example-card1{
+            max-width: 100%;
+            width: 100%;
+            max-height: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
 
 .card-container-fila2{
     display: flex;
     margin-top: 10px;
 }
 .example-card2{
-    max-width: 250px;
+    max-width: 100%;
+    width: 100%;
+    //max-width: 250px;
     max-height: 250px;
-    width: 165px;
+    //width: 165px;
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -237,20 +266,6 @@ p{
 }
 
 
-.card-container-fila3{
-    /*display: flex;*/
-    margin-top: 10px;
-}
-.example-card3{
-    max-width: 100%;
-    max-height: 250px;
-    width: 100%;
-    height: 150px;
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;*/
-}
 
 /*.container-cuerpo-fila2 {
  display:  flex;
@@ -303,83 +318,19 @@ p{
     min-width: 120px;
 }
 
-
-.mat-column-Cod_Registro_Det,
-.mat-column-Des_Jaba, 
-.mat-column-Total,
-.mat-column-Fecha,
-.mat-column-Hora,
-.mat-column-Usuario,
-.mat-column-Acciones
-//.mat-column-eliminar 
-{
-	text-align: center;
-	font-size: 13px;
-    font-family: arial;
-    padding: 10px;
-   
-}
- 
-.mat-column-Cod_Registro_Det{
-    width: 10px;
-}
-.mat-column-Des_Jaba{
-    width: 120px;
-}
-.mat-column-Total{
-    width: 120px;
-}
-.mat-column-Fecha{
-    width: 50px;
-}
-.mat-column-Hora{
-    width: 50px;
-}
-.mat-column-Usuario{
-    width: 50px;
-}
-.mat-column-Acciones{
-    width: 50px;
-}
-
-
-
-/* ------------------------- */
-/* TABLA */
-/* ------------------------- */
-
-.mat-elevation-z8 {
-    width: 100%;
-	font-family: arial;
-	font-size: 10px;
- 
-}
-.paginador{
-    width: auto
-}
-
-tr:hover {
-    border-color: currentColor;
-    background: #E1E1E1;
-}
-  
-tr:active {
-    background: #efefef;
-}
-
-
 @media screen and (max-width: 1009px){
     
     .grid-container{
-        height: 710px;
+        height: 455px;
     }
     .container-cuerpo {
+       
         display: grid;
     
         grid-template:
         "fila1" 220px
-        "fila2" 260px
-        "fila3" 170px
+        "fila2" 190px
+        "fila3" 0px
         "foot" 0px /
         99%;
     }
@@ -388,19 +339,20 @@ tr:active {
         
         grid-template:
         "col1 col2" 70px 
-        "col3 auto" 70px
-        "col4 auto" 70px /
-        180px;
+        "col3 col4" 70px/
+        49% 49%;
     }
 
-    .fila1-OP {
+    .fila1-Codigo {
         grid-area: col1;
         
     }
-    .fila1-Codigo {
+
+    .fila1-OP {
         grid-area: col2;
         
     }
+  
 
     .fila1-Color {
         grid-area: col3;
@@ -417,40 +369,51 @@ tr:active {
 
 
 
-  @media screen and (max-width: 535px){
+  @media screen and (max-width: 900px){
    .grid-container{
-       height: 720px;
+       height: 530px;
    } 
-    .container-cuerpo {
-        display: grid;
-     
-        grid-template:
-        "fila1" 290px
-        "fila2" 400px
-        "fila3" 400px
-        "foot" 55px /
-        99%; 
+
+   /*.card-container-fila2{
+   flex-wrap: wrap;
+    }*/
+   
+    .card-container-fila2{
+      width: 100%;
     }
-    .container-cuerpo-fila1{
-        display: grid;
-        
-        grid-template:
-        "col1" 70px 
-        "col2" 70px 
-        "col3" 70px/
-        180px;
-    } 
-    .fila1-OP {
-        grid-area: col1;
-        width: 180px;
+
+    .example-card2{
+        height: 180px;
     }
-    .fila1-Color {
-        grid-area: col2;
-        width: 180px;
+  
+    mat-card-title{
+        font-size: 13px;
+    }
+
+    mat-card-actions{
+        flex-direction: column;
     }
     
-    .fila1-Talla {
-        grid-area: col3;
-        width: 180px;
+    .card-btn {
+        width: 45px; 
+        font-size: 16px;
+    }
+    
+    p{
+        font-size: 14px;
     }
   }
+
+ /* ::ng-deep mat-dialog-container{
+    padding: 5px;
+    height: auto;
+}
+
+::ng-deep .my-class .mat-dialog-container{
+   padding: 5px;
+   height: auto;
+}*/
+
+    ::ng-deep .mat-input-element:disabled{
+        color: #222;
+    }

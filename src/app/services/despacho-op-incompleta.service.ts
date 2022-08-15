@@ -52,4 +52,18 @@ ListarMotivoDespachoOpIncompleta(){
   return this.http.get(`${this.baseUrl}/app_Listar_Motivo_Despacho_Op_Incompleta.php`);                                                
 }
 
+PermitirGiradoOp(Cod_Accion: string, Cod_OrdPro: string, Fec_Inicio: string, Fec_Fin: string){
+  
+  if (!_moment(Fec_Inicio).isValid()) {
+    Fec_Inicio = '01/01/1900';
+  }
+  if (!_moment(Fec_Fin).isValid()) {
+    Fec_Fin = '01/01/1900';
+  }                                                
+  Fec_Inicio = _moment(Fec_Inicio.valueOf()).format('DD/MM/YYYY'); 
+  Fec_Fin = _moment(Fec_Fin.valueOf()).format('DD/MM/YYYY'); 
+  
+  return this.http.get(`${this.baseUrl}/app_Permitir_Girado_Op.php?Accion=${Cod_Accion}&Cod_OrdPro=${Cod_OrdPro}&Fec_Inicio=${Fec_Inicio}&Fec_Fin=${Fec_Fin}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+}
+
 }

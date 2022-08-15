@@ -25,8 +25,10 @@ export class InspeccionPrendaComponent implements OnInit {
   Desmanche = 0
   Primeras = 0
   Total = 0
-  ImagePath = 'http://192.168.1.36/Estilos/EP18168.jpg'
-
+  Inicial = 0 
+  ImagePath = ''
+  Codigo = ''
+  //http://192.168.1.36/Estilos/EP18168.jpg
 
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
@@ -47,29 +49,36 @@ export class InspeccionPrendaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.ImagePath)
+    this.ImagePath = 'http://192.168.1.36/Estilos/default.jpg'
+    this.formulario.controls['OP'].disable()
+    this.formulario.controls['Color'].disable()
+    this.formulario.controls['Talla'].disable()
   }
 
   RestarCompostura(){
    if(this.Compostura != 0){
     this.Compostura = this.Compostura - 1
-    this.ActualizarTotal()}
+    //this.ActualizarTotal()
+    this.ActualizarPrimeras()}
   }
 
   SumarCompostura(){
     this.Compostura = this.Compostura + 1
-    this.ActualizarTotal()
+    //this.ActualizarTotal()
+    this.ActualizarPrimeras()
   }
 
   RestarSegunda(){
     if(this.Segunda != 0){
     this.Segunda = this.Segunda - 1
-    this.ActualizarTotal()}
+    //this.ActualizarTotal()
+    this.ActualizarPrimeras()}
   }
 
   SumarSegunda(){
     this.Segunda = this.Segunda + 1
-    this.ActualizarTotal()
+    //this.ActualizarTotal()
+    this.ActualizarPrimeras()
   }
 
   RestarZurcido(){
@@ -104,7 +113,7 @@ export class InspeccionPrendaComponent implements OnInit {
           })
   }
 
-  RestarDesmanche(){
+  RestarDesmanche(){ 
     let dialogRef =  this.dialog.open(DialogDefectoComponent, 
       { disableClose: true,
         panelClass: 'my-class',
@@ -135,9 +144,46 @@ export class InspeccionPrendaComponent implements OnInit {
             }
           })
   }
+  ActualizarPrimeras(){
+    
+    this.Primeras = this.Inicial + (-1*(this.Compostura + this.Segunda + this.Zurcido + this.Desmanche))
+  }
+
   ActualizarTotal(){
     
-    this.Total = -1*(this.Compostura + this.Segunda + this.Zurcido + this.Desmanche)
+    this.Primeras = this.Inicial - this.Total
+  }
+
+
+
+  LecturaCodBarras(){
+    this.Codigo = this.formulario.get('Codigo')?.value
+    if(this.Codigo.length == 9){
+      if(this.Codigo == 'PTX000001'){
+        this.formulario.controls['OP'].setValue('E5470')
+        this.formulario.controls['Color'].setValue('WHITE')
+        this.formulario.controls['Talla'].setValue('XL')
+        this.ImagePath = 'http://192.168.1.36/Estilos/EP18168.jpg'
+        this.Total = 50
+        this.Inicial = this.Total
+
+      }
+    }
+  
+  }
+
+  Limpiar(){
+    this.formulario.controls['Codigo'].setValue('')
+    this.formulario.controls['OP'].setValue('')
+    this.formulario.controls['Color'].setValue('')
+    this.formulario.controls['Talla'].setValue('')
+    this.Total = 0
+    this.Compostura = 0
+    this.Segunda = 0
+    this.Zurcido = 0
+    this.Desmanche = 0
+    this.Primeras = 0
+    this.ImagePath = 'http://192.168.1.36/Estilos/default.jpg'
   }
 
 }

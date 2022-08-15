@@ -93,6 +93,9 @@ import { DespachoOpIncompletaComponent } from './components/despacho-op-incomple
 import { DialogDespachoOpIncompletaComponent } from './components/despacho-op-incompleta/dialog-despacho-op-incompleta/dialog-despacho-op-incompleta.component';
 import { InspeccionPrendaComponent } from './components/inspeccion-prenda/inspeccion-prenda.component';
 import { DialogDefectoComponent } from './components/inspeccion-prenda/dialog-inspeccion-prenda/dialog-defecto/dialog-defecto.component';
+import { DialogModificarComponent } from './components/dialogs/dialog-modificar/dialog-modificar.component';
+import { PermitirGiradoOpComponent } from './components/permitir-girado-op/permitir-girado-op.component';
+import { DialogRegistrarGiradoOpComponent } from './components/permitir-girado-op/dialog-registrar-girado-op/dialog-registrar-girado-op.component';
 
 @NgModule({
   declarations: [
@@ -167,7 +170,10 @@ import { DialogDefectoComponent } from './components/inspeccion-prenda/dialog-in
     DespachoOpIncompletaComponent,
     DialogDespachoOpIncompletaComponent,
     InspeccionPrendaComponent,
-    DialogDefectoComponent
+    DialogDefectoComponent,
+    DialogModificarComponent,
+    PermitirGiradoOpComponent,
+    DialogRegistrarGiradoOpComponent
    
     
  

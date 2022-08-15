@@ -775,8 +775,9 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
 
         if(result.length >0){
         for (let i = 0; i < result.length; i++) {
-          this.listar_operacionEstilo.push(result[i].Cod_Estcli.replace(/\s+/g, " ").trim()) 
-        }
+          this.listar_operacionEstilo.push(result[i].Cod_Estcli) 
+          //.replace(/\s+/g, " ").trim()
+        } 
         this.RecargarOperacionEstilo() 
       }
       
@@ -887,7 +888,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   
   CargarOperacionTemporada(){
 
-
+console.log(this.formulario.get('sEstilo')?.value)
     this.Cod_TemCli = ''
     this.Cod_EstCli = this.formulario.get('sEstilo')?.value
     this.defectosAlmacenDerivadosService.Cf_Busca_Derivado_TemporadaCliente(this.Cod_Cliente,this.Cod_EstCli).subscribe(

@@ -7,15 +7,12 @@ import { AuditoriaLineaCosturaService } from 'src/app/services/auditoria-linea-c
 
 import * as _moment from 'moment';
 import { HttpErrorResponse } from '@angular/common/http';
-
-
-
 @Component({
-  selector: 'app-dialog-adicional',
-  templateUrl: './dialog-adicional.component.html',
-  styleUrls: ['./dialog-adicional.component.scss']
+  selector: 'app-dialog-modificar',
+  templateUrl: './dialog-modificar.component.html',
+  styleUrls: ['./dialog-modificar.component.scss']
 })
-export class DialogAdicionalComponent implements OnInit {
+export class DialogModificarComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private matSnackBar: MatSnackBar,private auditoriaLineaCosturaService: AuditoriaLineaCosturaService

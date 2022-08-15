@@ -66,6 +66,8 @@ import { ControlActivoFijoComponent} from './components/control-activo-fijo/cont
 
 import { InspeccionPrendaComponent} from './components/inspeccion-prenda/inspeccion-prenda.component'
 
+import { PermitirGiradoOpComponent} from './components/permitir-girado-op/permitir-girado-op.component'
+
 const routes: Routes = [
   { path: "root", component: AppComponent },
   { path: "principal", component: PrincipalComponent },
@@ -126,6 +128,8 @@ const routes: Routes = [
   { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
 
   {path: "InspeccionPrenda", component: InspeccionPrendaComponent},
+
+  {path: "PermitirGiradoOp", component: PermitirGiradoOpComponent},
   
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz
   //{ path: "**", component: AuditoriaLineaCosturaComponent }

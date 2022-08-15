@@ -1,0 +1,268 @@
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    //background-color: blue;
+    padding: 5px 5px 5px 5px;
+    font-family: corbel, arial;
+    font-size: 15px;
+    margin: 0;
+}
+   
+.grid-container {
+    border-radius: 4px;
+    width: 100%; 
+    height: auto; //93%;
+    //background-color: green;
+    border: 1px solid #337ab7;
+    margin: 0; 
+    padding: 0px 0px 0px 0px;
+    //padding-bottom: 10px;
+    min-width: 350px;
+    min-height: 400px;
+    height: 640px;
+    //position: absolute;  
+}
+  
+.title {
+    background-color: #3f51b5;
+    color: #ffffff;
+    padding: 8px 10px 10px 10px;
+    text-align: center;
+    //border-bottom: 1px solid #337AB7;
+    border-radius: 4px 4px 0px 0px;
+    border-bottom: 1px solid #337ab7;
+    font-weight: bold;
+}
+
+.container-cuerpo {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+.container-cuerpo {
+    display: grid;
+
+    grid-template:
+        "fila1" 90px
+        "fila2" 400px
+        "foot" 55px / 
+        99%;
+}
+
+.container-cuerpo-fila1 {
+    grid-area: fila1;
+    margin-top: 15px;
+}
+.container-cuerpo-fila2 {
+    grid-area: fila2;
+    overflow: auto;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.container-cuerpo-foot {
+    grid-area: foot;
+    
+}
+
+mat-form-field {
+    width: 100%;
+    padding: 0px 10px;
+
+}
+
+//fila 1 
+.container-cuerpo-fila1 {
+    display: grid;
+
+    grid-template:
+        "col1 col2 col3 col4" auto /
+        270px 270px 270px 270px auto;
+}
+
+
+.fila1-fecha {
+    grid-area: col1;
+    width: 265px; 
+}
+.fila1-OP {
+    grid-area: col2;
+    width: 265px; 
+}
+
+.fila1-buscar {
+    grid-area: col3;
+    height: 40px;
+    max-width: 270px;
+    margin: auto;
+    margin-top: 3px;
+    background-color: #3f51b5;
+    color: #ffffff;
+    width: 265px; 
+}
+
+.fila1-agregar {
+    grid-area: col4;
+    height: 40px;
+    max-width: 270px;
+    margin: auto;
+    margin-top: 3px;
+    background-color: #3f51b5;
+    color: #ffffff;
+    width: 265px; 
+}
+
+.mat-column-Cod_OrdPro,
+.mat-column-Cod_Usuario, 
+.mat-column-Fec_Creacion,
+.mat-column-Acciones
+{
+	text-align: center;
+	font-size: 13px;
+    font-family: arial;
+    padding: 10px;
+   
+}
+ 
+.mat-column-Cod_OrdPro{
+    width: 10px;
+}
+.mat-column-Cod_Usuario{
+    width: 120px;
+}
+.mat-column-Fec_Creacion{
+    width: 120px;
+}
+.mat-column-Acciones{
+    width: 50px;
+}
+
+
+
+/* ------------------------- */
+/* TABLA */
+/* ------------------------- */
+
+.mat-elevation-z8 {
+    width: 100%;
+	font-family: arial;
+	font-size: 10px;
+ 
+}
+.paginador{
+    width: auto
+}
+
+tr:hover {
+    border-color: currentColor;
+    background: #E1E1E1;
+}
+  
+tr:active {
+    background: #efefef;
+}
+
+.iconPicker{
+    position: absolute;
+    float: right;
+    top: -6px;
+    margin-left: 190px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+@media screen and (max-width: 1100px){
+    .grid-container{
+        height: 730px;
+    }
+    .container-cuerpo {
+        display: grid;
+    
+        grid-template:
+        "fila1" 170px
+        "fila2" 330px
+        "foot" 55px /
+        99%;
+    }
+    .container-cuerpo-fila1{
+        display: grid;
+        
+        grid-template:
+        "col1 col2" 80px 
+        "col3 col4" 80px/
+        270px 270px ;
+    }
+    
+    .fila1-fecha {
+        grid-area: col1;
+        width: 265px;
+    }
+    .fila1-OP {
+        grid-area: col2;
+        width: 265px;
+    }
+    .fila1-buscar {
+        grid-area: col3;
+        width: 265px;
+    }
+
+    .fila1-agregar {
+        grid-area: col4;
+        width: 265px;
+    }
+
+  }
+
+
+  @media screen and (max-width: 450px){
+   .grid-container{
+       height: 680px;
+   } 
+    .container-cuerpo {
+        display: grid;
+     
+        grid-template:
+        "fila1" 220px
+        "fila2" 400px
+        "foot" 55px /
+        99%; 
+    }
+    .container-cuerpo-fila1{
+        display: grid;
+        
+        grid-template:
+        "col1 col1" 70px
+        "col2 col2" 70px  
+        "col3 col4" 70px/
+        185px 185px;
+        
+        
+    } 
+    .fila1-fecha {
+        grid-area: col1;
+         width: 360px;
+    }
+    .fila1-OP {
+        grid-area: col2;
+        width: 360px;
+    }
+   
+    .fila1-buscar {
+      
+        grid-area: col3;
+        width: 170px;
+    }
+
+    .fila1-agregar {
+        grid-area: col4;
+        width: 170px;
+    }
+
+    .iconPicker{
+        margin-left: 280px;
+    }
+
+  }

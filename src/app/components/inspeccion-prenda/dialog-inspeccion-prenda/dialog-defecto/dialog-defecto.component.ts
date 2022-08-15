@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from
 import { GlobalVariable } from '../../../../VarGlobals';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuditoriaInspeccionCosturaService } from 'src/app/services/auditoria-inspeccion-costura.service';
-import { AuditoriaHojaMedidaService} from 'src/app/services/auditoria-hoja-medida.service'
+import { InspeccionPrendaService} from 'src/app/services/inspeccion-prenda.service'
 import * as _moment from 'moment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, startWith } from 'rxjs';
@@ -21,8 +21,8 @@ interface data{
 }
 
 interface data_det {
-  Cod_Medida: number;
-  Des_Medida: string;
+  Abr_Motivo: string;
+  Descripcion: string;
 
 }
 
@@ -48,15 +48,16 @@ export class DialogDefectoComponent implements OnInit {
   Medida3       = ''
   Medida4       = ''
   Medida5       = ''
+  Tipo          = ''
 
   Menos = ''
- displayedColumns_cab: string[] = ['Tallas']
+ displayedColumns_cab: string[] = ['Tallas', 'Cantidad']
  dataSource: MatTableDataSource<data_det>;
 
  constructor(public dialogRef: MatDialogRef<DialogDefectoComponent>,
           private formBuilder: FormBuilder,
              private matSnackBar: MatSnackBar, 
-             private auditoriaHojaMedidaService: AuditoriaHojaMedidaService,
+             private inspeccionPrendaService: InspeccionPrendaService,
              @Inject(MAT_DIALOG_DATA) public data: data) 
  {
     this.dataSource = new MatTableDataSource();
@@ -65,9 +66,7 @@ export class DialogDefectoComponent implements OnInit {
  }
 
  ngOnInit(): void {  
-  //this.CargarOperacionMedida()
-  this.dataSource.data = GlobalVariable.Arr_Medidas
-  
+  this.MostrarDefectoPorTipo()
  }
 
 
@@ -83,29 +82,13 @@ selectMedida(medida: string){
 
 }
 
-    CargarOperacionMedida(){  
-      this.Cod_Accion   = 'M'
-      this.Cod_Hoja_Medida_Det = 1
-      this.Cod_Hoja_Medida_Cab = 1
-      this.Sec = 0
-      this.Tip_Medida = ''
-      this.Sec_Medida = ''
-      this.Cod_Talla = ''
-      this.Medida1 = ''
-      this.Medida2 = ''
-     this.auditoriaHojaMedidaService.MantenimientoAuditoriaHojaMedidaDetalle(
-      this.Cod_Accion,
-      this.Cod_Hoja_Medida_Det,
-      this.Cod_Hoja_Medida_Cab,
-      this.Sec,
-      this.Tip_Medida,
-      this.Sec_Medida,
-      this.Cod_Talla,
-      this.Medida1,
-      this.Medida2
+MostrarDefectoPorTipo(){  
+    this.Tipo = 'Z'
+    this.inspeccionPrendaService.MostrarDefectoPorTipoService(
+      this.Tipo
       ).subscribe(
         (result: any) => { 
-          GlobalVariable.Arr_Medidas = result
+         this.dataSource.data = result
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
           duration: 1500,

@@ -108,7 +108,7 @@ selectMedida(medida: string){
   console.log(this.Cod_Hoja_Medida_Cab)
   
   
-
+if(ColumnHeader != ''){
   this.Cod_Accion   = 'I'
       this.Cod_Hoja_Medida_Det
       this.Cod_Hoja_Medida_Cab = this.data.Cod_Hoja_Medida_Cab
@@ -133,6 +133,10 @@ selectMedida(medida: string){
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
           duration: 1500,
         }))
+    }
+    else{
+      this.matSnackBar.open("Talla vacia..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+    }
 
 
 

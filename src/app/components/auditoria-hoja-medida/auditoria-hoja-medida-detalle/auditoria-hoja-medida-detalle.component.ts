@@ -197,7 +197,6 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.CargarOperacionMedida()
     this.formulario.controls['inputCliente'].disable()
     this.formulario.controls['inputEstCli'].disable()
     this.formulario.controls['inputEstPro'].disable()
@@ -225,7 +224,8 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
       this.formulario.controls['Auditor'].disable() 
       this.Cod_Hoja_Medida_Cab = GlobalVariable.Cod_Hoja_Medida_Cab
       this.traerInfoCabecera()
-      this.verificarEstadoFicha()   
+      this.verificarEstadoFicha()  
+      this.CargarOperacionMedida() 
     } 
 
 
@@ -646,7 +646,6 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   MostrarCargaMedida() {
-    
     this.SpinnerService.show();
 
     if(GlobalVariable.Cod_EstProHojaMedida != '' && GlobalVariable.Cod_VersionHojaMedida != ''){
@@ -943,7 +942,9 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
           this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
           this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
           this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
-          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab 
+          this.Cod_Hoja_Medida_Cab = result[0].Cod_Hoja_Medida_Cab
+          this.CargarOperacionMedida()
+    
         this.matSnackBar.open('Proceso correcto..!!', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
         }else{
           this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
@@ -1015,9 +1016,10 @@ export class AuditoriaHojaMedidaDetalleComponent implements OnInit {
 
 
   CargarOperacionMedida(){  
+    GlobalVariable.Arr_Medidas = []
     this.Cod_Accion   = 'M'
     this.Cod_Hoja_Medida_Det
-    this.Cod_Hoja_Medida_Cab 
+    this.Cod_Hoja_Medida_Cab
     this.Sec = 0
     this.Tip_Medida = ''
     this.Sec_Medida = ''

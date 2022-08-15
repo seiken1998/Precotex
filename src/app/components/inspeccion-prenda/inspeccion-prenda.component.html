@@ -11,17 +11,18 @@
             <div class="sub-container">
                 <div class="sub-container-cuerpo1">
                     <div class="container-cuerpo-fila1">
-                        <mat-form-field class="fila1-OP"> 
-                            <mat-label>OP</mat-label>
-                            <input matInput type="text"  placeholder="OP"  value="" 
-                                autocomplete="off"  formControlName="OP" >
-                        </mat-form-field>
-
+                       
                         <mat-form-field class="fila1-Codigo"> 
                             <mat-label>Cod. Barras</mat-label>
                             <input matInput type="text"  placeholder="Cod. Barras"  value="" 
-                                autocomplete="off"  formControlName="Codigo" >
+                                autocomplete="off"  formControlName="Codigo" (input)="LecturaCodBarras()" maxlength="9">
                         </mat-form-field>     
+
+                        <mat-form-field class="fila1-OP"> 
+                            <mat-label>OP</mat-label>
+                            <input matInput type="text"  placeholder="OP"  value="" 
+                                autocomplete="off"  formControlName="OP"  >
+                        </mat-form-field>
 
                         <mat-form-field class="fila1-Color"> 
                             <mat-label>Color</mat-label>
@@ -39,15 +40,26 @@
                     <div class="sub-container-cuerpo2">
                         <mat-card class="example-card">
                             <mat-card-title>Prenda</mat-card-title>
-                            <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+
                             <mat-card-content>
                                 <img [src] ="ImagePath" 
-                                style="width: 250px;height: 150px;">
+                                style="width: 250px;height: 150px; object-fit: contain;" (click)="Limpiar()">
                             </mat-card-content>                  
                         </mat-card>
                     </div>
-                    <!--<button type="button" class="fila1-btn_eliminar" mat-flat-button  >
-                    <mat-icon aria-label="person">delete</mat-icon></button>-->
+
+                    <div class="sub-container-cuerpo3">
+                        <mat-card class="example-card1">
+                            <mat-card-title>Eficiencia</mat-card-title>
+  
+                            <mat-card-content>
+                               Minutos Asistidos: 500min <br><br>
+                               Minutos Trabajados: 400min <br><br>
+                               Eficiencia: 70% 
+                            </mat-card-content>                  
+                        </mat-card>                      
+                    </div>
+         
               
             </div>  
             
@@ -134,18 +146,7 @@
 
             <div class="container-cuerpo-fila3">
                 <div class="card-container-fila3">
-                    <mat-card class="example-card3">
-                        <mat-card-title>Eficiencia:</mat-card-title>
-                        <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-                        <mat-card-content>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, voluptatum quia ab illo officiis, ad in at delectus asperiores ea laborum velit inventore? Placeat debitis reiciendis reprehenderit explicabo impedit facilis.</p>
-                        </mat-card-content>
-                        <!--<mat-divider inset></mat-divider>
-                        <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()">-</button>
-                        <button class="card-btn" mat-flat-button (click)="SumarCompostura()">+</button>
-                        </mat-card-actions>-->
-                    </mat-card>
+                   
                 </div>
             </div>
            
