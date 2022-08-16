@@ -152,8 +152,9 @@ mat-form-field {
             display: grid;
 
             grid-template:
-            "col1 col2"
-            "col3 col4" 70px/
+            "col1 col2" 85px
+            "col3 col4" 85px
+            "col5 col6" 85px/
             49% 49%;
         }
 
@@ -180,6 +181,41 @@ mat-form-field {
             grid-area: col4;
             width: 100%; 
             
+        }
+
+        
+        .fila1-Cantidad {
+            grid-area: col5;
+            width: 100%; 
+            
+        }
+
+        .fila1-button-container{
+            grid-area: col6;
+            width: 100%;
+        }
+        .button-Agregar{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #3f51b5;
+            color: #ffffff;
+        }
+
+        .button-Limpiar{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #3f51b5;
+            color: #ffffff;
+        }
+
+
+        .button-Agregar {
+            width: 48%; 
+            
+        }
+
+        .button-Limpiar {
+            width: 48%;   
         }
 
 
@@ -416,4 +452,7 @@ p{
 
     ::ng-deep .mat-input-element:disabled{
         color: #222;
+    }
+    ::ng-deep .mat-select-value-text{
+        color: #222,
     }

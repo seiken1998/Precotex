@@ -13,10 +13,10 @@ export class ControlActivoFijoService {
   
   constructor(private http: HttpClient) { }
 
-MantenimientoActivoFijoCabeceraService(Cod_Accion: string, Cod_Item_Cab: number, Cod_Empresa: number, Cod_Establecimiento: string, Num_Piso: number, Cod_CenCost: string, Cod_Activo: string, Clase_Activo: number){
+MantenimientoActivoFijoCabeceraService(Cod_Accion: string, Cod_Item_Cab: number, Cod_Empresa: number, Cod_Establecimiento: string, Num_Piso: number, Cod_CenCost: string, Nom_Area: string, Cod_Activo: string, Clase_Activo: number, Nom_Responsable: string, Nom_Usuario: string){
 
  
-    return this.http.get(`${this.baseUrl}/app_Man_Control_Activo_Fijo.php?Accion=${Cod_Accion}&Cod_Item_Cab=${Cod_Item_Cab}&Cod_Empresa=${Cod_Empresa}&Cod_Establecimiento=${Cod_Establecimiento}&Num_Piso=${Num_Piso}&Cod_CenCost=${Cod_CenCost}&Cod_Activo=${Cod_Activo}&Clase_Activo=${Clase_Activo}&Cod_Usuario=${this.sCod_Usuario}`);                                             
+    return this.http.get(`${this.baseUrl}/app_Man_Control_Activo_Fijo.php?Accion=${Cod_Accion}&Cod_Item_Cab=${Cod_Item_Cab}&Cod_Empresa=${Cod_Empresa}&Cod_Establecimiento=${Cod_Establecimiento}&Num_Piso=${Num_Piso}&Cod_CenCost=${Cod_CenCost}&Nom_Area=${Nom_Area}&Cod_Activo=${Cod_Activo}&Clase_Activo=${Clase_Activo}&Nom_Responsable=${Nom_Responsable}&Nom_Usuario=${Nom_Usuario}&Cod_Usuario=${this.sCod_Usuario}`);                                             
 }
 
 

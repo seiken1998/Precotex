@@ -295,7 +295,7 @@ mat-form-field {
 .example-section {
     //display: flex;
     align-content: center;
-    align-items: center;
+    align-items: center; 
     height: 60px;
   }
   
@@ -325,7 +325,7 @@ mat-checkbox-inner-container{
   @media screen and (max-width: 683px){
  
    .grid-container{
-       height: 1030px;
+       height: 1100px;
    } 
     .container-cuerpo {
         display: grid;
@@ -342,7 +342,8 @@ mat-checkbox-inner-container{
         "col1 col2" 70px 
         "col3 col4" 70px
         "col5 col6" 70px  
-        "col7 col8" 70px /
+        "col7 col8" 70px
+        "col9 col10" 70px/
         49% 49%;
     } 
     .fila1-Empresa {
@@ -361,21 +362,34 @@ mat-checkbox-inner-container{
         grid-area: col4;
         width: 100%;
     }
-    .fila1-Responsable {
+    .fila1-Area {
         grid-area: col5;
         width: 100%;
     }
-    .fila1-CodAct {
+    .fila1-Responsable {
         grid-area: col6;
         width: 100%;
     }
-    .fila1-ClaseAct {
+    .fila1-Usuario {
         grid-area: col7;
         width: 100%;
     }
+    .fila1-CodAct {
+        grid-area: col8;
+        width: 100%;
+    }
+    .fila1-ClaseAct {
+        grid-area: col9;
+        width: 100%;
+    }
+
+    /*.fila1-UsuarioLog {
+        grid-area: col10;
+        width: 100%;
+    }*/
 
     .fila1-Fijar {
-        grid-area: col8;
+        grid-area: col10;
         width: 100%;
            
     }

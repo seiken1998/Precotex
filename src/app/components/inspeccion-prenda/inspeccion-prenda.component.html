@@ -14,8 +14,8 @@
                        
                         <mat-form-field class="fila1-Codigo"> 
                             <mat-label>Cod. Barras</mat-label>
-                            <input matInput type="text"  placeholder="Cod. Barras"  value="" 
-                                autocomplete="off"  formControlName="Codigo" (input)="LecturaCodBarras()" maxlength="9">
+                            <input matInput type="text"  placeholder="Cod. Barras"  value="" #Codigo
+                                autocomplete="off"  formControlName="Codigo" (input)="LecturaCodBarras()">
                         </mat-form-field>     
 
                         <mat-form-field class="fila1-OP"> 
@@ -24,17 +24,49 @@
                                 autocomplete="off"  formControlName="OP"  >
                         </mat-form-field>
 
-                        <mat-form-field class="fila1-Color"> 
+                        <!--<mat-form-field class="fila1-Color"> 
                             <mat-label>Color</mat-label>
                             <input matInput type="text"  placeholder="Color"  value="" 
                                 autocomplete="off"  formControlName="Color" >
-                        </mat-form-field>     
+                        </mat-form-field>-->
+                        
+                        <mat-form-field class="fila1-Estado-Equipo" appearance="fill">
+                            <mat-label>Color</mat-label>
+                            <mat-select formControlName="Color" [(ngModel)]="SelectedValueColor">
+                                <mat-option *ngFor="let Color of listar_operacionColor"
+                                    [value]="Color.COD_PRESENT">
+                                    {{Color.DES_PRESENT}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
                         <mat-form-field class="fila1-Talla"> 
                             <mat-label>Talla</mat-label>
                             <input matInput type="text"  placeholder="Talla"  value="" 
                                 autocomplete="off"  formControlName="Talla" >
                         </mat-form-field>    
+
+                        <mat-form-field class="fila1-Cantidad"> 
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="text"  placeholder="Cantidad"  value="" 
+                                autocomplete="off"  formControlName="Cantidad" >
+                        </mat-form-field>    
+
+                        <div class="fila1-button-container">
+                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="GuardarCabecera()">
+                                <mat-icon aria-label="person">save
+                                </mat-icon>  Guardar
+                            </button>
+                            <button type="button" *ngIf ="Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="FinalizarProceso()">
+                                <mat-icon aria-label="person">save
+                                </mat-icon>  Finalizar
+                            </button>
+                            <button type="button" class="button-Limpiar" *ngIf ="!Flg_Habilitar_Detalle" mat-button mat-flat-button (click)="Limpiar()">
+                                <mat-icon aria-label="person">cached
+                                </mat-icon> Limpiar
+                                <!--[disabled]="Flg_Habilitar_Detalle"-->
+                            </button>   
+                        </div>
                     </div>
                 </div> 
                     <div class="sub-container-cuerpo2">
@@ -43,7 +75,7 @@
 
                             <mat-card-content>
                                 <img [src] ="ImagePath" 
-                                style="width: 250px;height: 150px; object-fit: contain;" (click)="Limpiar()">
+                                style="width: 250px;height: 150px; object-fit: contain;">
                             </mat-card-content>                  
                         </mat-card>
                     </div>
@@ -74,8 +106,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()">-</button>
-                        <button class="card-btn" mat-flat-button (click)="SumarCompostura()">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarCompostura()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -87,8 +119,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()">-</button>
-                        <button class="card-btn" mat-flat-button (click)="SumarSegunda()">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarSegunda()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -100,8 +132,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()">-</button>
-                        <button class="card-btn" mat-flat-button (click)="SumarZurcido()">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarZurcido()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -113,8 +145,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()">-</button>
-                        <button class="card-btn" mat-flat-button (click)="SumarDesmanche()">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarDesmanche()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
                         </mat-card-actions>
                     </mat-card>
 

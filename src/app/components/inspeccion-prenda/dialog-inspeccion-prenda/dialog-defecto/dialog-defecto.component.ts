@@ -11,18 +11,13 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
 interface data{
-  Cod_Talla:  string
-  Des_Medida:  string
-  Sec: number
-  Tip_Medida: string
-  Sec_Medida: string
-  Cod_Hoja_Medida_Cab: number
-  Flg_Enable: boolean
+  Accion: string
 }
 
 interface data_det {
   Abr_Motivo: string;
   Descripcion: string;
+  Cantidad: number;
 
 }
 
@@ -34,23 +29,9 @@ interface data_det {
 })
 export class DialogDefectoComponent implements OnInit {
 
-  Titulo        = ''
-  Cod_Talla     = ''
-  Des_Medida    = ''
-  Cod_Accion    = ''
-  Cod_Hoja_Medida_Det = 0
-  Cod_Hoja_Medida_Cab = 0
-  Sec = 0
-  Tip_Medida    = ''
-  Sec_Medida    = ''
-  Medida1       = ''
-  Medida2       = ''
-  Medida3       = ''
-  Medida4       = ''
-  Medida5       = ''
-  Tipo          = ''
-
-  Menos = ''
+  Id = 0
+  Cod_Familia = ""
+  
  displayedColumns_cab: string[] = ['Tallas', 'Cantidad']
  dataSource: MatTableDataSource<data_det>;
 
@@ -83,9 +64,11 @@ selectMedida(medida: string){
 }
 
 MostrarDefectoPorTipo(){  
-    this.Tipo = 'Z'
+    this.Id = 1
+    this.Cod_Familia = this.data.Accion
     this.inspeccionPrendaService.MostrarDefectoPorTipoService(
-      this.Tipo
+      this.Id,
+      this.Cod_Familia
       ).subscribe(
         (result: any) => { 
          this.dataSource.data = result

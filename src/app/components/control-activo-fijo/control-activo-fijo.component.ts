@@ -124,19 +124,9 @@ export class ControlActivoFijoComponent implements OnInit {
   listar_operacionEje: Eje[] = [];
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('Cod_Activo') inputCod_Activo!: ElementRef;
+  
   public data_det = [{
-    Num_Auditoria: 0,
-    Cod_Supervisor: "",
-    Nom_Supervisor: "",
-    Cod_Auditor: "",
-    Nom_Auditor: "",
-    Fecha_Auditoria: "",
-    Cod_LinPro: "",
-    Observacion: "",
-    Flg_Status: "",
-    Cod_Usuario: "",
-    Cod_Equipo: "",
-    Fecha_Reg: ""
+
   }]
 
 
@@ -155,6 +145,9 @@ export class ControlActivoFijoComponent implements OnInit {
   Planta = ""
   Piso = 0
   Cod_CenCost = ""
+  Nom_Area = ""
+  Nom_Responsable = ""
+  Nom_Usuario = ""
   Cod_Activo = ""
   Clase_Activo = 0
 
@@ -192,9 +185,12 @@ export class ControlActivoFijoComponent implements OnInit {
     Sede: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]{1,50}$")])],
     Piso: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9_-]{1,2}$")])],
     Ccosto: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]{1,16}$")])],
-    Responsable: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]$")])],
+    Area: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9 _-]{1,80}$")])],
+    Responsable: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9 _-]{1,50}$")])],
+    Usuario: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9 _-]{1,50}$")])],
     CodAct: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]{1,9}$")])],
     ClaseAct: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]$")])],
+    //UsuarioLog: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_-]$")])],
     Fijar: [''],
 
 
@@ -229,8 +225,8 @@ export class ControlActivoFijoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formulario.controls['Responsable'].setValue(GlobalVariable.vusu)
-    this.formulario.controls['Responsable'].disable()
+    //this.formulario.controls['Responsable'].setValue(GlobalVariable.vusu)
+    //this.formulario.controls['Responsable'].disable()
     this.CargarOperacionClase()
     this.MostrarEmpresa()
     this.MostrarEstado()
@@ -269,7 +265,9 @@ export class ControlActivoFijoComponent implements OnInit {
     this.formulario.controls['Sede'].disable()
     this.formulario.controls['Piso'].disable()
     this.formulario.controls['Ccosto'].disable()
-    //this.formulario.controls['Responsable'].disable()
+    this.formulario.controls['Area'].disable()
+    this.formulario.controls['Responsable'].disable()
+    this.formulario.controls['Usuario'].disable()
     this.formulario.controls['CodAct'].disable()
     this.formulario.controls['ClaseAct'].disable()
   }
@@ -279,7 +277,9 @@ export class ControlActivoFijoComponent implements OnInit {
     this.formulario.controls['Sede'].enable()
     this.formulario.controls['Piso'].enable()
     this.formulario.controls['Ccosto'].enable()
-    //this.formulario.controls['Responsable'].enable()
+    this.formulario.controls['Area'].enable()
+    this.formulario.controls['Responsable'].enable()
+    this.formulario.controls['Usuario'].enable()
     this.formulario.controls['CodAct'].enable()
     this.formulario.controls['ClaseAct'].enable()
   }
@@ -292,8 +292,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -301,8 +304,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -351,8 +357,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -360,8 +369,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -378,8 +390,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -387,8 +402,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -405,8 +423,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -414,8 +435,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -432,8 +456,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -441,8 +468,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -460,8 +490,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -469,8 +502,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -487,8 +523,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area  = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -496,8 +535,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -514,8 +556,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -523,8 +568,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -541,8 +589,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -550,8 +601,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -578,8 +632,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = ""
     this.Piso = 0
     this.Cod_CenCost = ""
+    this.Nom_Area = ""
     this.Cod_Activo = ""
     this.Clase_Activo = 0
+    this.Nom_Responsable = ""
+    this.Nom_Usuario = ""
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -587,8 +644,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -607,8 +667,11 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Planta = this.formulario.get('Sede')?.value
     this.Piso = this.formulario.get('Piso')?.value
     this.Cod_CenCost = this.formulario.get('Ccosto')?.value
+    this.Nom_Area = this.formulario.get('Area')?.value
     this.Cod_Activo = this.formulario.get('CodAct')?.value
     this.Clase_Activo = this.formulario.get('ClaseAct')?.value
+    this.Nom_Responsable = this.formulario.get('Responsable')?.value
+    this.Nom_Usuario = this.formulario.get('Usuario')?.value
     this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
       this.Cod_Accion,
       this.Cod_Item_Cab,
@@ -616,8 +679,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta,
       this.Piso,
       this.Cod_CenCost,
+      this.Nom_Area,
       this.Cod_Activo,
       this.Clase_Activo,
+      this.Nom_Responsable,
+      this.Nom_Usuario
     ).subscribe(
       (result: any) => {
         console.log(result)
@@ -750,7 +816,9 @@ export class ControlActivoFijoComponent implements OnInit {
       this.formulario.controls['Sede'].setValue('')
       this.formulario.controls['Piso'].setValue('')
       this.formulario.controls['Ccosto'].setValue('')
-      //this.formulario.controls['Responsable'].setValue('')
+      this.formulario.controls['Area'].setValue('')
+      this.formulario.controls['Responsable'].setValue('')
+      this.formulario.controls['Usuario'].setValue('')
       this.formulario.controls['CodAct'].setValue('')
       this.formulario.controls['ClaseAct'].setValue('')
     }
@@ -787,8 +855,11 @@ export class ControlActivoFijoComponent implements OnInit {
       this.Planta = ""
       this.Piso = 0
       this.Cod_CenCost = ""
+      this.Nom_Area = ""
       this.Cod_Activo = this.Cod_Activo
-      this.Clase_Activo = 0
+      this.Clase_Activo = 0,
+      this.Nom_Responsable = ""
+      this.Nom_Usuario = ""
       this.controlActivoFijoService.MantenimientoActivoFijoCabeceraService(
         this.Cod_Accion,
         this.Cod_Item_Cab,
@@ -796,8 +867,11 @@ export class ControlActivoFijoComponent implements OnInit {
         this.Planta,
         this.Piso,
         this.Cod_CenCost,
+        this.Nom_Area,
         this.Cod_Activo,
         this.Clase_Activo,
+        this.Nom_Responsable,
+        this.Nom_Usuario
       ).subscribe(
         (result: any) => {
 
@@ -820,6 +894,9 @@ export class ControlActivoFijoComponent implements OnInit {
                 this.formulario.controls['Sede'].setValue(result[0].Cod_Establecimiento)
                 this.formulario.controls['Piso'].setValue(result[0].Num_Piso)
                 this.formulario.controls['Ccosto'].setValue(result[0].Cod_CenCost)
+                this.formulario.controls['Area'].setValue(result[0].Nom_Area)
+                this.formulario.controls['Responsable'].setValue(result[0].Nom_Responsable)
+                this.formulario.controls['Usuario'].setValue(result[0].Nom_Usuario)
                 this.formulario.controls['CodAct'].disable()
                 //Cambiar Contenido
                 this.formulario.controls['ClaseAct'].setValue(result[0].Cod_Categoria)
@@ -885,7 +962,6 @@ export class ControlActivoFijoComponent implements OnInit {
     this.Cod_Item_Cab_Registrado = 0
     this.Fabricacion = new FormControl(moment("01-01-1990", "MM-DD-YYYY"));
     this.formulario.controls['CodAct'].enable()
-    this.formulario.controls['Responsable'].setValue(GlobalVariable.vusu)
   }
 }
 

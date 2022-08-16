@@ -30,10 +30,17 @@ export class InspeccionPrendaService {
 
 
 
-MostrarDefectoPorTipoService($Tipo: string){
-      return this.http.get(`${this.baseUrl}/app_Mostrar_Defecto_Tipo.php?Tipo=${$Tipo}`);                                                
-}
+  MostrarDefectoPorTipoService(Id: number, Cod_Familia: string){
+        return this.http.get(`${this.baseUrl}/app_Mostrar_Defecto_Tipo.php?Id=${Id}&Cod_Familia=${Cod_Familia}`);                                                
+  }
 
+  CF_MUESTRA_INSPECCION_LECTURA_TICKET(Codigo: string){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_LECTURA_TICKET.php?Codigo=${Codigo}`);                                                
+  }
+
+  CF_Man_Inspeccion_Prenda_Web(Cod_Accion: string, Cod_Fabrica: string, Cod_OrdPro: string, Cod_Present: number, Cod_Talla: string, Num_Paquete: string, Prendas_Paq: number){
+    return this.http.get(`${this.baseUrl}/app_CF_Man_Inspeccion_Prenda_Web.php?Accion=${Cod_Accion}&Cod_Fabrica=${Cod_Fabrica}&Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}&Cod_Talla=${Cod_Talla}&Prendas_Paq=${Prendas_Paq}&Num_Paquete=${Num_Paquete}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+  }
 
 
 }
