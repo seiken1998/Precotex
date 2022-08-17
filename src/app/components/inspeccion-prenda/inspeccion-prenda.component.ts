@@ -41,9 +41,15 @@ export class InspeccionPrendaComponent implements OnInit {
   ImagePath = ''
   Codigo = ''
 
+  Tipo_Proceso = ""
   Cod_Fabrica = ""
   Num_Paquete = ""
   Flg_Habilitar_Detalle = false
+
+  //variables para ejecutar SP CF_Man_Inspeccion_Prenda_Detalle_Web
+  Id = 0
+  Tipo_Sub_Proceso = ''
+  Cod_Defecto = ""
 
   //http://192.168.1.36/Estilos/EP18168.jpg
 
@@ -72,118 +78,316 @@ export class InspeccionPrendaComponent implements OnInit {
 
   RestarCompostura() {
     if (this.Compostura != 0) {
-      this.Compostura = this.Compostura - 1
-      //this.ActualizarTotal()
-      this.ActualizarPrimeras()
+    this.Cod_Accion   = "D"
+    this.Id
+    this.Tipo_Sub_Proceso = '01'
+    this.Cod_Defecto = ""
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+      this.Cod_Accion,
+      this.Id,
+      this.Tipo_Sub_Proceso,
+      this.Cod_Defecto
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+        if(result[0].Respuesta == 'OK'){
+          //this.Compostura = this.Compostura - 1
+          //this.ActualizarTotal()
+          //this.ActualizarPrimeras()
+          this.ActualizarCantidad()
+        }
+        else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
     }
   }
 
   SumarCompostura() {
-    this.Compostura = this.Compostura + 1
-    //this.ActualizarTotal()
-    this.ActualizarPrimeras()
+    this.Cod_Accion   = "I"
+    this.Id
+    this.Tipo_Sub_Proceso = '01'
+    this.Cod_Defecto = ""
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+      this.Cod_Accion,
+      this.Id,
+      this.Tipo_Sub_Proceso,
+      this.Cod_Defecto
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+        if(result[0].Respuesta == 'OK'){
+          //this.Compostura = this.Compostura + 1
+          //this.ActualizarTotal()
+          //this.ActualizarPrimeras()
+          this.ActualizarCantidad()
+        }
+        else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
   }
 
   RestarSegunda() {
     if (this.Segunda != 0) {
-      this.Segunda = this.Segunda - 1
-      //this.ActualizarTotal()
-      this.ActualizarPrimeras()
+    this.Cod_Accion   = "D"
+    this.Id
+    this.Tipo_Sub_Proceso = '02'
+    this.Cod_Defecto = ""
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+      this.Cod_Accion,
+      this.Id,
+      this.Tipo_Sub_Proceso,
+      this.Cod_Defecto
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+        if(result[0].Respuesta == 'OK'){
+          //this.Segunda = this.Segunda - 1
+          //this.ActualizarTotal()
+          //this.ActualizarPrimeras()
+          this.ActualizarCantidad()
+        }
+        else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
     }
   }
 
   SumarSegunda() {
-    this.Segunda = this.Segunda + 1
-    //this.ActualizarTotal()
-    this.ActualizarPrimeras()
+
+    this.Cod_Accion   = "I"
+    this.Id
+    this.Tipo_Sub_Proceso = '02'
+    this.Cod_Defecto = ""
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+      this.Cod_Accion,
+      this.Id,
+      this.Tipo_Sub_Proceso,
+      this.Cod_Defecto
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+        if(result[0].Respuesta == 'OK'){
+          //this.Segunda = this.Segunda + 1
+          //this.ActualizarTotal()
+          //this.ActualizarPrimeras()
+          this.ActualizarCantidad()
+        }
+        else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
   }
 
   RestarZurcido() {
+    if (this.Zurcido != 0) {
+      this.ActualizarCantidad()
     let dialogRef = this.dialog.open(DialogDefectoComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
         data: {
-          Accion: '03'
+          Cod_Familia: '03',
+          Id: this.Id,
+          Total: this.Zurcido
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-      if (result == 'false') {
-
-      } else {
-
-        console.log(result.data)
-      }
+      if (result != 'false') {
+        this.Cod_Accion   = "D"
+        this.Id
+        this.Tipo_Sub_Proceso = '03'
+        this.Cod_Defecto = result.data
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+          this.Cod_Accion,
+          this.Id,
+          this.Tipo_Sub_Proceso,
+          this.Cod_Defecto
+        ).subscribe(
+          (result: any) => {
+            console.log(result)
+            if(result[0].Respuesta == 'OK'){
+              this.ActualizarCantidad()
+            }
+            else{
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
+      } 
     })
+  }
   }
 
   SumarZurcido() {
+    this.ActualizarCantidad()
     let dialogRef = this.dialog.open(DialogDefectoComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
         data: {
-          Accion: '03'
+          Cod_Familia: '03',
+          Id: this.Id,
+          Total: this.Zurcido
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-      if (result == 'false') {
+      if (result != 'false') {
+        this.Cod_Accion   = "I"
+        this.Id
+        this.Tipo_Sub_Proceso = '03'
+        this.Cod_Defecto = result.data
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+          this.Cod_Accion,
+          this.Id,
+          this.Tipo_Sub_Proceso,
+          this.Cod_Defecto
+        ).subscribe(
+          (result: any) => {
+            console.log(result)
+            if(result[0].Respuesta == 'OK'){
+              this.ActualizarCantidad()
+            }
+            else{
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
+      } 
+    })
+  } 
 
-      } else {
-
-        console.log(result.data)
+  RestarDesmanche() {
+    if (this.Desmanche != 0) {
+      this.ActualizarCantidad()
+    let dialogRef = this.dialog.open(DialogDefectoComponent,
+      {
+        disableClose: true,
+        panelClass: 'my-class',
+        data: {
+          Cod_Familia: '04',
+          Id: this.Id,
+          Total: this.Desmanche
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != 'false') {
+        this.Cod_Accion   = "D"
+        this.Id
+        this.Tipo_Sub_Proceso = '04'
+        this.Cod_Defecto = result.data
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+          this.Cod_Accion,
+          this.Id,
+          this.Tipo_Sub_Proceso,
+          this.Cod_Defecto
+        ).subscribe(
+          (result: any) => {
+            console.log(result)
+            if(result[0].Respuesta == 'OK'){
+              this.ActualizarCantidad()
+            }
+            else{
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
       }
     })
   }
-
-  RestarDesmanche() {
-    let dialogRef = this.dialog.open(DialogDefectoComponent,
-      {
-        disableClose: true,
-        panelClass: 'my-class',
-        data: {
-          Accion: '04'
-        }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == 'false') {
-
-      } else {
-
-        console.log(result.data)
-      }
-    })
   }
 
   SumarDesmanche() {
+    this.ActualizarCantidad()
     let dialogRef = this.dialog.open(DialogDefectoComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
         data: {
-          Accion: '04'
+          Cod_Familia: '04',
+          Id: this.Id,
+          Total: this.Desmanche
         }
       });
     dialogRef.afterClosed().subscribe(result => {
-      if (result == 'false') {
 
-      } else {
+      console.log(result.data)
+      if (result != 'false') {
+        this.Cod_Accion   = "I"
+        this.Id
+        this.Tipo_Sub_Proceso = '04'
+        this.Cod_Defecto = result.data
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+          this.Cod_Accion,
+          this.Id,
+          this.Tipo_Sub_Proceso,
+          this.Cod_Defecto
+        ).subscribe(
+          (result: any) => {
+            console.log(result)
+            if(result[0].Respuesta == 'OK'){
+              this.ActualizarCantidad()
+            }
+            else{
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
 
-        console.log(result.data)
-      }
+      } 
     })
   }
 
   ActualizarPrimeras() {
 
-    this.Primeras = this.Inicial + (-1 * (this.Compostura + this.Segunda + this.Zurcido + this.Desmanche))
+    //this.Primeras = this.Inicial + (-1 * (this.Compostura + this.Segunda + this.Zurcido + this.Desmanche))
   }
 
   ActualizarTotal() {
 
-    this.Primeras = this.Inicial - this.Total
+    //this.Primeras = this.Inicial - this.Total
   }
 
+  ActualizarCantidad(){
+    this.Id
+    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RESUMEN(
+      this.Id
+    ).subscribe(
+      (result: any) => {
+        console.log(result)
+          this.Compostura = result[0].Tipo_Sub_Proceso_01
+          this.Segunda    = result[0].Tipo_Sub_Proceso_02
+          this.Zurcido    = result[0].Tipo_Sub_Proceso_03
+          this.Desmanche  = result[0].Tipo_Sub_Proceso_04
+          this.Total      = result[0].Total
+          this.Primeras   = result[0].Primeras
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
+  }
 
 
   LecturaCodBarras() {
@@ -233,7 +437,7 @@ export class InspeccionPrendaComponent implements OnInit {
       {
         disableClose: true,
         data: {
-        }
+        } 
       });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
@@ -248,17 +452,24 @@ export class InspeccionPrendaComponent implements OnInit {
           this.Cod_Accion,
           this.Cod_Fabrica,
           this.Cod_OrdPro,
-          this.Cod_Present,
+          this.Cod_Present, 
           this.Cod_Talla,
           this.Num_Paquete,
-          this.Prendas_Paq
+          this.Prendas_Paq 
         ).subscribe(
           (result: any) => {
             if(result[0].Respuesta == 'OK'){
               this.Flg_Habilitar_Detalle = true
+
+              this.Tipo_Proceso = result[0].Tipo_Proceso
+              this.Tipo_Proceso == 'R' ? this.Tipo_Proceso = 'Reproceso' : this.Tipo_Proceso = 'Produccion';
+              this.Tipo_Proceso = this.Tipo_Proceso.toUpperCase()
+              console.log(this.Tipo_Proceso)
+
               this.Total    = this.Prendas_Paq
               this.Inicial  = this.Prendas_Paq
               this.Primeras = this.Prendas_Paq
+              this.Id = result[0].Id
               this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
             }
             else{

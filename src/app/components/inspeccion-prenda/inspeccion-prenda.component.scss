@@ -193,6 +193,8 @@ mat-form-field {
         .fila1-button-container{
             grid-area: col6;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
         .button-Agregar{
             height: 40px;
@@ -208,14 +210,31 @@ mat-form-field {
             color: #ffffff;
         }
 
+        .button-Agregar-xs{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #3f51b5;
+            color: #ffffff;
+            display: none;
+        }
+
+        .button-Limpiar-xs{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #3f51b5;
+            color: #ffffff;
+            display: none;
+        }
+
 
         .button-Agregar {
-            width: 48%; 
-            
+            width: 45%; 
+            max-width: 49%;
         }
 
         .button-Limpiar {
-            width: 48%;   
+            width: 45%; 
+            max-width: 49%;  
         }
 
 
@@ -354,6 +373,25 @@ p{
     min-width: 120px;
 }
 
+
+@media screen and (max-width: 1500px){
+    .button-Agregar{
+        display: none;
+    }
+
+    .button-Limpiar{
+        display: none;
+    }
+
+    .button-Agregar-xs{
+        display: block;
+    }
+
+    .button-Limpiar-xs{
+        display: block;
+    }
+}
+
 @media screen and (max-width: 1009px){
     
     .grid-container{
@@ -375,7 +413,8 @@ p{
         
         grid-template:
         "col1 col2" 70px 
-        "col3 col4" 70px/
+        "col3 col4" 70px
+        "col5 col6" 70px/
         49% 49%;
     }
 
@@ -383,7 +422,7 @@ p{
         grid-area: col1;
         
     }
-
+ 
     .fila1-OP {
         grid-area: col2;
         
@@ -398,6 +437,13 @@ p{
     .fila1-Talla {
         grid-area: col4;
         
+    }
+    .fila1-Cantidad {
+        grid-area: col5;        
+    }
+
+    .fila1-button-container{
+        grid-area: col6;
     }
         
 }
@@ -439,6 +485,69 @@ p{
         font-size: 14px;
     }
   }
+
+
+  @media screen and (max-width: 900px){
+    .grid-container{
+        height: 1670px;
+    } 
+
+    .container-cuerpo {
+        display: grid;
+    
+        grid-template:
+            "fila1" 665px
+            "fila2" 190px
+            "fila3" 0px
+            "foot" 0px / 
+            99%;
+    }
+
+    .sub-container{
+        flex-wrap: wrap;
+     }
+
+     .sub-container-cuerpo1{
+        width: 100%;
+    }
+    .sub-container-cuerpo2{
+        width: 100%;
+        margin-top: 30px;
+    }
+    .sub-container-cuerpo3{
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .example-card{
+        width: 100%;
+    }
+    .card-container-fila2{
+        flex-wrap: wrap;
+    }
+    .example-card2{
+        max-height: 150px;
+        border: solid 0.1px lightgrey;
+        margin: 2px;
+    }
+    mat-card-title{
+        font-size: 17px;
+    }
+
+    mat-card-actions{
+        flex-direction: row;
+    }
+    
+    .card-btn {
+        width: 45px; 
+        font-size: 17px;
+    }
+    
+    p{
+        font-size: 16px;
+    }
+
+   }
 
  /* ::ng-deep mat-dialog-container{
     padding: 5px;

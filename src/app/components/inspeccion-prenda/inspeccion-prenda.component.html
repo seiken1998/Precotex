@@ -5,7 +5,7 @@
     <!-- ventana nro 4 - historial --> 
     <div class="grid-container">  
  
-        <div class="title">Inspeccion Prenda</div>
+        <div class="title">Inspeccion Prenda - ID: {{Id}} - Tipo Proceso: {{Tipo_Proceso}}</div>
 
         <form class="container-cuerpo" [formGroup]="formulario">
             <div class="sub-container">
@@ -54,10 +54,18 @@
 
                         <div class="fila1-button-container">
                             <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="GuardarCabecera()">
-                                <mat-icon aria-label="person">save
+                                <mat-icon aria-label="person">check
                                 </mat-icon>  Guardar
                             </button>
+                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar-xs" mat-button mat-flat-button (click)="GuardarCabecera()">
+                                <mat-icon aria-label="person">check
+                                </mat-icon>
+                            </button>
                             <button type="button" *ngIf ="Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="FinalizarProceso()">
+                                <mat-icon aria-label="person">save
+                                </mat-icon>  Finalizar
+                            </button>
+                            <button type="button" *ngIf ="Flg_Habilitar_Detalle" class="button-Agregar-xs" mat-button mat-flat-button (click)="FinalizarProceso()">
                                 <mat-icon aria-label="person">save
                                 </mat-icon>  Finalizar
                             </button>
@@ -65,7 +73,12 @@
                                 <mat-icon aria-label="person">cached
                                 </mat-icon> Limpiar
                                 <!--[disabled]="Flg_Habilitar_Detalle"-->
-                            </button>   
+                            </button>  
+                            <button type="button" class="button-Limpiar-xs" *ngIf ="!Flg_Habilitar_Detalle" mat-button mat-flat-button (click)="Limpiar()">
+                                <mat-icon aria-label="person">cached
+                                </mat-icon>
+                                <!--[disabled]="Flg_Habilitar_Detalle"-->
+                            </button> 
                         </div>
                     </div>
                 </div> 
@@ -106,8 +119,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         <button class="card-btn" mat-flat-button (click)="SumarCompostura()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -119,8 +132,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         <button class="card-btn" mat-flat-button (click)="SumarSegunda()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -132,8 +145,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         <button class="card-btn" mat-flat-button (click)="SumarZurcido()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -145,8 +158,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         <button class="card-btn" mat-flat-button (click)="SumarDesmanche()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 

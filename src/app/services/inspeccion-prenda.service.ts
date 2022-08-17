@@ -42,5 +42,14 @@ export class InspeccionPrendaService {
     return this.http.get(`${this.baseUrl}/app_CF_Man_Inspeccion_Prenda_Web.php?Accion=${Cod_Accion}&Cod_Fabrica=${Cod_Fabrica}&Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}&Cod_Talla=${Cod_Talla}&Prendas_Paq=${Prendas_Paq}&Num_Paquete=${Num_Paquete}&Cod_Usuario=${this.sCod_Usuario}`);                                                
   }
 
+  CF_Man_Inspeccion_Prenda_Detalle_Web(Cod_Accion: string, Id: number, Tipo_Sub_Proceso: string, Cod_Defecto: string){
+    return this.http.get(`${this.baseUrl}/app_CF_Man_Inspeccion_Prenda_Detalle_Web.php?Accion=${Cod_Accion}&Id=${Id}&Tipo_Sub_Proceso=${Tipo_Sub_Proceso}&Cod_Defecto=${Cod_Defecto}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+  }
+
+  CF_MUESTRA_INSPECCION_RESUMEN(Id: number){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_RESUMEN.php?Id=${Id}`);                                                
+  }
+
+
 
 }

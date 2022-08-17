@@ -11,7 +11,9 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
 interface data{
-  Accion: string
+  Cod_Familia: string
+  Id: number
+  Total: number
 }
 
 interface data_det {
@@ -31,6 +33,7 @@ export class DialogDefectoComponent implements OnInit {
 
   Id = 0
   Cod_Familia = ""
+  Total = 0
   
  displayedColumns_cab: string[] = ['Tallas', 'Cantidad']
  dataSource: MatTableDataSource<data_det>;
@@ -47,6 +50,7 @@ export class DialogDefectoComponent implements OnInit {
  }
 
  ngOnInit(): void {  
+  this.Total = this.data.Total
   this.MostrarDefectoPorTipo()
  }
 
@@ -55,17 +59,14 @@ export class DialogDefectoComponent implements OnInit {
 
 
 
-selectMedida(medida: string){
+selectMedida(Abr_Motivo: string){
   
-
-  this.dialogRef.close({data:medida});
-  
-
+  this.dialogRef.close({data:Abr_Motivo});
 }
 
 MostrarDefectoPorTipo(){  
-    this.Id = 1
-    this.Cod_Familia = this.data.Accion
+    this.Id = this.data.Id
+    this.Cod_Familia = this.data.Cod_Familia
     this.inspeccionPrendaService.MostrarDefectoPorTipoService(
       this.Id,
       this.Cod_Familia

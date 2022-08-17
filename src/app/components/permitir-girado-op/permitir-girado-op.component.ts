@@ -15,9 +15,15 @@ import { DialogEliminarComponent} from 'src/app/components/dialogs/dialog-elimin
 import { GlobalVariable } from 'src/app/VarGlobals';
 
 interface data_det {
-  Cod_OrdPro: string;
-  Cod_Usuario: string;
-  Fec_Creacion: string;
+  Num_Grupo: number
+  Cod_OrdPro: string
+  Cod_Present: string
+  Flg_Aprobado: string
+  Nom_Motivo: string
+  Cod_Usuario: string 
+  Fec_Creacion: string
+  Cod_Usuario_Aprobacion: string
+  Fec_Creacion_Aprobacion: string
 }
 
 @Component({
@@ -29,9 +35,15 @@ export class PermitirGiradoOpComponent implements OnInit {
  
  
   public data_det = [{
-    Cod_OrdPro:   "",
-    Cod_Usuario:  "",
-    Fec_Creacion: "" 		
+    Num_Grupo:                0,
+    Cod_OrdPro:               "",
+    Cod_Present:              "",
+    Flg_Aprobado:             "",
+    Nom_Motivo:               "",
+    Cod_Usuario:              "",
+    Fec_Creacion:             "",
+    Cod_Usuario_Aprobacion:   "",
+    Fec_Creacion_Aprobacion:  ""	
   }]
 
 
@@ -51,7 +63,7 @@ export class PermitirGiradoOpComponent implements OnInit {
   })
 
 
-  displayedColumns_cab: string[] = ['Cod_OrdPro', 'Cod_Usuario', 'Fec_Creacion', 'Acciones']
+  displayedColumns_cab: string[] = ['Num_Grupo', 'Cod_OrdPro', 'Cod_Present','Flg_Aprobado', 'Nom_Motivo', 'Cod_Usuario', 'Fec_Creacion', 'Cod_Usuario_Aprobacion', 'Fec_Creacion_Aprobacion', 'Acciones']
   dataSource: MatTableDataSource<data_det>;
 
 

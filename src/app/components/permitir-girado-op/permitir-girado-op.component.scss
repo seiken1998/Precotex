@@ -115,9 +115,15 @@ mat-form-field {
     width: 265px; 
 }
 
+.mat-column-Num_Grupo,
 .mat-column-Cod_OrdPro,
+.mat-column-Cod_Present,
+.mat-column-Flg_Aprobado,
+.mat-column-Nom_Motivo,
 .mat-column-Cod_Usuario, 
 .mat-column-Fec_Creacion,
+.mat-column-Cod_Usuario_Aprobacion,
+.mat-column-Fec_Creacion_Aprobacion,
 .mat-column-Acciones
 {
 	text-align: center;
