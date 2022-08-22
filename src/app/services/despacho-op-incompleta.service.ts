@@ -66,4 +66,9 @@ PermitirGiradoOp(Cod_Accion: string, Cod_OrdPro: string, Fec_Inicio: string, Fec
   return this.http.get(`${this.baseUrl}/app_Permitir_Girado_Op.php?Accion=${Cod_Accion}&Cod_OrdPro=${Cod_OrdPro}&Fec_Inicio=${Fec_Inicio}&Fec_Fin=${Fec_Fin}&Cod_Usuario=${this.sCod_Usuario}`);                                                
 }
 
+
+Ti_Man_Aprobacion_Despacho_Cod_OrdPro(Cod_Accion: string, Num_Grupo: number, Cod_OrdPro: string, Cod_Present:number, Cod_OrdTra: string, Id_Motivo:number){
+  return this.http.get(`${this.baseUrl}/app_Ti_Man_Aprobacion_Despacho_Cod_OrdPro.php?Accion=${Cod_Accion}&Num_Grupo=${Num_Grupo}&Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}&Cod_OrdTra=${Cod_OrdTra}&Id_Motivo=${Id_Motivo}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+}
+
 }

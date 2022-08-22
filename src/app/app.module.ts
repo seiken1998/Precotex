@@ -96,6 +96,9 @@ import { DialogDefectoComponent } from './components/inspeccion-prenda/dialog-in
 import { DialogModificarComponent } from './components/dialogs/dialog-modificar/dialog-modificar.component';
 import { PermitirGiradoOpComponent } from './components/permitir-girado-op/permitir-girado-op.component';
 import { DialogRegistrarGiradoOpComponent } from './components/permitir-girado-op/dialog-registrar-girado-op/dialog-registrar-girado-op.component';
+import { InspeccionPrendaHabilitadorComponent } from './components/inspeccion-prenda-habilitador/inspeccion-prenda-habilitador.component';
+import { ReinspeccionPrendaComponent } from './components/reinspeccion-prenda/reinspeccion-prenda.component';
+import { DialogHabilitadorComponent } from './components/inspeccion-prenda-habilitador/dialog-inspeccion-prenda-habilitador/dialog-habilitador/dialog-habilitador.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +176,10 @@ import { DialogRegistrarGiradoOpComponent } from './components/permitir-girado-o
     DialogDefectoComponent,
     DialogModificarComponent,
     PermitirGiradoOpComponent,
-    DialogRegistrarGiradoOpComponent
+    DialogRegistrarGiradoOpComponent,
+    InspeccionPrendaHabilitadorComponent,
+    ReinspeccionPrendaComponent,
+    DialogHabilitadorComponent
    
     
  

@@ -405,7 +405,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
 
 
 
-  mostrarAlertaCaidas(){
+  mostrarAlertaCaidasMayora1(){
     this.Total_solicitado_Global = 0
     this.Defectos_Global = 0
     this.Caidas_solicitado_Global = 0
@@ -449,25 +449,89 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     ).subscribe(
         (result: any) => {
           if(result[0]['Alerta'] !=undefined){
-          console.log(result[0]['Alerta'])
-          this.Total_solicitado_Global = result[0]['Total_solicitado']
-          this.Total_requerido_Global = result[0]['Total_requerido']
-          this.Defectos_Global = result[0]['Defectos']
-          this.Caidas_solicitado_Global = result[0]['Caidas_solicitado']
-          this.Caidas_requerido_Global = result[0]['Caidas_requerido']
-
-          this.Altertas_Caidas_Global = result[0]['Alerta']
-          this.EnviarAlertaTelegram()  
-        }
+            /* console.log(result[0]['Total'])
+             console.log(result[0]['Defectos'])
+             console.log(result[0]['Caidas'])*/
+   
+   
+             this.Total_solicitado_Global = result[0]['Total_solicitado']
+             this.Total_requerido_Global = result[0]['Total_requerido']
+             this.Defectos_Global = result[0]['Defectos']
+             this.Caidas_solicitado_Global = result[0]['Caidas_solicitado']
+             this.Caidas_requerido_Global = result[0]['Caidas_requerido']
+             
+             //this.Altertas_Caidas_Global = result[0]['Alerta']
+   
+   
+             this.EnviarAlertaTelegramMayora1()  
+           }
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 }))
 
 
   }
 
+  mostrarAlertaCaidasMayora5(){
+ 
+    this.Cod_Accion     = 'A'
+    this.Num_Auditoria  = this.data
+    this.Cod_Cliente    = this.formulario.controls['sCodCli'].value
+    this.Cod_Auditor    = ''
+    this.Fec_Auditoria  = ''
+    this.Total          = 0
+    this.Cod_EstCli     = this.formulario.controls['sEstilo'].value
+    this.Cod_TemCli     = this.formulario.controls['sCodTemp'].value
+    this.Cod_ColCli     = this.formulario.controls['sColor'].value
+    this.Glosa          = ''
+    this.Cod_Talla      = ''
+    this.Cod_Motivo     = ''
+    this.Can_Defecto    = 0 
+    this.Op             = ''
+    this.Tipo_Registro  = ''
+    this.Clasificacion  = ''
+    this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
+      this.Cod_Accion,
+      this.Num_Auditoria, 
+      this.Cod_Cliente,
+      this.Cod_Auditor,
+      this.Fec_Auditoria,
+      this.Total,
+      this.Cod_EstCli,
+      this.Cod_TemCli,
+      this.Cod_ColCli,
+      this.Glosa,
+      this.Cod_Talla,
+      this.Cod_Motivo,
+      this.Can_Defecto,
+      this.Op,
+      this.Tipo_Registro,
+      this.Clasificacion
+    ).subscribe(
+        (result: any) => {
+          if(result[0]['Alerta'] !=undefined){
+            /* console.log(result[0]['Total'])
+             console.log(result[0]['Defectos'])
+             console.log(result[0]['Caidas'])*/
+   
+   
+             this.Total_solicitado_Global = result[0]['Total_solicitado']
+             this.Total_requerido_Global = result[0]['Total_requerido']
+             this.Defectos_Global = result[0]['Defectos']
+             this.Caidas_solicitado_Global = result[0]['Caidas_solicitado']
+             this.Caidas_requerido_Global = result[0]['Caidas_requerido']
+             
+             this.Altertas_Caidas_Global = result[0]['Alerta']
+   
+   
+             this.EnviarAlertaTelegramMayora5()  
+           }
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 }))
 
 
-  EnviarAlertaTelegram(){
+  }
+
+  EnviarAlertaTelegramMayora1(){
     console.log(this.formulario.controls['sCodCli'].value)
     console.log(this.formulario.controls['sCliente'].value)
     console.log(this.formulario.controls['sCodEst'].value)
@@ -482,7 +546,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
 
 
 
-    this.defectosAlmacenDerivadosService.Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram(
+    this.defectosAlmacenDerivadosService.Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram1(
       this.formulario.controls['sCodCli'].value,
       this.formulario.controls['sCliente'].value,
       this.formulario.controls['sCodEst'].value,
@@ -504,7 +568,28 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
 
   }
 
+  EnviarAlertaTelegramMayora5(){
+    this.defectosAlmacenDerivadosService.Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram5(
+      this.formulario.controls['sCodCli'].value ,
+      this.formulario.controls['sCliente'].value,
+      this.formulario.controls['sEstilo'].value,
+      this.formulario.controls['sCodTemp'].value,
+      this.formulario.controls['sTemporada'].value,
+      this.formulario.controls['sColor'].value,
+      this.Total_solicitado_Global,
+      this.Total_requerido_Global,
+      this.Defectos_Global,
+      this.Caidas_solicitado_Global,
+      this.Caidas_requerido_Global
+    ).subscribe(
+ 
+        (result: any) => {
 
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 }))
+
+
+  }
 
 
   /******************************INSERTAR DETALLE **************************************** */
@@ -553,7 +638,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
           this.formulario.controls['cant'].setValue('')
           this.matSnackBar.open('Defecto agregado correctamente..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
           this.ListarRegistroDefecto()
-          this.mostrarAlertaCaidas()
+          this.mostrarAlertaCaidasMayora1()
+          this.mostrarAlertaCaidasMayora5()
           }else{
             this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
             
@@ -629,7 +715,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
           this.Numero_Auditoria_Cabecera = result[0].Numero_Auditoria
           this.formulario.controls['sEstilo'].setValue(this.formulario.controls['sCodEst'].value)
           this.matSnackBar.open('Proceso correcto..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-          this.mostrarAlertaCaidas()
+          //this.mostrarAlertaCaidasMayora1()
           }else{
             this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
             this.flg_btn_detalle = false
@@ -748,7 +834,8 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
           
             this.ListarRegistroDefecto()
             this.matSnackBar.open('Registro Eliminado!!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-            this.mostrarAlertaCaidas()
+            this.mostrarAlertaCaidasMayora1()
+            this.mostrarAlertaCaidasMayora5()
           }
           else {
             this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
@@ -940,7 +1027,7 @@ console.log(this.formulario.get('sEstilo')?.value)
         this.formulario.controls['sColor'].enable()
       }else{
         this.matSnackBar.open('La OP no existe...!!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-        this.mostrarAlertaCaidas()
+        //this.mostrarAlertaCaidasMayora1()
       }
           
        

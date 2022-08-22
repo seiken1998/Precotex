@@ -65,6 +65,8 @@ import { DespachoOpIncompletaComponent} from './components/despacho-op-incomplet
 import { ControlActivoFijoComponent} from './components/control-activo-fijo/control-activo-fijo.component'
 
 import { InspeccionPrendaComponent} from './components/inspeccion-prenda/inspeccion-prenda.component'
+import { ReinspeccionPrendaComponent} from './components/reinspeccion-prenda/reinspeccion-prenda.component'
+import { InspeccionPrendaHabilitadorComponent} from './components/inspeccion-prenda-habilitador/inspeccion-prenda-habilitador.component'
 
 import { PermitirGiradoOpComponent} from './components/permitir-girado-op/permitir-girado-op.component'
 
@@ -128,6 +130,8 @@ const routes: Routes = [
   { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
 
   {path: "InspeccionPrenda", component: InspeccionPrendaComponent},
+  {path: "ReinspeccionPrenda", component: ReinspeccionPrendaComponent},
+  {path: "InspeccionPrendaHabilitador", component: InspeccionPrendaHabilitadorComponent},
 
   {path: "PermitirGiradoOp", component: PermitirGiradoOpComponent},
   

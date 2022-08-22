@@ -50,6 +50,25 @@ export class InspeccionPrendaService {
     return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_RESUMEN.php?Id=${Id}`);                                                
   }
 
+  CF_MUESTRA_INSPECCION_EFICIENCIA(){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_EFICIENCIA.php?Cod_Usuario=${this.sCod_Usuario}`);            
+  }
+
+  CF_MUESTRA_INSPECCION_COLOR(Cod_OrdPro: string){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_COLOR.php?Cod_OrdPro=${Cod_OrdPro}`)
+  }
+
+  CF_MUESTRA_INSPECCION_TALLA(Cod_OrdPro: string, Cod_Present: number){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_TALLA.php?Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}`)
+  }
+
+  CF_MUESTRA_INSPECCION_FAMILIA(){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_FAMILIA.php`)
+  }
+
+  CF_MUESTRA_INSPECCION_RECOJO_PRENDA(Cod_Modulo: string, Cod_Familia: string, Ticket: string){
+    return this.http.get(`${this.baseUrl}/app_CF_MUESTRA_INSPECCION_RECOJO_PRENDA.php?Cod_Modulo=${Cod_Modulo}&Cod_Familia=${Cod_Familia}&Ticket=${Ticket}`)
+  }
 
 
 }

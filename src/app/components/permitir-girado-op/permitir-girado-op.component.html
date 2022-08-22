@@ -18,81 +18,120 @@
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
-                    <mat-icon  (click)="clearDate($event)" class="iconPicker" >clear</mat-icon>
+                    <mat-icon class="maticon-date" (click)="clearDate($event)">clear</mat-icon>
                     <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha Invalida</mat-error>
                     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha Invalida</mat-error>
-                </mat-form-field>
+                  </mat-form-field> 
 
                 <mat-form-field class="fila1-OP"> 
-                        <mat-label>OP</mat-label>
-                        <input matInput type="text"  placeholder="OP" value=""
-                            autocomplete="off" maxlength="5" formControlName="OP" >
+                    <mat-label>OP</mat-label>
+                    <input matInput type="text"  placeholder="OP" value="" autocomplete="off" formControlName="Cod_OrdPro" >
                 </mat-form-field>
 
-                <button type="button" class="fila1-buscar" mat-flat-button (click)="MostrarCabecera()">                    
+                <button type="button" class="fila1-buscar" mat-flat-button (click)="listarCabecera()">                    
                     <mat-icon aria-label="person">search</mat-icon>Buscar
                 </button>
 
-                <button type="button" class="fila1-agregar" mat-flat-button (click)="openDialog();">
-                    <mat-icon aria-label="person">add </mat-icon>  Agregar
+                <button type="button" class="fila1-excel" mat-flat-button 
+                    (click)="generateExcel()">
+                <mat-icon aria-label="create_new_folder">create_new_folder
+                </mat-icon>  Reporte Excel
                 </button>
-            </div>   
+
+                <!--<button type="button" [disabled]="this.Flg_Btn_Registrar == false" class="fila1-revertir" mat-flat-button [routerLink]="['/AuditoriaHojaMedidaDetalle']">
+                    <mat-icon aria-label="person">cached
+                    </mat-icon>  Revertir
+                </button>-->
+
+            </div>    
  
-            <!-- hora	tipo	num_guia	cod_proveedor	des_proveedor	cod_usuario -->
+            
             <div class="container-cuerpo-fila2">
+               
                 <table mat-table #table  [dataSource]="dataSource"   class="mat-elevation-z8" >
+
+                    <!--<ng-container matColumnDef="Sel">
+                        <th mat-header-cell *matHeaderCellDef>
+                          <mat-checkbox (change)="$event ? masterToggle() : null"
+                                        [checked]="selection.hasValue() && isAllSelected()"
+                                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                        [aria-label]="checkboxLabel()">
+                          </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? selection.toggle(row) : null"
+                                        [checked]="selection.isSelected(row)"
+                                        [aria-label]="checkboxLabel(row)">
+                          </mat-checkbox>
+                        </td>
+                      </ng-container>-->
+
+
                     <ng-container matColumnDef="Num_Grupo">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">NUM. GRUPO</th>
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Num. Grupo</th>
                         <td mat-cell  *matCellDef="let data_det"> {{data_det.Num_Grupo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Cod_OrdPro">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell">OP</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_OrdPro}} </td>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_OrdPro}}</td>
                     </ng-container>
                     <ng-container matColumnDef="Cod_Present">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">COLOR</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_Present}} </td>
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Color</th>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_Present}}</td>
                     </ng-container>
                     <ng-container matColumnDef="Flg_Aprobado">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">ESTADO</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Flg_Aprobado}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Nom_Motivo">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">MOTIVO</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Nom_Motivo}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Cod_Usuario">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">USUARIO</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_Usuario}}  </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Fec_Creacion">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">FEC. CREACION</th>
-                        <td mat-cell *matCellDef="let data_det">  {{data_det.Fec_Creacion}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Cod_Usuario_Aprobacion">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">USUARIO APROB.</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_Usuario_Aprobacion}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Fec_Creacion_Aprobacion">
-                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">FEC. APROB.</th>
-                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Fec_Creacion_Aprobacion}} </td>
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Estado</th>
+                        <td mat-cell *matCellDef="let data_det">  {{data_det.Flg_Aprobado}} </td>
                     </ng-container>
 
+                     <ng-container matColumnDef="Nom_Motivo">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Motivo</th>
+                        <td mat-cell  *matCellDef="let data_det">  {{data_det.Nom_Motivo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Cod_Usuario">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Usuario</th>
+                        <td mat-cell  *matCellDef="let data_det">  {{data_det.Cod_Usuario}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Fec_Creacion">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Fec. Creacion</th>
+                        <td mat-cell  *matCellDef="let data_det">  {{data_det.Fec_Creacion}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="Cod_Usuario_Aprobacion">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Usuario Aprob.</th>
+                         <td mat-cell *matCellDef="let data_det"> {{data_det.Cod_Usuario_Aprobacion }} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="Fec_Creacion_Aprobacion">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Fec. Creacion Aprob.</th>
+                        <td mat-cell *matCellDef="let data_det"> {{data_det.Fec_Creacion_Aprobacion}} </td>
+                    </ng-container>  
+
+        
                     <ng-container matColumnDef="Acciones">
-                        <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
-                        <td mat-cell *matCellDef="let data_det"> 
-                            <a mat-icon-button *ngIf="data_det.Cod_OrdPro.length>0"
-                                (click)="EliminarRegistrocCabecera(data_det.Cod_OrdPro)">
-                                <mat-icon color="warn">delete</mat-icon>
-                            </a> 
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let data_det">
+
+                            <a mat-icon-button style="margin-right:5px;" *ngIf="data_det.Cod_OrdPro.length>0" (click)="aprobarDespacho(data_det.Num_Grupo, data_det.Flg_Aprobado)" >
+                                <mat-icon color="primary">assignment_turned_in</mat-icon>
+                            </a>
                         </td>
                     </ng-container> 
+
+                 
+ 
                 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns_cab"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns_cab; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns_cab;"></tr>
 
                 </table>
+
+             
             </div>
+            
 
         </form>
 

@@ -137,8 +137,12 @@ export class DefectosAlmacenDerivadosService {
 
 
 
-  Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram(Cod_Cliente: string, Nom_Cliente: string,Cod_EstCli: string, Cod_TemCli: string, Nom_TemCli: string,Cod_ColCli: string, Total_solicitado: number, Total_requerido: number, Total_Num_Defecto: number, Caidas_solicitado: number, Caidas_requerido: number){
-    return this.http.get(`${this.baseUrl}/app_Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram.php?Cod_Cliente=${Cod_Cliente}&Nom_Cliente=${Nom_Cliente}&Cod_EstCli=${Cod_EstCli}&Cod_TemCli=${Cod_TemCli}&Nom_TemCli=${Nom_TemCli}&Cod_ColCli=${Cod_ColCli}&Total_solicitado=${Total_solicitado}&Total_requerido=${Total_requerido}&Total_Num_Defecto=${Total_Num_Defecto}&Caidas_solicitado=${Caidas_solicitado}&Caidas_requerido=${Caidas_requerido}`);
+  Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram1(Cod_Cliente: string, Nom_Cliente: string,Cod_EstCli: string, Cod_TemCli: string, Nom_TemCli: string,Cod_ColCli: string, Total_solicitado: number, Total_requerido: number, Total_Num_Defecto: number, Caidas_solicitado: number, Caidas_requerido: number){
+    return this.http.get(`${this.baseUrl}/app_Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram1.php?Cod_Cliente=${Cod_Cliente}&Nom_Cliente=${Nom_Cliente}&Cod_EstCli=${Cod_EstCli}&Cod_TemCli=${Cod_TemCli}&Nom_TemCli=${Nom_TemCli}&Cod_ColCli=${Cod_ColCli}&Total_solicitado=${Total_solicitado}&Total_requerido=${Total_requerido}&Total_Num_Defecto=${Total_Num_Defecto}&Caidas_solicitado=${Caidas_solicitado}&Caidas_requerido=${Caidas_requerido}`);
+  }
+
+  Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram5(Cod_Cliente: string, Nom_Cliente: string,Cod_EstCli: string, Cod_TemCli: string, Nom_TemCli: string,Cod_ColCli: string, Total_solicitado: number, Total_requerido: number, Total_Num_Defecto: number, Caidas_solicitado: number, Caidas_requerido: number){
+    return this.http.get(`${this.baseUrl}/app_Cf_Enviar_Alerta_Audita_Defectos_Derivados_Telegram5.php?Cod_Cliente=${Cod_Cliente}&Nom_Cliente=${Nom_Cliente}&Cod_EstCli=${Cod_EstCli}&Cod_TemCli=${Cod_TemCli}&Nom_TemCli=${Nom_TemCli}&Cod_ColCli=${Cod_ColCli}&Total_solicitado=${Total_solicitado}&Total_requerido=${Total_requerido}&Total_Num_Defecto=${Total_Num_Defecto}&Caidas_solicitado=${Caidas_solicitado}&Caidas_requerido=${Caidas_requerido}`);
   }
   
 

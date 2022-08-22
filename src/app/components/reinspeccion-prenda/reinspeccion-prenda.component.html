@@ -5,7 +5,7 @@
     <!-- ventana nro 4 - historial --> 
     <div class="grid-container">  
  
-        <div class="title">INSPECCION PRENDA - ID: {{Id}} - TIPO PROCESO: {{Tipo_Proceso}}</div>
+        <div class="title">RE-INSPECCION PRENDA - ID: {{Id}} - TIPO PROCESO: {{Tipo_Proceso}}</div>
 
         <form class="container-cuerpo" [formGroup]="formulario">
             <div class="sub-container">
@@ -105,14 +105,12 @@
 
                     <div class="sub-container-cuerpo3">
                         <mat-card class="example-card1">
-                            <mat-card-title><div class="card1-title">Eficiencia</div></mat-card-title>
+                            <mat-card-title>Eficiencia</mat-card-title>
   
                             <mat-card-content>
-                                <div class="card1-content">
-                                    Minutos Asistidos: {{Min_Trabajados}}min <br><br>
-                                    Minutos Trabajados: {{Min_Asistidos}}min <br><br>
-                                    Eficiencia: {{Eficiencia}}%
-                                </div> 
+                               Minutos Asistidos: {{Min_Trabajados}}min <br><br>
+                               Minutos Trabajados: {{Min_Asistidos}}min <br><br>
+                               Eficiencia: {{Eficiencia}}% 
                             </mat-card-content>                  
                         </mat-card>                      
                     </div>
@@ -137,7 +135,7 @@
                                 <div class="sub-card-container">
                                     <div class="sub-card-title">Recogido</div>
                                     <div class="sub-card-content"> 
-                                        <p>{{Compostura_R}}</p>
+                                        <p>0</p>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +161,7 @@
                                 <div class="sub-card-container">
                                     <div class="sub-card-title">Recogido</div>
                                     <div class="sub-card-content"> 
-                                        <p>{{Segunda_R}}</p>
+                                        <p>0</p>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +187,7 @@
                                 <div class="sub-card-container">
                                     <div class="sub-card-title">Recogido</div>
                                     <div class="sub-card-content"> 
-                                        <p>{{Zurcido_R}}</p>
+                                        <p>0</p>
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +213,7 @@
                                 <div class="sub-card-container">
                                     <div class="sub-card-title">Recogido</div>
                                     <div class="sub-card-content"> 
-                                        <p>{{Desmanche_R}}</p>
+                                        <p>0</p>
                                     </div>
                                 </div>
                             </div>

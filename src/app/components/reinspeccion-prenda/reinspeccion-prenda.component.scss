@@ -275,13 +275,6 @@ mat-form-field {
             justify-content: center;
             align-items: center;
         }
-        .card1-title{
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .card1-content{
-            font-size: 16px;
-        }
         
 
 .card-container-fila2{
@@ -608,8 +601,3 @@ p{
     ::ng-deep .mat-select-value-text{
         color: #222,
     }
-
-    ::ng-deep .mat-label{
-       font-size: 16px;
-    }
-    

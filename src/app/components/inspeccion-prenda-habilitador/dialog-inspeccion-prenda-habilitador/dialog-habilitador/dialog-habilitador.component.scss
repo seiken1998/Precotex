@@ -18,9 +18,9 @@
     margin: 0; 
     padding: 0px 0px 0px 0px;
     //padding-bottom: 10px;
-    min-width: 350px;
-    min-height: 400px;
-    height: 500px;
+    //min-width: 350px;
+    //min-height: 400px;
+    //height: 400px;
     //position: absolute;  
 }
   
@@ -47,10 +47,8 @@
     display: grid;
 
     grid-template:
-        "fila1" 250px
-        "fila2" 190px
-        "fila3" 0px
-        "foot" 0px / 
+        "fila1" 280px
+        "foot" 70px / 
         99%;
 }
 
@@ -59,22 +57,6 @@
     margin-top: 15px;
 }
 
-.container-cuerpo-fila2 {
-    grid-area: fila2;
-    margin-top: 15px;
-}
-
-.container-cuerpo-fila3 {
-    grid-area: fila3;
-    margin-top: 15px;
-
-}
-/*.container-cuerpo-fila2 {
-    grid-area: fila2;
-    overflow: auto;
-    margin-bottom: 10px;
-    width: 100%;
-}*/
 .container-cuerpo-foot {
     grid-area: foot;
     
@@ -144,7 +126,7 @@ mat-form-field {
 }
 
     .sub-container-cuerpo1{
-        width: 33%;
+        width: 49%;
     }
 
 
@@ -155,7 +137,7 @@ mat-form-field {
             grid-template:
             "col1 col2" 85px
             "col3 col4" 85px
-            "col5 col6" 85px/
+            "col5 col5" 85px/
             49% 49%;
         }
 
@@ -191,7 +173,7 @@ mat-form-field {
             
         }
 
-        .fila1-button-container{
+        /*.fila1-button-container{
             grid-area: col6;
             width: 100%;
             display: flex;
@@ -236,11 +218,11 @@ mat-form-field {
         .button-Limpiar {
             width: 45%; 
             max-width: 49%;  
-        }
+        }*/
 
 
     .sub-container-cuerpo2{
-        width: 33%;
+        width: 49%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -258,48 +240,7 @@ mat-form-field {
             align-items: center;
         }
 
-    .sub-container-cuerpo3{
-        width: 33%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-    }
-        .example-card1{
-            max-width: 100%;
-            width: 100%;
-            max-height: 200px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .card1-title{
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .card1-content{
-            font-size: 16px;
-        }
-        
-
-.card-container-fila2{
-    display: flex;
-    margin-top: 10px;
-}
-.example-card2{
-    max-width: 100%;
-    width: 100%;
-    //max-width: 250px;
-    max-height: 250px;
-    //width: 165px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+    
 mat-card-title{
     font-size: 16px;
 }
@@ -312,73 +253,11 @@ mat-card-actions{
     display: flex;
 }
 
-.card-content-fila2{
-    margin: 0px;
-}
-
-.sub-card {
-    display: flex;
-}
-
-.sub-card-container {
-    margin: 0 15px 0 15px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-size: 15px;
-}
-
-
-
-
-
-.card-btn {
-    width: 100%;
-    height: 40px;
-    max-width: 280px;
-    margin: 3px 2px auto;
-    margin-top: 3px;
-    background-color: #3f51b5;
-    color: #ffffff;
-    width: 75px; 
-    font-size: 16px;
-}
 
 p{
     font-size: 17px;
     //font-weight: bold;
 }
-
-
-
-/*.container-cuerpo-fila2 {
- display:  flex;
-}
-
-.sub-container-fila2{
-    width: 100%;
-    height: 150px;
-    margin: 1px;
-    border: solid 1px black;
-}
-
-.sub-div-container1-fila2{
-    background: yellow;
-}
-
-.sub-button-container2-fila2{
-    display: flex;
-    background: red;
-}
-
-.add-button-container-fila2{
- background: blue;
-}
-
-.res-button-container-fila2{
- background: green;
-}*/
-
 
 
 //fila foot
@@ -393,46 +272,37 @@ p{
 }
 
 
-.container-cuerpo-foot{
+.container-cuerpo-foot .button-agregar,.button-cancelar {
     height: 10%;
     margin: 0 auto;
     margin: 15px 10px 10px 10px;
     min-height: 42px;
-    max-width: 300px;
+    max-width: 200px;
     min-width: 120px;
 }
 
 
-@media screen and (max-width: 1500px){
-    .button-Agregar{
-        display: none;
-    }
 
-    .button-Limpiar{
-        display: none;
-    }
-
-    .button-Agregar-xs{
-        display: block;
-    }
-
-    .button-Limpiar-xs{
-        display: block;
-    }
+.button-agregar {
+    grid-area: fcol1;
+    background-color: #3f51b5;
+    color: #ffffff;
 }
 
-@media screen and (max-width: 1120px){
-    .sub-card-container{
-        margin: 0 5px;
-        font-size: 14px;
-    }
+.button-cancelar {
+    grid-area: fcol2;
+    background-color: #d32f2f;
+    color: #ffffff;
 }
+
+
+
 
 
 @media screen and (max-width: 1009px){
     
     .grid-container{
-        height: 455px;
+        height: 340px;
     }
     .container-cuerpo {
        
@@ -440,9 +310,7 @@ p{
     
         grid-template:
         "fila1" 220px
-        "fila2" 190px
-        "fila3" 0px
-        "foot" 0px /
+        "foot" 50px /
         99%;
     }
     .container-cuerpo-fila1{
@@ -451,7 +319,7 @@ p{
         grid-template:
         "col1 col2" 70px 
         "col3 col4" 70px
-        "col5 col6" 70px/
+        "col5 col5" 70px/
         49% 49%;
     }
 
@@ -479,128 +347,56 @@ p{
         grid-area: col5;        
     }
 
-    .fila1-button-container{
-        grid-area: col6;
-    }
+   
         
 }
 
-
-
-
-  @media screen and (max-width: 900px){
-   .grid-container{
-       height: 530px;
-   } 
-
-   /*.card-container-fila2{
-   flex-wrap: wrap;
-    }*/
-   
-    .card-container-fila2{
-      width: 100%;
-    }
-
-    .example-card2{
-        height: 180px;
-    }
-  
-    mat-card-title{
-        font-size: 13px;
-    }
-
-    mat-card-actions{
-        flex-direction: column;
-    }
+@media screen and (max-width: 615px){
     
-    .card-btn {
-        width: 45px; 
-        font-size: 16px;
-    }
-    
-    p{
-        font-size: 14px;
-    }
-  }
-
-
-  @media screen and (max-width: 900px){
     .grid-container{
-        height: 1670px;
-    } 
-
+        height: 590px;
+    }
     .container-cuerpo {
+       
         display: grid;
     
         grid-template:
-            "fila1" 665px
-            "fila2" 190px
-            "fila3" 0px
-            "foot" 0px / 
-            99%;
+        "fila1" 450px
+        "foot" 50px /
+        99%;
     }
-
     .sub-container{
-        flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
      }
+     
+         .sub-container-cuerpo1{
+             width: 100%;
+         }
+         .sub-container-cuerpo2{
+            width: 100%;
+        } 
 
-     .sub-container-cuerpo1{
-        width: 100%;
+    .container-cuerpo-foot {      
+        grid-template:
+            "fcol1 fcol2" auto /
+            130px auto;
     }
-    .sub-container-cuerpo2{
-        width: 100%;
-        margin-top: 30px;
-    }
-    .sub-container-cuerpo3{
-        width: 100%;
-        margin-top: 30px;
-    }
-
-    .example-card{
-        width: 100%;
-    }
-    .card-container-fila2{
-        flex-wrap: wrap;
-    }
-    .example-card2{
-        max-height: 150px;
-        border: solid 0.1px lightgrey;
-        margin: 2px;
+        
+        
+    .container-cuerpo-foot .button-agregar,.button-cancelar {
+            min-width: 120px;
+            width: 120px;
     }
 
-    .sub-card-container {
-        margin: 0 15px 0 15px;
-        font-size: 15px;
-    }
-
-    mat-card-title{
-        font-size: 17px;
-    }
-
-    mat-card-actions{
-        flex-direction: row;
-    }
-    
-    .card-btn {
-        width: 45px; 
-        font-size: 17px;
-    }
-    
-    p{
+    .title {
         font-size: 16px;
     }
-
-   }
-
- /* ::ng-deep mat-dialog-container{
-    padding: 5px;
-    height: auto;
+        
+          
 }
 
-::ng-deep .my-class .mat-dialog-container{
-   padding: 5px;
-   height: auto;
-}*/
 
     ::ng-deep .mat-input-element:disabled{
         color: #222;
@@ -613,3 +409,20 @@ p{
        font-size: 16px;
     }
     
+  ::ng-deep mat-dialog-container{
+    padding: 5px;
+    height: auto;
+    /*min-height: calc(100vh - 90px);
+    height: 100%;*/
+}
+
+::ng-deep .my-class .mat-dialog-container{
+ padding: 5px;
+ height: auto;
+ }
+
+ ::ng-deep .mat-button, .mat-flat-button{
+    line-height: 40px;
+ }
+
+ 
