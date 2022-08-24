@@ -79,7 +79,7 @@ import { DialogTallaRegistrarDetalleComponent } from './components/seguridad-con
 import { DialogCantidadRegistrarDetalleComponent } from './components/seguridad-control-jaba/dialog-seguridad-control-jaba/dialog-cantidad-registrar-detalle/dialog-cantidad-registrar-detalle.component';
 import { DialogAdicionalComponent } from './components/dialogs/dialog-adicional/dialog-adicional.component';
 import { SeguridadControlMovimientosJabasComponent } from './components/seguridad-control-movimientos-jabas/seguridad-control-movimientos-jabas.component';
-
+  
 import { ToastrModule } from 'ngx-toastr';
 import { HttpErrorInterceptor } from './interceptors/http-error-response.service';
 import { SeguridadControlMovimientosJabasAccionComponent } from './components/seguridad-control-movimientos-jabas/seguridad-control-movimientos-jabas-accion/seguridad-control-movimientos-jabas-accion.component';
@@ -100,6 +100,14 @@ import { InspeccionPrendaHabilitadorComponent } from './components/inspeccion-pr
 import { ReinspeccionPrendaComponent } from './components/reinspeccion-prenda/reinspeccion-prenda.component';
 import { DialogHabilitadorComponent } from './components/inspeccion-prenda-habilitador/dialog-inspeccion-prenda-habilitador/dialog-habilitador/dialog-habilitador.component';
 import { DialogDefectoAudiComponent } from './components/reinspeccion-prenda/dialog-reinspeccion-prenda/dialog-defecto-audi/dialog-defecto-audi.component';
+import { ReprocesoPartidaComponent } from './components/reproceso-partida/reproceso-partida.component';
+import { TelasComponent } from './components/telas/telas.component';
+import { TiempoImproductivoComponent } from './components/tiempo-improductivo/tiempo-improductivo.component';
+import { DialogConfirmacion2Component } from './components/dialogs/dialog-confirmacion2/dialog-confirmacion2.component';
+import { DerivadoInspeccionPrendaComponent } from './components/derivado-inspeccion-prenda/derivado-inspeccion-prenda.component';
+import { MantenimientoWebComponent } from './components/mantenimiento-web/mantenimiento-web.component';
+import { AccesosUsuariosComponent } from './components/accesos-usuarios/accesos-usuarios.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -181,7 +189,15 @@ import { DialogDefectoAudiComponent } from './components/reinspeccion-prenda/dia
     InspeccionPrendaHabilitadorComponent,
     ReinspeccionPrendaComponent,
     DialogHabilitadorComponent,
-    DialogDefectoAudiComponent
+    DialogDefectoAudiComponent,
+    ReprocesoPartidaComponent,
+    TelasComponent,
+    TiempoImproductivoComponent,
+    DialogConfirmacion2Component,
+    DerivadoInspeccionPrendaComponent,
+    MantenimientoWebComponent,
+    AccesosUsuariosComponent,
+    LoginComponent
    
     
  

@@ -67,8 +67,18 @@ import { ControlActivoFijoComponent} from './components/control-activo-fijo/cont
 import { InspeccionPrendaComponent} from './components/inspeccion-prenda/inspeccion-prenda.component'
 import { ReinspeccionPrendaComponent} from './components/reinspeccion-prenda/reinspeccion-prenda.component'
 import { InspeccionPrendaHabilitadorComponent} from './components/inspeccion-prenda-habilitador/inspeccion-prenda-habilitador.component'
+import { DerivadoInspeccionPrendaComponent} from './components/derivado-inspeccion-prenda/derivado-inspeccion-prenda.component'
 
 import { PermitirGiradoOpComponent} from './components/permitir-girado-op/permitir-girado-op.component'
+
+//huachipa
+import { ReprocesoPartidaComponent } from './components/reproceso-partida/reproceso-partida.component';
+import { TelasComponent } from './components/telas/telas.component';
+
+//mantenimiento general web - rol- opciones- usuarios
+import { MantenimientoWebComponent} from './components/mantenimiento-web/mantenimiento-web.component'
+import { AccesosUsuariosComponent} from './components/accesos-usuarios/accesos-usuarios.component'
+ 
 
 const routes: Routes = [
   { path: "root", component: AppComponent },
@@ -124,7 +134,7 @@ const routes: Routes = [
   { path: "RegistrarDetalleSeguridadControlJaba", component: RegistrarDetalleSeguridadControlJabaComponent},
   { path: "SeguridadControlMovimientosJabas", component: SeguridadControlMovimientosJabasComponent},
   { path: "SeguridadControlMovimientosJabasAccion", component: SeguridadControlMovimientosJabasAccionComponent},
-
+ 
   { path: "GiradoPartidaIncompleta", component: DespachoOpIncompletaComponent},
 
   { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
@@ -132,9 +142,22 @@ const routes: Routes = [
   {path: "InspeccionPrenda", component: InspeccionPrendaComponent},
   {path: "AuditoriainspeccionPrenda", component: ReinspeccionPrendaComponent},
   {path: "InspeccionPrendaHabilitador", component: InspeccionPrendaHabilitadorComponent},
+  {path: "DerivadoInspeccionPrenda", component: DerivadoInspeccionPrendaComponent},
 
   {path: "PermitirGiradoOp", component: PermitirGiradoOpComponent},
   
+  //huachipa 
+  {path:'proceso1', component:TelasComponent},
+  {path:'reprocesopartida', component:ReprocesoPartidaComponent},
+  
+
+  //mantenimiento general web - rol- opciones- usuarios
+  { path: 'MantenimientoWeb', component: MantenimientoWebComponent},
+  { path: 'AccesosUsuarios', component: AccesosUsuariosComponent},
+
+ 
+
+
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz
   //{ path: "**", component: AuditoriaLineaCosturaComponent }
   { path: "**", redirectTo: "/principal" }

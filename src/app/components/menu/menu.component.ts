@@ -88,6 +88,7 @@ MuestraMenu(){
 }
 
 CerrarSession(){
+   window.location.reload();
   /*GlobalVariable.vusu = ''
   this.router.navigate(['./']);*/
 }

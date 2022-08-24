@@ -1,0 +1,104 @@
+::ng-deep .mat-dialog-container{
+    /*  background: rgb(206, 153, 40); /* red!important;*/
+    background-color: rgb(199, 195, 186);
+  }
+table {
+    width: 100%;
+  }
+
+form{
+    margin: 0 auto;
+   width: 300px;
+    display: block;
+}
+form div{
+    padding: 5px 0;
+}
+form label{
+    display: block;
+    padding: 10px 0;
+
+}
+
+form input[type=text]{
+    width: 100%;
+    padding: 5px;
+    text-transform: uppercase;
+    
+}
+form h2{
+    text-align: center;
+}
+.main{
+width: 100%;
+background-color: bisque;
+display: flex;
+}
+.divRigth{
+    width: 60%;
+    height: 500px;
+    /*background-color: rgb(62, 133, 94);*/
+    background-color: blanchedalmond;
+    color: rgb(18, 18, 20);
+}
+.divLeft{
+    width: 40%;
+    height: 500px;
+    background-color: blanchedalmond;
+    color: rgb(18, 18, 20);
+    border-radius: 8px;
+    border-color: black;
+}
+
+/*
+datasource
+*/
+.mat-column-Fecha_Registro,
+.mat-column-IdGrupo,
+.mat-column-Cod_Ordtra,
+
+.mat-column-Num_Secuencia,
+
+.mat-column-Cod_Tela,
+.mat-column-Cod_Comb,
+.mat-column-Kgs_Crudo,
+.mat-column-select,
+.mat-column-Flg_Principal {
+    text-align: left;
+    /*color: rgb(18, 18, 20);*/
+    height: 10px;
+    font-size: 12px;
+    /*background-color: rgb(206, 153, 40);*/
+    
+    color: rgb(18, 18, 20);
+    background-color: blanchedalmond;
+}
+
+.mat-selection-list .mat-list-option {
+    font-size: small;
+    height: 15px;
+background-color: blanchedalmond;
+}
+
+.mat-header-cell{
+    color: blanchedalmond;
+    background-color: rgb(88, 88, 88);
+    height: 1px;
+
+}
+::ng-deep .tiempoInicio {
+    
+    background-color: rgb(88, 88, 88);
+    color: #ffffff; 
+    width: 70px;
+    border: 0px;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 4px
+}
+
+button[disabled=disabled], button:disabled {
+    background: rgb(228, 165, 102)
+}
+
