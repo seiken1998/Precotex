@@ -93,7 +93,8 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
   Id_Motivo                 = 0
   Cod_OrdTra                = ""
   Flg_visible_button        = true
-
+  Fec_Inicio                = ""
+  Fec_Fin                   = ""
 
   formulario = this.formBuilder.group({
     Partida:          [''],
@@ -167,7 +168,9 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo  
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin   
     ).subscribe(
       (result: any) => { 
     
@@ -195,7 +198,9 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo   
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin   
     ).subscribe(
       (result: any) => { 
     
@@ -233,7 +238,9 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin
     ).subscribe(
       (result: any) => { 
         if (result.length > 0) {
@@ -265,7 +272,9 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo 
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin 
     ).subscribe(
       (result: any) => { 
         if (result.length > 0) {
@@ -297,7 +306,9 @@ export class DialogRegistrarGiradoOpComponent implements OnInit {
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo  
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin  
     ).subscribe(
       (result: any) => { 
         if (result.length > 0) {

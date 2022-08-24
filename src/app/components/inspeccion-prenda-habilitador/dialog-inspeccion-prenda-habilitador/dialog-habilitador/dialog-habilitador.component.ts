@@ -11,9 +11,12 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
 interface data{
-  Cod_Modulo: string
-  Cod_Familia: string
   Ticket: string
+  Cod_Ordpro: string
+  Des_Present: string
+  Prendas_Recoger: number
+  Cod_Talla: string
+  ImagePath: string
 }
 
 
@@ -33,7 +36,7 @@ export class DialogHabilitadorComponent implements OnInit {
   Cod_Present   = 0
   Cod_Talla     = ""
   Prendas_Paq   = 0
-  ImagePath     = ''
+  ImagePath     = this.data.ImagePath
   
   //* Declaramos formulario para obtener los controles */
   formulario = this.formBuilder.group({
@@ -60,7 +63,14 @@ export class DialogHabilitadorComponent implements OnInit {
   this.formulario.controls['Color'].disable()
   this.formulario.controls['Talla'].disable()
   this.formulario.controls['Cantidad'].disable()
-  this.MostrarRecojoPrenda()
+
+  this.formulario.controls['Codigo'].setValue(this.data.Ticket)
+  this.formulario.controls['OP'].setValue(this.data.Cod_Ordpro)
+  this.formulario.controls['Color'].setValue(this.data.Des_Present)
+  this.formulario.controls['Talla'].setValue(this.data.Cod_Talla)
+  this.formulario.controls['Cantidad'].setValue(this.data.Prendas_Recoger)
+
+  //this.MostrarRecojoPrenda()
  }
 
 
@@ -74,25 +84,6 @@ export class DialogHabilitadorComponent implements OnInit {
 }*/
 
 MostrarRecojoPrenda(){  
-    this.Cod_Modulo   = ""
-    this.Cod_Familia  = this.data.Cod_Familia
-    this.Ticket       = this.data.Ticket
-    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RECOJO_PRENDA(
-      this.Cod_Modulo,
-      this.Cod_Familia,
-      this.Ticket
-      ).subscribe(
-        (result: any) => { 
-          this.formulario.controls['Codigo'].setValue(this.data.Ticket)
-          this.formulario.controls['OP'].setValue(result[0].COD_ORDPRO)
-          this.formulario.controls['Color'].setValue(result[0].DES_PRESENT)
-          this.formulario.controls['Talla'].setValue(result[0].COD_TALLA)
-          this.formulario.controls['Cantidad'].setValue(result[0].PRENDAS_RECOGER)
-          this.ImagePath = result[0].ICONO_WEB
-
-        },
-        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-          duration: 1500,
-        }))
-    }
+  
+}
 }

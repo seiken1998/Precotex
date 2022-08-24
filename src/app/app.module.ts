@@ -99,6 +99,7 @@ import { DialogRegistrarGiradoOpComponent } from './components/permitir-girado-o
 import { InspeccionPrendaHabilitadorComponent } from './components/inspeccion-prenda-habilitador/inspeccion-prenda-habilitador.component';
 import { ReinspeccionPrendaComponent } from './components/reinspeccion-prenda/reinspeccion-prenda.component';
 import { DialogHabilitadorComponent } from './components/inspeccion-prenda-habilitador/dialog-inspeccion-prenda-habilitador/dialog-habilitador/dialog-habilitador.component';
+import { DialogDefectoAudiComponent } from './components/reinspeccion-prenda/dialog-reinspeccion-prenda/dialog-defecto-audi/dialog-defecto-audi.component';
 
 @NgModule({
   declarations: [
@@ -179,7 +180,8 @@ import { DialogHabilitadorComponent } from './components/inspeccion-prenda-habil
     DialogRegistrarGiradoOpComponent,
     InspeccionPrendaHabilitadorComponent,
     ReinspeccionPrendaComponent,
-    DialogHabilitadorComponent
+    DialogHabilitadorComponent,
+    DialogDefectoAudiComponent
    
     
  

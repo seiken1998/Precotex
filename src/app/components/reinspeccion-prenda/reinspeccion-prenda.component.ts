@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { InspeccionPrendaService } from 'src/app/services/inspeccion-prenda.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner";
-import { DialogDefectoComponent } from 'src/app/components/inspeccion-prenda/dialog-inspeccion-prenda/dialog-defecto/dialog-defecto.component';
+import { DialogDefectoAudiComponent } from 'src/app/components/reinspeccion-prenda/dialog-reinspeccion-prenda/dialog-defecto-audi/dialog-defecto-audi.component';
 import { DialogConfirmacionComponent } from 'src/app/components/dialogs/dialog-confirmacion/dialog-confirmacion.component'
 
 
@@ -49,7 +49,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   Num_Paquete = ""
   Flg_Habilitar_Detalle = false
 
-  //variables para ejecutar SP CF_Man_Inspeccion_Prenda_Detalle_Web
+  //variables para ejecutar SP CF_Man_Inspeccion_Prenda_Detalle_Audi_Web
   Id = 0
   Tipo_Sub_Proceso = ''
   Cod_Defecto = ""
@@ -92,7 +92,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
     this.Id
     this.Tipo_Sub_Proceso = '01'
     this.Cod_Defecto = ""
-    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
       this.Cod_Accion,
       this.Id,
       this.Tipo_Sub_Proceso,
@@ -121,7 +121,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
     this.Id
     this.Tipo_Sub_Proceso = '01'
     this.Cod_Defecto = ""
-    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
       this.Cod_Accion,
       this.Id,
       this.Tipo_Sub_Proceso,
@@ -150,7 +150,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
     this.Id
     this.Tipo_Sub_Proceso = '02'
     this.Cod_Defecto = ""
-    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
       this.Cod_Accion,
       this.Id,
       this.Tipo_Sub_Proceso,
@@ -175,12 +175,12 @@ export class ReinspeccionPrendaComponent implements OnInit {
   }
 
   SumarSegunda() {
-
+ 
     this.Cod_Accion   = "I"
     this.Id
     this.Tipo_Sub_Proceso = '02'
     this.Cod_Defecto = ""
-    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
       this.Cod_Accion,
       this.Id,
       this.Tipo_Sub_Proceso,
@@ -206,7 +206,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   RestarZurcido() {
     if (this.Zurcido != 0) {
       this.ActualizarCantidad()
-    let dialogRef = this.dialog.open(DialogDefectoComponent,
+    let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
@@ -222,7 +222,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
         this.Id
         this.Tipo_Sub_Proceso = '03'
         this.Cod_Defecto = result.data
-        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
           this.Cod_Accion,
           this.Id,
           this.Tipo_Sub_Proceso,
@@ -247,7 +247,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
 
   SumarZurcido() {
     this.ActualizarCantidad()
-    let dialogRef = this.dialog.open(DialogDefectoComponent,
+    let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
@@ -263,7 +263,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
         this.Id
         this.Tipo_Sub_Proceso = '03'
         this.Cod_Defecto = result.data
-        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
           this.Cod_Accion,
           this.Id,
           this.Tipo_Sub_Proceso,
@@ -288,7 +288,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   RestarDesmanche() {
     if (this.Desmanche != 0) {
       this.ActualizarCantidad()
-    let dialogRef = this.dialog.open(DialogDefectoComponent,
+    let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
@@ -304,7 +304,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
         this.Id
         this.Tipo_Sub_Proceso = '04'
         this.Cod_Defecto = result.data
-        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
           this.Cod_Accion,
           this.Id,
           this.Tipo_Sub_Proceso,
@@ -329,7 +329,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
 
   SumarDesmanche() {
     this.ActualizarCantidad()
-    let dialogRef = this.dialog.open(DialogDefectoComponent,
+    let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
         disableClose: true,
         panelClass: 'my-class',
@@ -347,7 +347,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
         this.Id
         this.Tipo_Sub_Proceso = '04'
         this.Cod_Defecto = result.data
-        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Audi_Web(
           this.Cod_Accion,
           this.Id,
           this.Tipo_Sub_Proceso,
@@ -382,7 +382,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
 
   ActualizarCantidad(){
     this.Id
-    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RESUMEN(
+    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RESUMEN_AUDI(
       this.Id
     ).subscribe(
       (result: any) => {
@@ -402,7 +402,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
 
   LecturaCodBarras() {
     this.Codigo = this.formulario.get('Codigo')?.value
-    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_LECTURA_TICKET(
+    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_LECTURA_AUDI(
       this.Codigo
     ).subscribe(
       (result: any) => {
@@ -412,6 +412,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.SelectedValueColor = result[0].COD_PRESENT
           this.listar_operacionTalla = result
           this.SelectedValueTalla = result[0].COD_TALLA
+          this.Id = result[0].ID
           //this.formulario.controls['Talla'].setValue(result[0].COD_TALLA)
           this.ImagePath = result[0].ICONO_WEB
           this.formulario.controls['Cantidad'].setValue(result[0].PRENDASPAQ)
@@ -428,7 +429,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
         duration: 1500,
       }))
-
+ 
 
 
 
@@ -455,32 +456,21 @@ export class ReinspeccionPrendaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
         this.Cod_Accion   = "I"
-        this.Cod_Fabrica  = this.Cod_Fabrica
-        if(this.Cod_Fabrica == ""){
-          this.Cod_Fabrica = "001"
-        }
-        this.Cod_OrdPro   = this.formulario.get('OP')?.value
-        this.Cod_Present  = this.formulario.get('Color')?.value
-        this.Cod_Talla    = this.formulario.get('Talla')?.value
-        this.Num_Paquete  = this.Num_Paquete
+        this.Id
         this.Prendas_Paq  = this.formulario.get('Cantidad')?.value
-        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Web(
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Audi_Web(
           this.Cod_Accion,
-          this.Cod_Fabrica,
-          this.Cod_OrdPro,
-          this.Cod_Present, 
-          this.Cod_Talla,
-          this.Num_Paquete,
-          this.Prendas_Paq 
+          this.Id,
+          this.Prendas_Paq
         ).subscribe(
           (result: any) => {
             if(result[0].Respuesta == 'OK'){
               this.Flg_Habilitar_Detalle = true
 
-              this.Tipo_Proceso = result[0].Tipo_Proceso
+              /*this.Tipo_Proceso = result[0].Tipo_Proceso
               this.Tipo_Proceso == 'R' ? this.Tipo_Proceso = 'Reproceso' : this.Tipo_Proceso = 'Produccion';
               this.Tipo_Proceso = this.Tipo_Proceso.toUpperCase()
-              console.log(this.Tipo_Proceso)
+              console.log(this.Tipo_Proceso)*/
 
               this.Total    = this.Prendas_Paq
               this.Inicial  = this.Prendas_Paq
@@ -505,9 +495,36 @@ export class ReinspeccionPrendaComponent implements OnInit {
 
   }
 
-  FinalizarProceso() {
-    this.Flg_Habilitar_Detalle = false
-    this.Limpiar()
+  FinalizarProceso(Flg_Estado: string) {
+    let dialogRef = this.dialog.open(DialogConfirmacionComponent,
+      {
+        disableClose: true,
+        data: {
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Finalizado_Audi_Web(
+          this.Id,
+          Flg_Estado
+        ).subscribe(
+          (result: any) => {
+            if (result[0].Respuesta == 'OK') {
+              this.Flg_Habilitar_Detalle = false
+              this.Limpiar()
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+            else {
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
+
+      }
+    })
+
   }
 
   Limpiar() {

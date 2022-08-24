@@ -15,7 +15,7 @@
                         <mat-form-field class="fila1-Codigo"> 
                             <mat-label>Cod. Barras</mat-label>
                             <input matInput type="text"  placeholder="Cod. Barras"  value="" #Codigo
-                                autocomplete="off"  formControlName="Codigo" (input)="LecturaCodBarras()">
+                                autocomplete="off"  formControlName="Codigo" (keyup.enter)="LecturaCodBarras()">
                         </mat-form-field>     
 
                         <mat-form-field class="fila1-OP"> 
@@ -64,19 +64,19 @@
 
                         <div class="fila1-button-container">
                             <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="GuardarCabecera()">
-                                <mat-icon aria-label="person">check
+                                <mat-icon aria-label="person">save
                                 </mat-icon>  Guardar
                             </button>
                             <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar-xs" mat-button mat-flat-button (click)="GuardarCabecera()">
-                                <mat-icon aria-label="person">check
+                                <mat-icon aria-label="person">save
                                 </mat-icon>
                             </button>
                             <button type="button" *ngIf ="Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="FinalizarProceso()">
-                                <mat-icon aria-label="person">save
+                                <mat-icon aria-label="person">check
                                 </mat-icon>  Finalizar
                             </button>
                             <button type="button" *ngIf ="Flg_Habilitar_Detalle" class="button-Agregar-xs" mat-button mat-flat-button (click)="FinalizarProceso()">
-                                <mat-icon aria-label="person">save
+                                <mat-icon aria-label="person">check
                                 </mat-icon>  Finalizar
                             </button>
                             <button type="button" class="button-Limpiar" *ngIf ="!Flg_Habilitar_Detalle" mat-button mat-flat-button (click)="Limpiar()">

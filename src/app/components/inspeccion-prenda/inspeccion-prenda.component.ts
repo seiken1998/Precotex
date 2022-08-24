@@ -72,7 +72,7 @@ export class InspeccionPrendaComponent implements OnInit {
     OP: [''],
     Color: [''],
     Talla: [''],
-    Codigo: [''], 
+    Codigo: [''],
     Cantidad: ['']
   })
 
@@ -94,6 +94,11 @@ export class InspeccionPrendaComponent implements OnInit {
     this.formulario.controls['Color'].disable()
     this.formulario.controls['Talla'].disable()
     this.formulario.controls['Cantidad'].disable()
+
+  }
+
+  ngAfterViewInit() {
+    this.inputCodigo.nativeElement.focus()
   }
 
   RestarCompostura() {
@@ -514,7 +519,7 @@ export class InspeccionPrendaComponent implements OnInit {
               this.formulario.controls['Color'].disable()
               this.formulario.controls['Talla'].disable()
               this.formulario.controls['Cantidad'].disable()
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500})
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
             }
             else {
               this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
@@ -536,8 +541,34 @@ export class InspeccionPrendaComponent implements OnInit {
   }
 
   FinalizarProceso() {
-    this.Flg_Habilitar_Detalle = false
-    this.Limpiar()
+    let dialogRef = this.dialog.open(DialogConfirmacionComponent,
+      {
+        disableClose: true,
+        data: {
+        }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Finalizado_Web(
+          this.Id
+        ).subscribe(
+          (result: any) => {
+            if (result[0].Respuesta == 'OK') {
+              this.Flg_Habilitar_Detalle = false
+              this.Limpiar()
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+            else {
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+          },
+          (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+            duration: 1500,
+          }))
+
+      }
+    })
+
   }
 
   Limpiar() {

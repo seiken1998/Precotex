@@ -7,7 +7,7 @@ import { GlobalVariable } from '../VarGlobals';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService { 
 
   baseUrl = GlobalVariable.baseUrl;
   sCod_Usuario = GlobalVariable.vusu;

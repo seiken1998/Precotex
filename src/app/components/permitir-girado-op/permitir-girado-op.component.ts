@@ -17,8 +17,10 @@ import {SelectionModel} from '@angular/cdk/collections';
 
 interface data_det {
     Num_Grupo:                number,
+    EstCli:                   string,
     Cod_OrdPro:               string,
     Cod_Present:              string,
+    Partida:                  string,
     Flg_Aprobado:             string,
     Nom_Motivo:               string,
     Cod_Usuario:              string,
@@ -79,7 +81,7 @@ export class PermitirGiradoOpComponent implements OnInit {
   })
 
 
-  displayedColumns_cab: string[] = ['Num_Grupo','Cod_OrdPro','Cod_Present','Flg_Aprobado','Nom_Motivo','Cod_Usuario','Fec_Creacion','Cod_Usuario_Aprobacion','Fec_Creacion_Aprobacion','Acciones']
+  displayedColumns_cab: string[] = ['Num_Grupo','EstCli','Cod_OrdPro','Cod_Present','Partida','Flg_Aprobado','Nom_Motivo','Cod_Usuario','Fec_Creacion','Cod_Usuario_Aprobacion','Fec_Creacion_Aprobacion','Acciones']
   dataSource: MatTableDataSource<data_det>;
 
  
@@ -104,13 +106,22 @@ export class PermitirGiradoOpComponent implements OnInit {
   }
 
   generateExcel(){
-   /* this.SpinnerService.show();
-
-    this.Cod_Accion     = 'V'
+    this.SpinnerService.show();
+    this.Cod_Accion           = 'V'
+    this.Num_Grupo            = 0
+    this.Cod_OrdPro           = this.formulario.get('Cod_OrdPro')?.value
+    this.Cod_Present          = 0
+    this.Cod_OrdTra           = ""
+    this.Id_Motivo            = 0
     this.Fec_Inicio     = this.range.get('start')?.value
     this.Fec_Fin        = this.range.get('end')?.value
-    this.despachoOpIncompletaService.ReporteDespachoOpIncompleta(
+    this.despachoOpIncompletaService.Ti_Man_Aprobacion_Despacho_Cod_OrdPro(
       this.Cod_Accion,
+      this.Num_Grupo,
+      this.Cod_OrdPro,
+      this.Cod_Present,
+      this.Cod_OrdTra,
+      this.Id_Motivo,
       this.Fec_Inicio,
       this.Fec_Fin  
       ).subscribe(
@@ -126,7 +137,7 @@ export class PermitirGiradoOpComponent implements OnInit {
           })
       
           let reportData = {
-            title: 'REPORTE GIRADO PARTIDA INCOMPLETA',
+            title: 'REPORTE PERMITIR GIRADO OP',
             data: this.dataForExcel,
             headers: Object.keys(result[0])
           }
@@ -140,7 +151,7 @@ export class PermitirGiradoOpComponent implements OnInit {
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
           duration: 1500,
         }))
-*/
+
 
   }
 
@@ -152,13 +163,17 @@ export class PermitirGiradoOpComponent implements OnInit {
     this.Cod_Present          = 0
     this.Cod_OrdTra           = ""
     this.Id_Motivo            = 0
+    this.Fec_Inicio     = this.range.get('start')?.value
+    this.Fec_Fin        = this.range.get('end')?.value
     this.despachoOpIncompletaService.Ti_Man_Aprobacion_Despacho_Cod_OrdPro(
       this.Cod_Accion,
       this.Num_Grupo,
       this.Cod_OrdPro,
       this.Cod_Present,
       this.Cod_OrdTra,
-      this.Id_Motivo
+      this.Id_Motivo,
+      this.Fec_Inicio,
+      this.Fec_Fin 
       ).subscribe(
       (result: any) => {
         console.log(result) 

@@ -67,8 +67,18 @@ PermitirGiradoOp(Cod_Accion: string, Cod_OrdPro: string, Fec_Inicio: string, Fec
 }
 
 
-Ti_Man_Aprobacion_Despacho_Cod_OrdPro(Cod_Accion: string, Num_Grupo: number, Cod_OrdPro: string, Cod_Present:number, Cod_OrdTra: string, Id_Motivo:number){
-  return this.http.get(`${this.baseUrl}/app_Ti_Man_Aprobacion_Despacho_Cod_OrdPro.php?Accion=${Cod_Accion}&Num_Grupo=${Num_Grupo}&Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}&Cod_OrdTra=${Cod_OrdTra}&Id_Motivo=${Id_Motivo}&Cod_Usuario=${this.sCod_Usuario}`);                                                
+Ti_Man_Aprobacion_Despacho_Cod_OrdPro(Cod_Accion: string, Num_Grupo: number, Cod_OrdPro: string, Cod_Present:number, Cod_OrdTra: string, Id_Motivo:number, Fec_Inicio: string, Fec_Fin: string){
+  
+  if (!_moment(Fec_Inicio).isValid()) {
+    Fec_Inicio = '01/01/1900';
+  }
+  if (!_moment(Fec_Fin).isValid()) {
+    Fec_Fin = '01/01/1900';
+  }                                                
+  Fec_Inicio = _moment(Fec_Inicio.valueOf()).format('DD/MM/YYYY'); 
+  Fec_Fin = _moment(Fec_Fin.valueOf()).format('DD/MM/YYYY'); 
+  
+  return this.http.get(`${this.baseUrl}/app_Ti_Man_Aprobacion_Despacho_Cod_OrdPro.php?Accion=${Cod_Accion}&Num_Grupo=${Num_Grupo}&Cod_OrdPro=${Cod_OrdPro}&Cod_Present=${Cod_Present}&Cod_OrdTra=${Cod_OrdTra}&Id_Motivo=${Id_Motivo}&Cod_Usuario=${this.sCod_Usuario}&Fec_Inicio=${Fec_Inicio}&Fec_Fin=${Fec_Fin}`);                                                
 }
 
 }

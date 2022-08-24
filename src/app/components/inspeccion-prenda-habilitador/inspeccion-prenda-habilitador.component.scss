@@ -81,67 +81,59 @@ mat-form-field {
     display: grid;
 
     grid-template:
-    "col1 col2"   70px 
-    "col3 col3"   70px/
-    150px 150px   auto;
+    "col1 col2 col2"   70px 
+    "col3 col3 col4"   70px/
+    150px 150px 150px auto;
 }
 
-.fila1-Modulo {
-    grid-area: col1;
-    
-}
 
-.fila1-Tipo_Proceso {
-    grid-area: col2;
-    
-}
+    .fila1-Modulo {
+        grid-area: col1;
+        width: 100%;
+    }
 
-.fila1-Ticket {
-    grid-area: col3;
-    
-}
+    .fila1-Tipo_Proceso {
+        grid-area: col2;
+        width: 50%
+    }
 
-.button-buscar {
-    display: none;
-    /*grid-area: col2;
-    height: 10%;
-    margin: 0 auto;
-    margin: 5px 10px 10px 10px;
-    min-height: 42px;
-    max-width: 300px;
-    min-width: 120px;
-    background-color: #3f51b5;
-    color: #ffffff;*/
-}
+    .fila1-Ticket {
+        grid-area: col3;
+        width: 100%;
+    }
 
-.button-registrar{
-    display: none;
-    /*grid-area: col3;
-    height: 10%;
-    margin: 0 auto;
-    margin: 5px 10px 10px 10px;
-    min-height: 42px;
-    max-width: 300px;
-    min-width: 120px;
-    background-color: #3f51b5;
-    color: #ffffff;*/
-}
 
-.mat-column-Sel,
-.mat-column-Codigo,
-.mat-column-Color,
-.mat-column-Stock
+    .button-finalizar {
+        grid-area: col4;
+        height: 10%;
+        margin: 0 auto;
+        margin: 5px 10px 10px 10px;
+        min-height: 42px;
+        max-width: 100%;
+        width: 100%;
+        min-width: 120px;
+        background-color: #3f51b5;
+        color: #ffffff;
+    }
+
+   
+
+.mat-column-Sec,
+.mat-column-Cod_OrdPro,
+.mat-column-Des_Present,
+.mat-column-Cod_Talla,
+.mat-column-Cantidad
 {
 	text-align: left;
 	font-size: 13px;
     font-family: arial;
     padding: 15px;
 }
-.mat-column-Sel {width: 30px !important;text-align: left}
-.mat-column-Codigo {width: 30px !important;text-align: left}
-.mat-column-Color {width: 30px !important;text-align: left}
-.mat-column-Stock {width: 30px !important;text-align: left}
-
+.mat-column-Sec {text-align: left}
+.mat-column-Cod_OrdPro {text-align: left}
+.mat-column-Des_Present {text-align: left}
+.mat-column-Cod_Talla {text-align: left}
+.mat-column-Cantidad {text-align: left}
 
 .mat-header-cell {text-align: left; padding: 15px; }
 
@@ -192,36 +184,29 @@ tr:active {
         display: grid;
         
         grid-template:
-        "col1 col2"   70px 
-        "col3 col3"   70px/
-        150px 150px   auto;
+        "col1 col2 col2"   70px 
+        "col3 col3 col4"   70px/
+        150px 150px 150px  auto;
     }
     
     .fila1-Modulo {
         grid-area: col1;
-        
-    }
-    
-    .fila1-Tipo_Proceso {
-        grid-area: col2;
-        
-    }
-    
-    .fila1-Ticket {
-        grid-area: col3;
-        
-    }
-   
-    .button-buscar {
-        display: none;
-        //grid-area: col2;
-       
+        width: 100%;
     }
 
-    .button-registrar {
-        display:  none;
-        //grid-area: col3;
-       
+    .fila1-Tipo_Proceso {
+        grid-area: col2;
+        width: 50%
+    }
+
+    .fila1-Ticket {
+        grid-area: col3;
+        width: 100%;
+    }
+
+
+    .button-finalizar {
+        grid-area: col4;
     }
 
   }
@@ -229,13 +214,13 @@ tr:active {
 
   @media screen and (max-width: 600px){
    .grid-container{
-       height: 510px;
+       height: 640px;
    } 
     .container-cuerpo {
         display: grid;
      
         grid-template:
-        "fila1" 160px
+        "fila1" 210px
         "fila2" 400px
         "foot" 0px / 
         99%;
@@ -245,40 +230,30 @@ tr:active {
         
         grid-template:
         "col1 col2"   70px 
-        "col3 col3"   70px/
-        150px 150px   auto;
+        "col3 col3"   70px
+        "col4 col4"   70px/
+        50% 50%  auto;
     }
     
     .fila1-Modulo {
         grid-area: col1;
-        
+        width: 100%;
     }
-    
+
     .fila1-Tipo_Proceso {
         grid-area: col2;
-        
+        width: 100%
     }
-    
+
     .fila1-Ticket {
         grid-area: col3;
-        
+        width: 100%;
     }
 
-    .button-buscar {
-        display: none;
-       /* grid-area: col2;
-        margin: 5px 0px 10px;
-        min-width: 110px;*/
-   
-       
-    }
 
-    .button-registrar {
-        display: none;
-        /*grid-area: col3;
-        margin: 5px 10px 10px;
-        min-width: 110px;*/
-       
+    .button-finalizar {
+        grid-area: col4;
+        width: 50%;
     }
     
   }

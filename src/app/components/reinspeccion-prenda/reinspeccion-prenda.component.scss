@@ -203,6 +203,12 @@ mat-form-field {
             background-color: #3f51b5;
             color: #ffffff;
         }
+        .button-Rechazar{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #d32f2f;
+            color: #ffffff;
+        }
 
         .button-Limpiar{
             height: 40px;
@@ -215,6 +221,13 @@ mat-form-field {
             height: 40px;
             margin: 3px 5px 0px 0px;
             background-color: #3f51b5;
+            color: #ffffff;
+            display: none;
+        }
+        .button-Rechazar-xs{
+            height: 40px;
+            margin: 3px 5px 0px 0px;
+            background-color: #d32f2f;
             color: #ffffff;
             display: none;
         }

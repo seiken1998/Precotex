@@ -130,7 +130,7 @@ const routes: Routes = [
   { path: "ControlActivoFijo", component: ControlActivoFijoComponent},
 
   {path: "InspeccionPrenda", component: InspeccionPrendaComponent},
-  {path: "ReinspeccionPrenda", component: ReinspeccionPrendaComponent},
+  {path: "AuditoriainspeccionPrenda", component: ReinspeccionPrendaComponent},
   {path: "InspeccionPrendaHabilitador", component: InspeccionPrendaHabilitadorComponent},
 
   {path: "PermitirGiradoOp", component: PermitirGiradoOpComponent},

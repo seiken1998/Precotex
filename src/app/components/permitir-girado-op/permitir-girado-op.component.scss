@@ -163,10 +163,8 @@ mat-form-field {
     color: #ffffff;
 }*/
 .mat-column-Num_Grupo,
-.mat-column-Cod_OrdPro,
-.mat-column-Cod_Present, 
+.mat-column-Cod_OrdPro, 
 .mat-column-Flg_Aprobado,
-.mat-column-Nom_Motivo,
 .mat-column-Cod_Usuario,
 .mat-column-Fec_Creacion,
 .mat-column-Cod_Usuario_Aprobacion,
@@ -180,38 +178,36 @@ mat-form-field {
     padding: 15px;
    
 }
-.mat-column-Num_Grupo{
-    width: 120px;
+
+.mat-column-EstCli,
+.mat-column-Cod_Present,
+.mat-column-Partida,
+.mat-column-Nom_Motivo 
+{
+	text-align: left;
+	font-size: 13px;
+    font-family: arial;
+    padding: 15px;
+   
 }
-.mat-column-Cod_OrdPro{
-    width: 120px;
+
+.mat-column-EstCli{
+
+    text-align: left;
 }
+
 .mat-column-Cod_Present{
-    width: 120px;
+    
+    text-align: left;
 }
-.mat-column-Flg_Aprobado{
-    width: 120px;
+.mat-column-Partida{
+
+    text-align: left;
 }
+
 .mat-column-Nom_Motivo{
-    width: 250px;
-}
-.mat-column-Cod_Usuario{
-    width: 120px;
-}
-.mat-column-Fec_Creacion{
-    width: 120px;
-}
-.mat-column-Fec_Creacion{
-    width: 120px;
-}
-.mat-column-Cod_Usuario_Aprobacion{
-    width: 120px;
-}
-.mat-column-Fec_Creacion_Aprobacion{
-    width: 120px;
-}
-.mat-column-Acciones{
-    width: 50px;
+   
+    text-align: left;
 }
 
 

@@ -472,7 +472,9 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   }
 
   mostrarAlertaCaidasMayora5(){
- 
+    this.Total_solicitado_Global = 0
+    this.Defectos_Global = 0
+    this.Caidas_solicitado_Global = 0
     this.Cod_Accion     = 'A'
     this.Num_Auditoria  = this.data
     this.Cod_Cliente    = this.formulario.controls['sCodCli'].value

@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from
 import { GlobalVariable } from '../../VarGlobals';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovimientoInspeccionService } from 'src/app/services/movimiento-inspeccion.service';
-import { InspeccionPrendaService} from 'src/app/services/inspeccion-prenda.service'
+import { InspeccionPrendaService } from 'src/app/services/inspeccion-prenda.service'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -13,25 +13,41 @@ import { startWith, map, debounceTime } from 'rxjs/operators';
 import * as _moment from 'moment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSelect } from '@angular/material/select';
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { DialogHabilitadorComponent } from 'src/app/components/inspeccion-prenda-habilitador/dialog-inspeccion-prenda-habilitador/dialog-habilitador/dialog-habilitador.component';
-import { NgxSpinnerService }  from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
+import { DialogEliminarComponent } from 'src/app/components/dialogs/dialog-eliminar/dialog-eliminar.component'
 interface Color {
-  Codigo:       string;
-  Descripcion:  string;
+  Codigo: string;
+  Descripcion: string;
 }
 
 interface Modulo {
-  Cod_Modulo:  number;
-  Des_Modulo:  string;
+  Cod_Modulo: number;
+  Des_Modulo: string;
 }
 
 interface Tipo_Proceso {
-  Cod_Familia:        string;
-  Des_Familia:        string;
-  Cod_Almcen:         number;
-  Cod_TipMov:         string;
+  Cod_Familia: string;
+  Des_Familia: string;
+  Cod_Almcen: number;
+  Cod_TipMov: string;
 }
+
+
+interface data_det {
+  ID_R: number
+  SEC: number
+  ID: number
+  COD_FAMILIA: string
+  COD_FABRICA: string
+  COD_ORDPRO: string
+  COD_PRESENT: number
+  DES_PRESENT: string
+  COD_TALLA: string
+  CANTIDAD: number
+}
+
 
 @Component({
   selector: 'app-inspeccion-prenda-habilitador',
@@ -39,190 +55,270 @@ interface Tipo_Proceso {
   styleUrls: ['./inspeccion-prenda-habilitador.component.scss']
 })
 export class InspeccionPrendaHabilitadorComponent implements OnInit {
-  
+
   listar_operacionColor: Color[] = [];
+  displayedColumns_cab: string[] = ['Sec', 'Cod_OrdPro', 'Des_Present', 'Cod_Talla', 'Cantidad', 'Acciones']
+  dataSource: MatTableDataSource<data_det>;
+
+  Op = ''
+  Cod_Accion = ''
+  ColorConcat = ''
+  Flg_Btn_Buscar = false
+  Cod_Modulo = ""
+  Ticket = ""
+  Tipo_Proceso = ""
 
 
-  displayedColumns: string[] = ['Sel', 'Codigo', 'Color','Stock'];
-  dataSource = new MatTableDataSource<Color>(this.listar_operacionColor);
-  selection = new SelectionModel<Color>(true, []);
+  Cod_Ordpro = ""
+  Des_Present = ""
+  Prendas_Recoger = 0
+  Cod_Talla = ""
+  ImagePath = ""
+  Id = 0
+  Id_R = 0
 
-  Op              = ''
-  Color           = []
-  Cod_Accion      = ''
-  ColorConcat     = '' 
-  Flg_Btn_Buscar  = false
-  Ticket          = ""
-  Tipo_Proceso    = ""
+  Sec = 0
+
+  Flg_Habilitar_btn_Finalizar = true
 
   formulario = this.formBuilder.group({
-    Modulo:       [''],
+    Modulo: [''],
     Tipo_Proceso: [''],
-    op:           [''],
-    color:        ['']
-  }) 
+    Ticket: [''],
+    color: ['']
+  })
 
   listar_operacionModulo: Modulo[] = [];
   listar_operacionTipo_Proceso: Tipo_Proceso[] = [];
+  @ViewChild('Ticket') inputTicket!: ElementRef;
 
   constructor(private formBuilder: FormBuilder,
-    private matSnackBar: MatSnackBar,private SpinnerService: NgxSpinnerService, 
+    private matSnackBar: MatSnackBar, private SpinnerService: NgxSpinnerService,
     private movimientoInspeccionService: MovimientoInspeccionService,
     public dialog: MatDialog,
     private inspeccionPrendaService: InspeccionPrendaService
   ) {
 
+    this.dataSource = new MatTableDataSource();
+
     this.formulario = formBuilder.group({
-      op:          ['', Validators.required],
+      Ticket: ['', Validators.required],
       Tipo_Proceso: ['', Validators.required],
-      Modulo:       ['']
+      Modulo: ['']
     });
   }
- 
+
 
   ngOnInit(): void {
+    this.MuestraModulo()
     this.MuestraTipoProceso()
   }
 
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
 
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-
-  checkboxLabel(row?: Color): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Codigo + 1}`;
-  }
-
-
-  llenarColorPorOp(){
-    this.listar_operacionColor = []
-    this.ColorConcat = ''
-    this.Cod_Accion = 'F'
-    this.Op         = this.formulario.get('op')?.value
-    this.movimientoInspeccionService.llenarColorPorOp(this.Cod_Accion,this.Op).subscribe(
+  MuestraModulo() {
+    this.inspeccionPrendaService.CF_MUESTRA_MODULO(
+    ).subscribe(
       (result: any) => {
-        console.log(result[0].Respuesta)
-        if (result[0].Respuesta == undefined) {
-        this.dataSource.data = result
-        }else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
-        }
+        this.listar_operacionModulo = result
       },
-      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
+
   }
 
-  ValidarActivarBuscar(){
-    if(this.formulario.get('op')?.value.length == 5){
-      this.Flg_Btn_Buscar = true
-    }
-    else{
-      this.reset()
-
-    }
-  }
-
-
-
-
-
- /* submit(formDirective) :void {
-    this.SpinnerService.show();
-    this.ColorConcat = ''
-    this.Op     = this.formulario.get('op')?.value
-    this.Color  = this.selection.selected
-    this.Color.forEach((currentValue, index) => {
-    this.ColorConcat += this.Color[index].Codigo + '-'
-    });
-
-    this.movimientoInspeccionService.generaMovimientoIngresoOpColor(this.Op, this.ColorConcat).subscribe(
+  MuestraTipoProceso() {
+    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_FAMILIA(
+    ).subscribe(
       (result: any) => {
-        if (result[0].Respuesta  == 'OK') {
-          this.matSnackBar.open('El movimiento se genero correctamente..!!', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
-          this.reset()
-          this.SpinnerService.hide();
-        }
-        else{
-          this.SpinnerService.hide();
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
-        }
+        this.listar_operacionTipo_Proceso = result
       },
-      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
-    
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
 
-
-  }*/
-
- 
-  reset(){
-      this.Flg_Btn_Buscar = false
-      this.ColorConcat = ''
-      this.dataSource.data = []
-      this.Color = []
-      this.selection = new SelectionModel<Color>(true, []);
-    
   }
 
-  MuestraTipoProceso(){
-      this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_FAMILIA(
+  ValidarTicket() {
+    this.Ticket = this.formulario.get('Ticket')?.value
+    this.Cod_Modulo = this.formulario.get('Modulo')?.value
+    this.Tipo_Proceso = this.formulario.get('Tipo_Proceso')?.value
+    if (this.Ticket != "") {
+
+      this.Cod_Modulo = this.Cod_Modulo
+      this.Tipo_Proceso = this.Tipo_Proceso
+      this.Ticket = this.Ticket
+      this.Id_R = this.Id_R
+
+      this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RECOJO_PRENDA(
+        this.Cod_Modulo,
+        this.Tipo_Proceso,
+        this.Ticket,
+        this.Id_R
       ).subscribe(
         (result: any) => {
-        this.listar_operacionTipo_Proceso = result
+
+          if (result[0].Respuesta == undefined) {
+
+            this.formulario.controls['Tipo_Proceso'].disable()
+            this.formulario.controls['Modulo'].disable()
+            this.Flg_Habilitar_btn_Finalizar = false
+
+            this.Cod_Ordpro = result[0].COD_ORDPRO
+            this.Des_Present = result[0].DES_PRESENT
+            this.Prendas_Recoger = result[0].PRENDAS_RECOGER
+            this.Cod_Talla = result[0].COD_TALLA
+            this.ImagePath = result[0].ICONO_WEB
+            this.Id = result[0].ID
+            this.Id_R = result[0].ID_R
+            console.log('ID RETORNADOS')
+            console.log(this.Id)
+            console.log(this.Id_R)
+            let dialogRef = this.dialog.open(DialogHabilitadorComponent,
+              {
+                disableClose: false,
+                panelClass: 'my-class',
+                data: {
+                  Ticket: this.Ticket,
+                  Cod_Ordpro: this.Cod_Ordpro,
+                  Des_Present: this.Des_Present,
+                  Prendas_Recoger: this.Prendas_Recoger,
+                  Cod_Talla: this.Cod_Talla,
+                  ImagePath: this.ImagePath
+                }
+              });
+            dialogRef.afterClosed().subscribe(result => {
+              if (result == 'true') {
+
+
+                this.Cod_Accion = "I"
+                this.Id_R = this.Id_R
+                this.Sec = 0
+                this.Id = this.Id
+                this.Tipo_Proceso = this.Tipo_Proceso
+                this.Prendas_Recoger = this.Prendas_Recoger
+                this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Recojo_Web(
+                  this.Cod_Accion,
+                  this.Id_R,
+                  this.Sec,
+                  this.Id,
+                  this.Tipo_Proceso,
+                  this.Prendas_Recoger
+                ).subscribe(
+                  (result: any) => {
+
+                    if (result[0].Respuesta == 'OK') {
+
+                      this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+                    }
+                    else {
+                      this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+                    }
+
+                    this.Id_R = this.Id_R
+                    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RESUMEN_RECOJO(
+                      this.Id_R
+                    ).subscribe(
+                      (result: any) => {
+                        this.dataSource.data = result
+                      })
+
+                  })
+              }
+
+            })
+          }
+          else {
+            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          }
+
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
           duration: 1500,
         }))
-    
+
+    }
   }
 
-  ValidarTicket(){
-      this.Ticket = this.formulario.get('op')?.value
-      this.Tipo_Proceso = this.formulario.get('Tipo_Proceso')?.value
-      if(this.Ticket != ""){
-      let dialogRef = this.dialog.open(DialogHabilitadorComponent,
-        {
-          disableClose: false,
-          panelClass: 'my-class',
-          data: { Cod_Modulo: "",
-                  Cod_Familia: this.Tipo_Proceso,
-                  Ticket: this.Ticket 
-          }
-        });
-      dialogRef.afterClosed().subscribe(result => {
+  TicketFocus() {
+    this.inputTicket.nativeElement.focus()
+  }
 
-          /*this.Cod_Accion = "I"
-          this.Id
-          this.Tipo_Sub_Proceso = '04'
-          this.Cod_Defecto = result.data
-          this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Web(
-            this.Cod_Accion,
-            this.Id,
-            this.Tipo_Sub_Proceso,
-            this.Cod_Defecto
-          ).subscribe(
-            (result: any) => {
-              console.log(result)
-             
-            },
-            (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-              duration: 1500,
-            }))*/
+  FinalizarProceso() {
+    this.Id_R
+    this.inspeccionPrendaService.CF_Man_Inspeccion_Recojo_Finalizado_Web(
+      this.Id_R
+    ).subscribe(
+      (result: any) => {
+        if (result[0].Respuesta == 'OK') {
+          this.Id_R = 0
+          this.formulario.controls['Ticket'].enable()
+          this.formulario.controls['Tipo_Proceso'].enable()
+          this.formulario.controls['Modulo'].enable()
+          this.Flg_Habilitar_btn_Finalizar = true
+          this.dataSource.data = []
+          this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
+        else {
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+        }
 
-      })
-    }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 1500,
+      }))
+
+
+
+  }
+
+  EliminarRegistro(ID_R: number, SEC: number) {
+
+    let dialogRef = this.dialog.open(DialogEliminarComponent,
+      {
+        disableClose: false,
+        data: {}
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+
+        this.Cod_Accion = "D"
+        this.Id_R = ID_R
+        this.Sec = SEC
+        this.Id = this.Id
+        this.Tipo_Proceso = this.Tipo_Proceso
+        this.Prendas_Recoger = this.Prendas_Recoger
+        this.inspeccionPrendaService.CF_Man_Inspeccion_Prenda_Detalle_Recojo_Web(
+          this.Cod_Accion,
+          this.Id_R,
+          this.Sec,
+          this.Id,
+          this.Tipo_Proceso,
+          this.Prendas_Recoger
+        ).subscribe(
+          (result: any) => {
+
+            if (result[0].Respuesta == 'OK') {
+
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+            else {
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            }
+
+            this.Id_R = this.Id_R
+            this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_RESUMEN_RECOJO(
+              this.Id_R
+            ).subscribe(
+              (result: any) => {
+                this.dataSource.data = result
+              })
+
+          })
+      }
+    })
+
   }
 
 }

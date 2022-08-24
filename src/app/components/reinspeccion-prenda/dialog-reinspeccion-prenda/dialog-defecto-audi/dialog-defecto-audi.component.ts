@@ -25,12 +25,11 @@ interface data_det {
 
 
 @Component({
-  selector: 'app-dialog-defecto',
-  templateUrl: './dialog-defecto.component.html',
-  styleUrls: ['./dialog-defecto.component.scss']
+  selector: 'app-dialog-defecto-audi',
+  templateUrl: './dialog-defecto-audi.component.html',
+  styleUrls: ['./dialog-defecto-audi.component.scss']
 })
-export class DialogDefectoComponent implements OnInit {
-
+export class DialogDefectoAudiComponent implements OnInit {
   Id = 0
   Cod_Familia = ""
   Total = 0
@@ -38,7 +37,7 @@ export class DialogDefectoComponent implements OnInit {
  displayedColumns_cab: string[] = ['Tallas', 'Cantidad']
  dataSource: MatTableDataSource<data_det>;
 
- constructor(public dialogRef: MatDialogRef<DialogDefectoComponent>,
+ constructor(public dialogRef: MatDialogRef<DialogDefectoAudiComponent>,
           private formBuilder: FormBuilder,
              private matSnackBar: MatSnackBar, 
              private inspeccionPrendaService: InspeccionPrendaService,
@@ -67,7 +66,7 @@ selectMedida(Abr_Motivo: string){
 MostrarDefectoPorTipo(){  
     this.Id = this.data.Id
     this.Cod_Familia = this.data.Cod_Familia
-    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_DEFECTO_FAMILIA(
+    this.inspeccionPrendaService.CF_MUESTRA_INSPECCION_DEFECTO_FAMILIA_AUDI(
       this.Id,
       this.Cod_Familia
       ).subscribe(
@@ -79,3 +78,4 @@ MostrarDefectoPorTipo(){
         }))
     }
 }
+

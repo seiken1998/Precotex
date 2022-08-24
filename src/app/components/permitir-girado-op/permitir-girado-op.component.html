@@ -72,6 +72,10 @@
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Num. Grupo</th>
                         <td mat-cell  *matCellDef="let data_det"> {{data_det.Num_Grupo}} </td>
                     </ng-container>
+                    <ng-container matColumnDef="EstCli">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Estilo</th>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.EstCli}} </td>
+                    </ng-container>
                     <ng-container matColumnDef="Cod_OrdPro">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell">OP</th>
                         <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_OrdPro}}</td>
@@ -79,6 +83,10 @@
                     <ng-container matColumnDef="Cod_Present">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Color</th>
                         <td mat-cell  *matCellDef="let data_det"> {{data_det.Cod_Present}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Partida">
+                        <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Partida</th>
+                        <td mat-cell  *matCellDef="let data_det"> {{data_det.Partida}}</td>
                     </ng-container>
                     <ng-container matColumnDef="Flg_Aprobado">
                         <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Estado</th>
@@ -124,7 +132,7 @@
                  
  
                 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns_cab"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns_cab; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns_cab;"></tr>
 
                 </table>
