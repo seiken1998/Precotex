@@ -80,6 +80,9 @@ import { MantenimientoWebComponent} from './components/mantenimiento-web/manteni
 import { AccesosUsuariosComponent} from './components/accesos-usuarios/accesos-usuarios.component'
  
 
+//dashboard estilos por liquidar
+import {EstilosLiquidarComponent} from './components/estilos-liquidar/estilos-liquidar.component'
+
 const routes: Routes = [
   { path: "root", component: AppComponent },
   { path: "principal", component: PrincipalComponent },
@@ -155,7 +158,8 @@ const routes: Routes = [
   { path: 'MantenimientoWeb', component: MantenimientoWebComponent},
   { path: 'AccesosUsuarios', component: AccesosUsuariosComponent},
 
- 
+ //dashboard estilos por liquidar
+ { path: 'EstilosLiquidar', component: EstilosLiquidarComponent},
 
 
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz

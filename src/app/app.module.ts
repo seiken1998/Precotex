@@ -108,6 +108,7 @@ import { DerivadoInspeccionPrendaComponent } from './components/derivado-inspecc
 import { MantenimientoWebComponent } from './components/mantenimiento-web/mantenimiento-web.component';
 import { AccesosUsuariosComponent } from './components/accesos-usuarios/accesos-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
+import { EstilosLiquidarComponent } from './components/estilos-liquidar/estilos-liquidar.component';
 
 @NgModule({
   declarations: [
@@ -197,7 +198,8 @@ import { LoginComponent } from './components/login/login.component';
     DerivadoInspeccionPrendaComponent,
     MantenimientoWebComponent,
     AccesosUsuariosComponent,
-    LoginComponent
+    LoginComponent,
+    EstilosLiquidarComponent
    
     
  

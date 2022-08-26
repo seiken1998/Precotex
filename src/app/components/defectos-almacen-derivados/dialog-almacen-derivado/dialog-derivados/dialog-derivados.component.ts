@@ -117,12 +117,26 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
   flg_btn_detalle = false
   flg_btn_cabecera = true
   flg_reset_estilo = false
-  Altertas_Caidas_Global  = ''
-  Total_solicitado_Global = 0
-  Total_requerido_Global = 0
-  Defectos_Global = 0
-  Caidas_solicitado_Global = 0
-  Caidas_requerido_Global = 0
+
+
+   //variables para alerta > 5 %
+   Altertas_Caidas_Global  = ''
+   Total_solicitado_Global = 0
+   Total_requerido_Global = 0
+   Defectos_Global = 0
+   Caidas_solicitado_Global = 0
+   Caidas_requerido_Global = 0
+ 
+   //variables para alerta > 1%
+   Altertas_Caidas_Global2  = ''
+   Total_solicitado_Global2 = 0
+   Total_requerido_Global2 = 0
+   Defectos_Global2 = 0
+   Caidas_solicitado_Global2 = 0
+   Caidas_requerido_Global2 = 0
+
+
+
   Nom_TemCli = ''
   Tipo_Registro = ''
   Clasificacion = ''
@@ -406,9 +420,9 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
 
 
   mostrarAlertaCaidasMayora1(){
-    this.Total_solicitado_Global = 0
-    this.Defectos_Global = 0
-    this.Caidas_solicitado_Global = 0
+    this.Total_solicitado_Global2 = 0
+    this.Defectos_Global2 = 0
+    this.Caidas_solicitado_Global2 = 0
     
     this.Cod_Accion     = 'C'
     this.Num_Auditoria  = this.Numero_Auditoria_Cabecera
@@ -454,13 +468,13 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
              console.log(result[0]['Caidas'])*/
    
    
-             this.Total_solicitado_Global = result[0]['Total_solicitado']
-             this.Total_requerido_Global = result[0]['Total_requerido']
-             this.Defectos_Global = result[0]['Defectos']
-             this.Caidas_solicitado_Global = result[0]['Caidas_solicitado']
-             this.Caidas_requerido_Global = result[0]['Caidas_requerido']
+             this.Total_solicitado_Global2 = result[0]['Total_solicitado']
+             this.Total_requerido_Global2 = result[0]['Total_requerido']
+             this.Defectos_Global2 = result[0]['Defectos']
+             this.Caidas_solicitado_Global2 = result[0]['Caidas_solicitado']
+             this.Caidas_requerido_Global2 = result[0]['Caidas_requerido']
              
-             //this.Altertas_Caidas_Global = result[0]['Alerta']
+             this.Altertas_Caidas_Global2 = result[0]['Alerta']
    
    
              this.EnviarAlertaTelegramMayora1()  
@@ -489,7 +503,7 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     this.Cod_Motivo     = ''
     this.Can_Defecto    = 0 
     this.Op             = ''
-    this.Tipo_Registro  = ''
+    this.Tipo_Registro  = '' 
     this.Clasificacion  = ''
     this.defectosAlmacenDerivadosService.Cf_Mantenimiento_Derivados(
       this.Cod_Accion,
@@ -540,11 +554,11 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
     console.log(this.formulario.get('sTemporada')?.value)
     console.log(this.Nom_TemCli)
     console.log(this.formulario.get('sColor')?.value)
-    console.log(this.Total_solicitado_Global)
-    console.log(this.Total_requerido_Global)
-    console.log(this.Defectos_Global)
-    console.log(this.Caidas_solicitado_Global)
-    console.log(this.Caidas_requerido_Global)
+    console.log(this.Total_solicitado_Global2)
+    console.log(this.Total_requerido_Global2)
+    console.log(this.Defectos_Global2)
+    console.log(this.Caidas_solicitado_Global2)
+    console.log(this.Caidas_requerido_Global2)
 
 
 
@@ -555,11 +569,11 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
       this.formulario.get('sTemporada')?.value,
       this.Nom_TemCli,
       this.formulario.get('sColor')?.value,
-      this.Total_solicitado_Global,
-      this.Total_requerido_Global,
-      this.Defectos_Global,
-      this.Caidas_solicitado_Global,
-      this.Caidas_requerido_Global
+      this.Total_solicitado_Global2,
+      this.Total_requerido_Global2,
+      this.Defectos_Global2,
+      this.Caidas_solicitado_Global2,
+      this.Caidas_requerido_Global2
     ).subscribe( 
  
         (result: any) => {
@@ -640,8 +654,9 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
           this.formulario.controls['cant'].setValue('')
           this.matSnackBar.open('Defecto agregado correctamente..!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
           this.ListarRegistroDefecto()
-          this.mostrarAlertaCaidasMayora1()
           this.mostrarAlertaCaidasMayora5()
+          this.mostrarAlertaCaidasMayora1()
+
           }else{
             this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
             
@@ -836,8 +851,9 @@ export class DialogDerivadosComponent implements OnInit, AfterViewInit {
           
             this.ListarRegistroDefecto()
             this.matSnackBar.open('Registro Eliminado!!!', 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
-            this.mostrarAlertaCaidasMayora1()
             this.mostrarAlertaCaidasMayora5()
+            this.mostrarAlertaCaidasMayora1()
+       
           }
           else {
             this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })

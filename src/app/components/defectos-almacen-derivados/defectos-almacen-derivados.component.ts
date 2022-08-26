@@ -15,6 +15,7 @@ import { DialogEliminarComponent } from '../dialogs/dialog-eliminar/dialog-elimi
 import { DialogDerivadosTotalComponent} from './dialog-almacen-derivado/dialog-derivados-total/dialog-derivados-total.component'
 import { DialogDerivadosObservacionComponent} from './dialog-almacen-derivado/dialog-derivados-observacion/dialog-derivados-observacion.component'
 import { DialogDerivadosReportexdiaComponent} from './dialog-almacen-derivado/dialog-derivados-reportexdia/dialog-derivados-reportexdia.component'
+import { NgxSpinnerService }  from "ngx-spinner";
 
 interface data_det {
   Num_Auditoria:  string,
@@ -113,6 +114,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private matSnackBar: MatSnackBar, 
     private defectosAlmacenDerivadosService: DefectosAlmacenDerivadosService,
+    private SpinnerService: NgxSpinnerService,
     public dialog: MatDialog) {  this.dataSource = new MatTableDataSource();}
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -174,6 +176,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
 
   /***************************** lisatr la cabecera  ************************** */
   buscarDefectosDerivados(){
+    this.SpinnerService.show();
     if(this.formulario.get('sCliente')?.value == ''){
       this.Cod_Cliente = ''
     }
@@ -228,6 +231,7 @@ export class DefectosAlmacenDerivadosComponent implements OnInit {
             this.matSnackBar.open("No existen registros..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
             this.dataSource.data = []
           }
+          this.SpinnerService.hide();
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
           duration: 1500,
