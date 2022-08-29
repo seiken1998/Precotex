@@ -7,18 +7,18 @@ import { SeguridadControlJabaService } from 'src/app/services/seguridad-control-
 import * as _moment from 'moment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, startWith } from 'rxjs';
-
+import { MatTableDataSource } from '@angular/material/table';
 
 interface data{
  Cod_Mov_Jaba:    number,
  Cod_Jaba_Estado: number,
  Cod_Estado:      string, 
  Observacion:     string, 
-  
+   
 }
-
-
-
+ 
+  
+ 
 
 @Component({
   selector: 'app-dialog-registrar-estado-control-movmientos-jabas',
@@ -46,6 +46,9 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
   Opciones         = []
  
 
+  displayedColumns_cab: string[] = ['Estado']
+  dataSource: MatTableDataSource<data>;
+
   formulario = this.formBuilder.group({
     Defectos:         [''],
     Observacion:      [''],
@@ -57,6 +60,7 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
               private seguridadControlJabaService: SeguridadControlJabaService,
               @Inject(MAT_DIALOG_DATA) public data: data) 
   {
+    this.dataSource = new MatTableDataSource();
 
     this.formulario = formBuilder.group({
       Defectos:         ['', Validators.required],
@@ -115,7 +119,7 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
      }))
     
   } 
-
+ 
 
   llenarEstados(){
     this.Cod_Accion         = 'E'
@@ -135,13 +139,17 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
       this.Fec_Registro
     ).subscribe(
       (result: any) => { 
-       this.Opciones = result
+       this.dataSource.data = result
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
         duration: 2500,
       }))
   }
 
+  selectEstado(Cod_Estado: string){
+    this.Cod_Estado = Cod_Estado
+    console.log(this.Cod_Estado)
+  }
 
 
   

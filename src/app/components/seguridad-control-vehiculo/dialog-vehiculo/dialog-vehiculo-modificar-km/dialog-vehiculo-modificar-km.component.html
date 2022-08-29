@@ -3,22 +3,22 @@
     <!-- ventana nro 4 - historial --> 
     <div class="grid-container"> 
  
-        <div class="title">Modificar Observacion</div>
+        <div class="title">Modificar Km.</div>
         <form class="container-cuerpo" [formGroup]="formulario" #formDirective="ngForm" (ngSubmit)="submit(formDirective)" >
             <div class="container-cuerpo-fila1">
                 
                     <mat-form-field class="fila1-Total"> 
-                        <mat-label>Observacion</mat-label>
-                        <textarea matInput type="text"  placeholder="Observacion" value="" 
-                            autocomplete="off" formControlName="Observacion" ></textarea>
+                        <mat-label>Kilometraje</mat-label>
+                        <input matInput type="number"  placeholder="km" value="" 
+                            autocomplete="off" formControlName="Km" >
                     </mat-form-field>      
 
             </div>    
 
- 
+
  
             <div class="container-cuerpo-foot">
-                <button  type="submit" class="button-agregar" mat-dialog-close="false" [disabled]="!formulario.valid"  mat-flat-button>
+                <button  type="submit" class="button-agregar" mat-dialog-close="true" [disabled]="!formulario.valid"  mat-flat-button>
                     <mat-icon aria-label="person" >create
                     </mat-icon>  Modificar
                 </button>

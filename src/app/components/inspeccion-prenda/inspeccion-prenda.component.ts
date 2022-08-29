@@ -506,7 +506,7 @@ export class InspeccionPrendaComponent implements OnInit {
           this.Cod_Talla,
           this.Num_Paquete,
           this.Prendas_Paq
-        ).subscribe(
+        ).subscribe( 
           (result: any) => {
             if (result[0].Respuesta == 'OK') {
               this.Flg_Habilitar_Detalle = true
@@ -519,6 +519,7 @@ export class InspeccionPrendaComponent implements OnInit {
               this.formulario.controls['Color'].disable()
               this.formulario.controls['Talla'].disable()
               this.formulario.controls['Cantidad'].disable()
+              this.ActualizarCantidad()
               this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
             }
             else {

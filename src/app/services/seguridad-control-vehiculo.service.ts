@@ -112,5 +112,9 @@ export class SeguridadControlVehiculoService {
         return this.http.get(`${this.baseUrl}/app_ver_reporte_control_vehiculo.php?Fec_Inicio=${Fecha_Auditoria}&Fec_Fin=${Fecha_Auditoria2}`);
       }
 
+     Modificar_Km_Vehiculo(Id: number, Num_Kilometraje: number){
+      return this.http.get(`${this.baseUrl}/app_Modificar_Km_Vehiculo.php?Id=${Id}&Km=${Num_Kilometraje}&Cod_Usuario=${this.sCod_Usuario}`);
+     }
+
 }
    

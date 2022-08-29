@@ -480,6 +480,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.formulario.controls['Color'].disable()
               this.formulario.controls['Talla'].disable()
               this.formulario.controls['Cantidad'].disable()
+              this.ActualizarCantidad()
               this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
             }
             else{

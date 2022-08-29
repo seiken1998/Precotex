@@ -4,6 +4,7 @@ import { GlobalVariable } from '../../../VarGlobals'; //<==== this one
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SeguridadControlVehiculoService } from '../../../services/seguridad-control-vehiculo.service';
 import { DialogEliminarComponent } from '../../dialogs/dialog-eliminar/dialog-eliminar.component';
+import { DialogVehiculoModificarKmComponent} from 'src/app/components/seguridad-control-vehiculo/dialog-vehiculo/dialog-vehiculo-modificar-km/dialog-vehiculo-modificar-km.component'
 import * as _moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -31,7 +32,7 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
 
   displayedColumns_cab: string[] = ['tipo','fecha','hora', 'vehiculo', 'conductor', 'origen', 'destino','kilometraje','tipo_operacion','ver','detalle']
 
-   
+    
   
   public data_det = [{
     hora: "",
@@ -75,7 +76,7 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
   }
 
   MostrarTitulo() {
-    if (GlobalVariable.num_planta === 1) {
+    if (GlobalVariable.num_planta == 1) {
       this.des_planta = 'Santa Maria'
     } else if (GlobalVariable.num_planta == 2) {
       this.des_planta = 'Santa Cecilia'
@@ -85,14 +86,15 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
       this.des_planta = 'Huachipa Sede II'
     } else if (GlobalVariable.num_planta == 5) {
       this.des_planta = 'Independencia'
-    } else if (GlobalVariable.num_planta == 6) {
+    } else if (GlobalVariable.num_planta == 13) {
       this.des_planta = 'Santa Rosa'
-    } else if (GlobalVariable.num_planta == 7) {
+    } else if (GlobalVariable.num_planta == 11) {
       this.des_planta = 'VyD'
-    } else {
+    }else {
       this.des_planta = ''
     }
-  }
+  }  
+ 
  
   ListarHistorial() {
     
@@ -120,7 +122,16 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
         }))
   }
  
-  
+  ModificarKm(Id: number, Num_Kilometraje: number){
+    if(GlobalVariable.vCod_Rol == 1 || GlobalVariable.vCod_Rol == 3){
+      let dialogRef =  this.dialog.open(DialogVehiculoModificarKmComponent, { disableClose: true, data:{Id: Id, Km: Num_Kilometraje} });
+      dialogRef.afterClosed().subscribe(result =>{
+      if(result == 'true'){  
+        this.ListarHistorial()
+        } 
+      })
+    }
+  }
 
 
   EliminarRegistro(Cod_Barras: string,Cod_Accion:string,Cod_Vehiculo:string,Num_Kilometraje: string, Num_Planta_Destino: String,Dni_Conductor: string,Numero_Planta:string) {

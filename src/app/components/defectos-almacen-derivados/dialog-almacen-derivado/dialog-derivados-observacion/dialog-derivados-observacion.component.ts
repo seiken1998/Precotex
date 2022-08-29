@@ -16,7 +16,7 @@ import { MatSelect } from '@angular/material/select';
 interface data{
   Num_Auditoria: number
   
-}
+} 
 
 
 @Component({
