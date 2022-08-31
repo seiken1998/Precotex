@@ -37,6 +37,8 @@
 
     Arr_Medidas: [],
 
+
+
     wsHuachipa: 'http://192.168.1.31/publicaWs/'
     //baseUrl: "https://gestion.precotex.com/ws_android"
     //... more of your variables

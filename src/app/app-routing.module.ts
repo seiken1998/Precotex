@@ -83,6 +83,9 @@ import { AccesosUsuariosComponent} from './components/accesos-usuarios/accesos-u
 //dashboard estilos por liquidar
 import {EstilosLiquidarComponent} from './components/estilos-liquidar/estilos-liquidar.component'
 
+//mantenimiento de jabas
+import { MantenimientoJabasComponent} from './components/mantenimiento-jabas/mantenimiento-jabas.component'
+
 const routes: Routes = [
   { path: "root", component: AppComponent },
   { path: "principal", component: PrincipalComponent },
@@ -161,6 +164,8 @@ const routes: Routes = [
  //dashboard estilos por liquidar
  { path: 'EstilosLiquidar', component: EstilosLiquidarComponent},
 
+ //mantenimiento jabas
+ { path: 'MantenimientoJabas', component: MantenimientoJabasComponent},
 
   { path: "", redirectTo: "/", pathMatch: "full" },// Cuando es la raíz
   //{ path: "**", component: AuditoriaLineaCosturaComponent }

@@ -75,7 +75,7 @@ MostrarDefectoPorTipo(){
          this.dataSource.data = result
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-          duration: 1500,
+          duration: 5000,
         }))
     }
 }

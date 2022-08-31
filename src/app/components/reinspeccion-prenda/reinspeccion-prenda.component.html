@@ -3,9 +3,9 @@
   
 <div class="container"> 
     <!-- ventana nro 4 - historial --> 
-    <div class="grid-container">  
+    <div class="grid-container" [style]="grid_border">  
  
-        <div class="title">AUDITORIA - INSPECCION PRENDA - ID: {{Id}}</div>
+        <div class="title" [style]='background' >AUDITORIA - INSPECCION PRENDA - ID: {{Id}} - TIPO PROCESO: {{Des_Tipo_Proceso}}</div>
 
         <form class="container-cuerpo" [formGroup]="formulario">
             <div class="sub-container">
@@ -15,7 +15,7 @@
                         <mat-form-field class="fila1-Codigo"> 
                             <mat-label>Cod. Barras</mat-label>
                             <input matInput type="text"  placeholder="Cod. Barras"  value="" #Codigo
-                                autocomplete="off"  formControlName="Codigo" (input)="LecturaCodBarras()">
+                                autocomplete="off"  formControlName="Codigo" (keyup.enter)="LecturaCodBarras()">
                         </mat-form-field>     
 
                         <mat-form-field class="fila1-OP"> 
@@ -63,11 +63,11 @@
                         </mat-form-field>    
 
                         <div class="fila1-button-container">
-                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar" mat-button mat-flat-button (click)="GuardarCabecera()">
+                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" [disabled]="DisableSaveButton" class="button-Agregar" mat-button mat-flat-button (click)="GuardarCabecera()">
                                 <mat-icon aria-label="person">assignment_turned_in
                                 </mat-icon>  Guardar
                             </button>
-                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" class="button-Agregar-xs" mat-button mat-flat-button (click)="GuardarCabecera()">
+                            <button type="button" *ngIf="!Flg_Habilitar_Detalle" [disabled]="DisableSaveButton" class="button-Agregar-xs" mat-button mat-flat-button (click)="GuardarCabecera()">
                                 <mat-icon aria-label="person">assignment_turned_in
                                 </mat-icon>
                             </button>
@@ -150,8 +150,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="SumarCompostura()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
-                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarCompostura()"  [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarCompostura()" [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -176,8 +176,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="SumarSegunda()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
-                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarSegunda()"  [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarSegunda()" [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -202,8 +202,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="SumarZurcido()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
-                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarZurcido()"  [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarZurcido()" [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 
@@ -228,8 +228,8 @@
                         </mat-card-content>
                         <mat-divider inset></mat-divider>
                         <mat-card-actions>
-                        <button class="card-btn" mat-flat-button (click)="SumarDesmanche()"  [disabled]="!Flg_Habilitar_Detalle">+</button>
-                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()" [disabled]="!Flg_Habilitar_Detalle">-</button>
+                        <button class="card-btn" mat-flat-button (click)="SumarDesmanche()"  [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">+</button>
+                        <button class="card-btn" mat-flat-button (click)="RestarDesmanche()" [style]="btn_background" [disabled]="!Flg_Habilitar_Detalle">-</button>
                         </mat-card-actions>
                     </mat-card>
 

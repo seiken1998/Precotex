@@ -123,7 +123,7 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
         this.listar_operacionModulo = result
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
 
   }
@@ -135,7 +135,7 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
         this.listar_operacionTipo_Proceso = result
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
 
   }
@@ -210,10 +210,11 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
 
                     if (result[0].Respuesta == 'OK') {
 
-                      this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+                      this.formulario.controls['Ticket'].setValue('')
+                      this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
                     }
                     else {
-                      this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+                      this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
                     }
 
                     this.Id_R = this.Id_R
@@ -230,12 +231,12 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
             })
           }
           else {
-            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
           }
 
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-          duration: 1500,
+          duration: 5000,
         }))
 
     }
@@ -258,15 +259,15 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
           this.formulario.controls['Modulo'].enable()
           this.Flg_Habilitar_btn_Finalizar = true
           this.dataSource.data = []
-          this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
         else {
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
 
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
 
 
@@ -301,10 +302,10 @@ export class InspeccionPrendaHabilitadorComponent implements OnInit {
 
             if (result[0].Respuesta == 'OK') {
 
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
             else {
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
 
             this.Id_R = this.Id_R

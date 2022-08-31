@@ -41,9 +41,7 @@ export class SeguridadControlJabaService {
     return this.http.get(`${this.baseUrl}/app_listar_guia_salida_jabas.php?Num_Planta=${sNum_Planta}`);
   }
 
-  BuscarNomProveedorService(sRuc_Proveedor: string) {
-    return this.http.get(`${this.baseUrl}/app_muestra_nom_proveedor_num_ruc.php?Ruc_Proveedor=${sRuc_Proveedor}`);
-  }
+
 
 
   ListarGuiaInternoService(
@@ -147,6 +145,15 @@ export class SeguridadControlJabaService {
 
       ListarMovimientosJabas(Cod_Accion: string, Cod_Mov_Jaba: number, Cod_Barras: string, Cod_Estado: string, Observacion: string, Operacion: string, Fec_Registro: string){
         return this.http.get(`${this.baseUrl}/app_Man_Movimiento_Jaba.php?Accion=${Cod_Accion}&Cod_Mov_Jaba=${Cod_Mov_Jaba}&Cod_Barras=${Cod_Barras}&Cod_Estado=${Cod_Estado}&Observacion=${Observacion}&Cod_Accion=${Operacion}&Fec_Registro=${Fec_Registro}&Cod_Usuario=${this.sCod_Usuario}`);
+      }
+
+      BuscarNomProveedorService(Ruc_Proveedor: string) {
+        return this.http.get(`${this.baseUrl}/app_muestra_nom_proveedor_num_ruc.php?Ruc_Proveedor=${Ruc_Proveedor}`);
+      }
+
+
+      LG_MOVIMIENTOS_JABA(Cod_Accion: string,Id_Mov_Jaba_Cab: number,Id_Mov_Jaba_Det: number,cod_proveedor: string,Num_Guia: string,Cod_Baras: string){
+        return this.http.get(`${this.baseUrl}/app_LG_MOVIMIENTOS_JABA.php?Accion=${Cod_Accion}&Id_Mov_Jaba_Cab=${Id_Mov_Jaba_Cab}&Id_Mov_Jaba_Det=${Id_Mov_Jaba_Det}&cod_proveedor=${cod_proveedor}&Num_Guia=${Num_Guia}&Cod_Baras=${Cod_Baras}&Cod_Usuario=${this.sCod_Usuario}`);
       }
 
       

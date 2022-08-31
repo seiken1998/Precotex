@@ -10,10 +10,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
 interface data{
- Cod_Mov_Jaba:    number,
- Cod_Jaba_Estado: number,
- Cod_Estado:      string, 
- Observacion:     string, 
+ Cod_Barras: string
    
 }
  
@@ -50,7 +47,6 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
   dataSource: MatTableDataSource<data>;
 
   formulario = this.formBuilder.group({
-    Defectos:         [''],
     Observacion:      [''],
   
   }) 
@@ -63,7 +59,6 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
     this.dataSource = new MatTableDataSource();
 
     this.formulario = formBuilder.group({
-      Defectos:         ['', Validators.required],
       Observacion:      [''],
     });
 
@@ -71,18 +66,7 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
 
   ngOnInit(): void {    
 
-    this.llenarEstados()
-  
-    /*this.Opciones = [
-      {Cod_Jaba_Estado: 1,  Des_Jaba_Estado:'Roto'},
-      {Cod_Jaba_Estado: 2,  Des_Jaba_Estado:'Rajado'},
-      {Cod_Jaba_Estado: 3,  Des_Jaba_Estado:'Sin Defecto'},
-    ];*/
-    this.Observacion = this.data.Observacion
-    this.formulario.controls['Defectos'].setValue(this.data.Cod_Estado)
-    this.formulario.controls['Observacion'].setValue(this.Observacion)
-
-  
+    this.llenarEstados()  
   }
 
  
@@ -90,12 +74,15 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
 
   submit(formDirective) :void {
    //console.log(this.formulario.get('Defectos')?.value)
-   this.Cod_Accion         = 'U'
-   this.Cod_Mov_Jaba       = this.data.Cod_Mov_Jaba
-   this.Cod_Barras         = ''
-   this.Cod_Estado         = this.formulario.get('Defectos')?.value
+
+   if(this.Cod_Estado != ''){
+
+   this.Cod_Accion         = 'I'
+   this.Cod_Mov_Jaba       = 0
+   this.Cod_Barras         = this.data.Cod_Barras
+   this.Cod_Estado         = this.Cod_Estado
    this.Observacion        = this.formulario.get('Observacion')?.value
-   this.Operacion          
+   this.Operacion          = 'I'
    this.Fec_Registro       = ''
    this.seguridadControlJabaService.ListarMovimientosJabas(
      this.Cod_Accion,
@@ -117,6 +104,7 @@ export class DialogRegistrarEstadoControlMovmientosJabasComponent implements OnI
      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
        duration: 2500,
      }))
+    }
     
   } 
  

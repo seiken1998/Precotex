@@ -38,23 +38,7 @@ interface data_det {
 })
 export class SeguridadControlMovimientosJabasComponent implements OnInit {
   
-  public data_det = [{
-    Cod_Mov_Jaba:     0,
-    Cod_Jaba:         0,
-    Des_Jaba:         '',
-    Cod_Barras:       '',
-    Cod_Jaba_Estado:  0,
-    Des_Jaba_Estado:  '',
-    Observacion:      '',
-    Cod_Accion:       '',
-    Accion:           '',
-    Fec_Registro:     '',
-    Fecha:            '',
-    Hora:             '',
-    Cod_Usuario:      '',
-    Cod_Estado:       ''
-  }]
-
+  num_guiaMascara = [/[A-Z-0-9]/i, /[A-Z-0-9]/i, /[A-Z-0-9]/i, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 
  // nuevas variables
  Cod_Accion       = ''
@@ -73,11 +57,14 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
  Cod_Usuario      = ''
  Titulo           = ''
  Cod_Barras_Flg   = ''
+ nom_proveedor = ''
+ ruc_proveedor = ''
+ cod_proveedor = ''
+ Id_Mov_Jaba_Cab = 0
+ Id_Mov_Jaba_Det = 0
+ Num_Guia = ''
 
-
-
-
-
+ @ViewChild('myinputGuia') inputGuia!: ElementRef;
  @ViewChild('myinputAdd') inputAdd!: ElementRef;
  @ViewChild('myinputDel') inputDel!: ElementRef;
 
@@ -85,12 +72,14 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
   formulario = this.formBuilder.group({
     bulto_añadir:     [''],
     bulto_eliminar:   [''],
+    num_guia:         [''],
+    ruc_proveedor:    [''],
+    nom_proveedor:    ['']
   })
 
 
 
-  //displayedColumns_cab: string[] = ['Cod_Registro_Det', 'Des_Jaba', 'Total', 'Fecha','Hora', 'Usuario', 'Acciones']
-  displayedColumns_cab: string[] = ['Estado', 'Fecha','Hora', 'Usuario','Acciones']
+  displayedColumns_cab: string[] = ['Estado', 'Fecha','Hora', 'Observacion','Usuario']
   dataSource: MatTableDataSource<data_det>;
 
 
@@ -113,13 +102,15 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
    else if(this.Operacion == 'I'){
      this.Titulo = 'Ingreso'
    }
+
+   this.formulario.controls['nom_proveedor'].disable()
   }
 
   ListarMovimientosJabas() {
     this.SpinnerService.show();
     this.Cod_Accion         = 'L'
     this.Cod_Mov_Jaba       = 0 
-    this.Cod_Barras         = this.formulario.get('bulto_añadir')?.value
+    this.Cod_Barras         = this.Cod_Barras_Flg
     this.Cod_Estado         = ''
     this.Observacion        = ''
     this.Operacion          = ''
@@ -135,7 +126,7 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
     ).subscribe(
       (result: any) => { 
         if (result.length > 0) {
-          console.log(result)
+   
           this.dataSource.data = result
           this.SpinnerService.hide();
         }
@@ -149,7 +140,194 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
         duration: 2500,
       }))
   }
+
+
+  
+  BuscarNomProveedor() {
+    this.ruc_proveedor = this.formulario.get('ruc_proveedor')?.value
+
+    if (this.ruc_proveedor.length !== 11 || this.ruc_proveedor == null) {
+      this.formulario.patchValue({ cod_proveedor: '' })
+      this.nom_proveedor = ''
+    } else {
+
+      this.seguridadControlJabaService.BuscarNomProveedorService(this.ruc_proveedor).subscribe(
+        (result: any) => {
+          if (result[0].Respuesta == 'OK') {
+
+
+            this.cod_proveedor =  result[0].Codigo
+            this.formulario.controls['nom_proveedor'].setValue(result[0].Nombres)
+       
+          } else {
+            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 })
+            this.cod_proveedor =  ''
+            this.formulario.controls['nom_proveedor'].setValue('')
+          }
+        },
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center',  verticalPosition: 'top',duration: 1500 }))
+    }
+  }
  
+
+  applyEnterAdd(event: any) {
+    this.InsertarRegistroCab()
+    
+  }
+
+  applyEnterDel(event: any) {
+    this.EliminarRegistroDetalle()
+  }
+
+  EliminarRegistroDetalle(){
+    alert('eliminar')
+  }
+
+  ActualizarProcedenciaJaba(){
+    this.Cod_Accion         = 'U'
+    this.Cod_Mov_Jaba       = 0
+    this.Cod_Barras         = this.formulario.get('bulto_añadir')?.value
+    this.Cod_Estado         = ''
+    this.Observacion        = ''
+    this.Operacion          = ''
+    this.Fec_Registro       = ''
+    this.seguridadControlJabaService.ListarMovimientosJabas(
+      this.Cod_Accion,
+      this.Cod_Mov_Jaba,
+      this.Cod_Barras,
+      this.Cod_Estado,
+      this.Observacion,
+      this.Operacion,
+      this.Fec_Registro
+    ).subscribe(
+      (result: any) => { 
+        if (result[0].Respuesta == 'OK') {
+          this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+          this.Cod_Baras = this.formulario.get('bulto_añadir')?.value
+          this.ListarMovimientosJabas()
+          this.formulario.controls['num_guia'].disable()
+          this.formulario.controls['ruc_proveedor'].disable()
+          this.Cod_Barras_Flg = this.formulario.get('bulto_añadir')?.value
+          this.formulario.controls['bulto_añadir'].setValue('')
+          this.inputAdd.nativeElement.focus()
+     
+        }
+        else {
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+          this.formulario.controls['bulto_añadir'].setValue('')
+          this.Cod_Baras = ''
+          this.Cod_Barras_Flg = ''
+          this.dataSource.data = []
+          this.inputAdd.nativeElement.focus()
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 2500,
+      }))
+  }
+
+  InsertarRegistroCab() {
+    if(this.Id_Mov_Jaba_Cab == 0){
+    this.cod_proveedor
+    this.Num_Guia = this.formulario.get('num_guia')?.value
+    if(this.cod_proveedor != '' && this.Num_Guia != ''){
+    this.Cod_Accion         = 'I'
+    this.Id_Mov_Jaba_Cab   
+    this.Id_Mov_Jaba_Det   
+    this.cod_proveedor
+    this.Num_Guia = this.Num_Guia
+    this.Cod_Baras = this.formulario.get('bulto_añadir')?.value
+    this.seguridadControlJabaService.LG_MOVIMIENTOS_JABA(
+      this.Cod_Accion,
+     this.Id_Mov_Jaba_Cab,
+     this.Id_Mov_Jaba_Det,
+     this.cod_proveedor,
+     this.Num_Guia,
+     this.Cod_Baras
+    ).subscribe(
+      (result: any) => { 
+        if (result[0].Id_Mov_Jaba_Cab != undefined) {
+
+            this.Id_Mov_Jaba_Cab = result[0].Id_Mov_Jaba_Cab
+            this.formulario.controls['num_guia'].disable()
+            this.formulario.controls['ruc_proveedor'].disable()
+            console.log(result[0].Id_Mov_Jaba_Cab)
+            console.log(this.Id_Mov_Jaba_Cab)
+            this.InsertarRegistroDet()
+        }
+        else {
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+         
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 2500,
+      }))
+    }else{
+      this.matSnackBar.open("Debe llenar todos los campos...", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+    }
+    } else{
+      this.InsertarRegistroDet()
+    }
+  }
+
+
+  
+  InsertarRegistroDet() {
+    this.Cod_Baras = this.formulario.get('bulto_añadir')?.value
+    console.log(this.Id_Mov_Jaba_Cab)
+    if(this.Id_Mov_Jaba_Cab != 0){
+    this.Cod_Accion  = 'D'
+    this.Id_Mov_Jaba_Det   
+    this.cod_proveedor
+    this.Num_Guia = this.formulario.get('num_guia')?.value
+    this.Cod_Baras =  this.Cod_Baras
+    this.seguridadControlJabaService.LG_MOVIMIENTOS_JABA(
+    this.Cod_Accion,
+     this.Id_Mov_Jaba_Cab,
+     this.Id_Mov_Jaba_Det,
+     this.cod_proveedor,
+     this.Num_Guia,
+     this.Cod_Baras
+    ).subscribe(
+      (result: any) => { 
+        if (result[0].Respuesta == 'OK') {
+          this.Cod_Barras_Flg = this.formulario.get('bulto_añadir')?.value
+          this.Cod_Baras = ''
+          this.inputAdd.nativeElement.focus()
+          this.ListarMovimientosJabas()
+          this.formulario.controls['bulto_añadir'].setValue('')
+          this.inputAdd.nativeElement.focus()
+          this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+        }
+        else {
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+         
+        }
+      },
+      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
+        duration: 2500,
+      }))
+    }else{
+      this.matSnackBar.open("Debe llenar todos los campos detalle..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
+    }
+  }
+
+  ReproducirError() {
+    const audio = new Audio('assets/error.mp3');
+    audio.play();
+  }
+ 
+  ReproducirOk() {
+    const audio = new Audio('assets/aceptado.mp3');
+    audio.play();
+  } 
+
+  clearDate(event) {
+    event.stopPropagation();
+    this.formulario.controls['Fec_Registro'].setValue('')
+  }
+
 
   DarDeBajaJaba(){
     let dialogRef =  this.dialog.open(DialogConfirmacionComponent, {disableClose: true,data: { }});
@@ -158,7 +336,7 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
         this.Cod_Accion         = 'B'
         this.Cod_Mov_Jaba       = 0
         this.Cod_Barras         
-        this.Cod_Estado         = 'C'
+        this.Cod_Estado         = 'OUT'
         this.Observacion        = ''
         this.Operacion          = ''
         this.Fec_Registro       = ''
@@ -189,95 +367,35 @@ export class SeguridadControlMovimientosJabasComponent implements OnInit {
   }
   
 
-  applyEnterAdd(event: any) {
-    this.InsertarRegistro()
-  }
+  VerDetalle(){
 
-  applyEnterDel(event: any) {
-    this.EliminarRegistroDetalle()
-  }
-
-  EliminarRegistroDetalle(){
-    alert('eliminar')
-  }
-
-  InsertarRegistro() {
-    this.Cod_Accion         = 'I'
-    this.Cod_Mov_Jaba       = 0
-    this.Cod_Barras         = this.formulario.get('bulto_añadir')?.value
-    this.Cod_Estado         = 'C'
-    this.Observacion        = ''
-    this.Operacion          = GlobalVariable.Accion
-    this.Fec_Registro       = ''
-    this.seguridadControlJabaService.ListarMovimientosJabas(
-      this.Cod_Accion,
-      this.Cod_Mov_Jaba,
-      this.Cod_Barras,
-      this.Cod_Estado,
-      this.Observacion,
-      this.Operacion,
-      this.Fec_Registro
-    ).subscribe(
-      (result: any) => { 
-        if (result[0].Respuesta == 'OK') {
-         
-          this.ListarMovimientosJabas()
-          this.matSnackBar.open("Proceso Correcto..!!", 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
-          this.Cod_Baras = this.formulario.get('bulto_añadir')?.value
-          this.Cod_Barras_Flg = this.formulario.get('bulto_añadir')?.value
-          this.formulario.controls['bulto_añadir'].setValue('')
-          this.inputAdd.nativeElement.focus()
-        }
-        else {
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 2500 })
-          this.formulario.controls['bulto_añadir'].setValue('')
-          this.Cod_Baras = ''
-          this.Cod_Barras_Flg = ''
-          this.dataSource.data = []
-          this.inputAdd.nativeElement.focus()
-        }
-      },
-      (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 2500,
-      }))
-  }
-
-
-
-
-
-  ReproducirError() {
-    const audio = new Audio('assets/error.mp3');
-    audio.play();
-  }
- 
-  ReproducirOk() {
-    const audio = new Audio('assets/aceptado.mp3');
-    audio.play();
-  } 
-
-  clearDate(event) {
-    event.stopPropagation();
-    this.formulario.controls['Fec_Registro'].setValue('')
-  }
-
-  VerDetalle(Cod_Mov_Jaba: number, Cod_Jaba_Estado: number,Cod_Estado: string, Observacion:string){
     let dialogRef =  this.dialog.open(DialogRegistrarEstadoControlMovmientosJabasComponent, { 
       disableClose: true,
       panelClass: 'my-class',
-      data: { 
-        Cod_Mov_Jaba:     Cod_Mov_Jaba,
-        Cod_Jaba_Estado:  Cod_Jaba_Estado,
-        Cod_Estado:       Cod_Estado,
-        Observacion:      Observacion}});
+      data: { Cod_Barras: this.Cod_Barras_Flg
+        }});
         dialogRef.afterClosed().subscribe(result => {
           if (result == 'true') { 
             this.ListarMovimientosJabas()
 
           }})
-  
   }
 
+
+  Limpiar(){
+    this.formulario.controls['num_guia'].enable()
+    this.formulario.controls['ruc_proveedor'].enable()
+    this.formulario.controls['num_guia'].setValue('')
+    this.formulario.controls['ruc_proveedor'].setValue('')
+    this.formulario.controls['bulto_añadir'].setValue('')
+    this.Cod_Baras = ''
+    this.Cod_Barras_Flg = ''
+    this.dataSource.data = []
+    this.inputGuia.nativeElement.focus()
+    this.Id_Mov_Jaba_Cab = 0
+    this.Id_Mov_Jaba_Det = 0
+
+  }
 
 }
 

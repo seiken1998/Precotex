@@ -43,12 +43,16 @@ export class ReinspeccionPrendaComponent implements OnInit {
   Inicial = 0
   ImagePath = ''
   Codigo = ''
+  Des_Tipo_Proceso = ''
+  grid_border = ' border: 1px solid #337ab7;'
+  background = 'background-color: #3f51b5; border: 1px solid #3f51b5;'
+  btn_background =  'background-color: #3f51b5; color: #ffffff;'
 
   Tipo_Proceso = ""
   Cod_Fabrica = ""
   Num_Paquete = ""
   Flg_Habilitar_Detalle = false
-
+  DisableSaveButton = true
   //variables para ejecutar SP CF_Man_Inspeccion_Prenda_Detalle_Audi_Web
   Id = 0
   Tipo_Sub_Proceso = ''
@@ -87,7 +91,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   }
 
   RestarCompostura() {
-    if (this.Compostura != 0) {
+
     this.Cod_Accion   = "D"
     this.Id
     this.Tipo_Sub_Proceso = '01'
@@ -107,13 +111,13 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
-    }
+    
   }
 
   SumarCompostura() {
@@ -136,16 +140,16 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
   }
 
   RestarSegunda() {
-    if (this.Segunda != 0) {
+
     this.Cod_Accion   = "D"
     this.Id
     this.Tipo_Sub_Proceso = '02'
@@ -165,13 +169,13 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
-    }
+    
   }
 
   SumarSegunda() {
@@ -195,11 +199,11 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
   }
 
@@ -234,11 +238,11 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
       } 
     })
@@ -246,6 +250,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   }
 
   SumarZurcido() {
+    if (this.Primeras != 0) {
     this.ActualizarCantidad()
     let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
@@ -275,14 +280,15 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
       } 
     })
+  }
   } 
 
   RestarDesmanche() {
@@ -316,11 +322,11 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
       }
     })
@@ -328,6 +334,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
   }
 
   SumarDesmanche() {
+    if (this.Primeras != 0) {
     this.ActualizarCantidad()
     let dialogRef = this.dialog.open(DialogDefectoAudiComponent,
       {
@@ -359,15 +366,17 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
 
       } 
+      
     })
+  }
   }
 
   ActualizarPrimeras() {
@@ -395,7 +404,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.Primeras   = result[0].Primeras
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
   }
 
@@ -423,11 +432,15 @@ export class ReinspeccionPrendaComponent implements OnInit {
           this.formulario.controls['Color'].disable()
           this.formulario.controls['Talla'].disable()
           this.formulario.controls['Cantidad'].disable()
+          this.DisableSaveButton = false
         }
-        console.log(result)
+        else{
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
+          this.Limpiar()
+        }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
  
 
@@ -481,15 +494,40 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.formulario.controls['Talla'].disable()
               this.formulario.controls['Cantidad'].disable()
               this.ActualizarCantidad()
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
+              
             }
+
+            this.Tipo_Proceso = result[0].Tipo_Proceso
+            if(this.Tipo_Proceso == 'X'){
+              this.grid_border = ' border: 1px solid #E52B18;'
+              this.background = 'background-color: #E52B18; border: 1px solid #E52B18;'
+              this.btn_background =  'background-color: #E52B18; color: #ffffff;'
+            }
+            if(this.Tipo_Proceso == 'R'){
+              this.grid_border = ' border: 1px solid #0e740e;'
+              this.background = 'background-color: #0e740e; border: 1px solid #0e740e;'
+              this.btn_background =  'background-color: #0e740e; color: #ffffff;'
+            }
+            if(this.Tipo_Proceso == 'R'){
+              this.Des_Tipo_Proceso = 'Reproceso'
+            }
+            else if (this.Tipo_Proceso == 'X'){
+              this.Des_Tipo_Proceso = 'Rechazado'
+            }
+            else{
+              this.Des_Tipo_Proceso = 'Produccion'
+            }
+
+            //this.Tipo_Proceso == 'R' ? this.Tipo_Proceso = 'Reproceso' : this.Tipo_Proceso = 'Produccion';
+            this.Des_Tipo_Proceso = this.Des_Tipo_Proceso.toUpperCase()
          
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
       }
     })
@@ -513,14 +551,14 @@ export class ReinspeccionPrendaComponent implements OnInit {
             if (result[0].Respuesta == 'OK') {
               this.Flg_Habilitar_Detalle = false
               this.Limpiar()
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
             else {
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
 
       }
@@ -552,6 +590,11 @@ export class ReinspeccionPrendaComponent implements OnInit {
     this.Desmanche = 0
     this.Primeras = 0
     this.ImagePath = 'http://192.168.1.36/Estilos/default.jpg'
+    this.grid_border = ' border: 1px solid #337ab7;'
+    this.background = 'background-color: #3f51b5; border: 1px solid #3f51b5;'
+    this.btn_background =  'background-color: #3f51b5; color: #ffffff;'
+    this.Des_Tipo_Proceso = ''
+    this.DisableSaveButton = true
   }
 
   CalcularEficiencia(){
@@ -564,7 +607,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
         this.Eficiencia = result[0].EFICIENCIA
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-        duration: 1500,
+        duration: 5000,
       }))
   }
 
@@ -582,12 +625,12 @@ export class ReinspeccionPrendaComponent implements OnInit {
               this.formulario.controls['OP'].disable()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 5000 })
             }
      
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
       }
   }
@@ -603,7 +646,7 @@ export class ReinspeccionPrendaComponent implements OnInit {
      
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-            duration: 1500,
+            duration: 5000,
           }))
     
   }

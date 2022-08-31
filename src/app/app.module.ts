@@ -110,6 +110,7 @@ import { AccesosUsuariosComponent } from './components/accesos-usuarios/accesos-
 import { LoginComponent } from './components/login/login.component';
 import { EstilosLiquidarComponent } from './components/estilos-liquidar/estilos-liquidar.component';
 import { DialogVehiculoModificarKmComponent } from './components/seguridad-control-vehiculo/dialog-vehiculo/dialog-vehiculo-modificar-km/dialog-vehiculo-modificar-km.component';
+import { MantenimientoJabasComponent } from './components/mantenimiento-jabas/mantenimiento-jabas.component';
 
 @NgModule({
   declarations: [
@@ -201,7 +202,8 @@ import { DialogVehiculoModificarKmComponent } from './components/seguridad-contr
     AccesosUsuariosComponent,
     LoginComponent,
     EstilosLiquidarComponent,
-    DialogVehiculoModificarKmComponent
+    DialogVehiculoModificarKmComponent,
+    MantenimientoJabasComponent
    
     
  

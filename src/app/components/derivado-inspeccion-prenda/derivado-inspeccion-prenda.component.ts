@@ -108,7 +108,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -137,7 +137,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -166,7 +166,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -196,7 +196,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
           this.ActualizarCantidad()
         }
         else{
-          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+          this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
         }
       },
       (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -235,7 +235,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -276,7 +276,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -317,7 +317,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -360,7 +360,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.ActualizarCantidad()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -481,10 +481,10 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.formulario.controls['Color'].disable()
               this.formulario.controls['Talla'].disable()
               this.formulario.controls['Cantidad'].disable()
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
          
           },
@@ -513,10 +513,10 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
             if (result[0].Respuesta == 'OK') {
               this.Flg_Habilitar_Detalle = false
               this.Limpiar()
-              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open('Proceso Correcto...', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
             else {
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
           },
           (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
@@ -582,7 +582,7 @@ export class DerivadoInspeccionPrendaComponent implements OnInit {
               this.formulario.controls['OP'].disable()
             }
             else{
-              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+              this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 1500 })
             }
      
           },

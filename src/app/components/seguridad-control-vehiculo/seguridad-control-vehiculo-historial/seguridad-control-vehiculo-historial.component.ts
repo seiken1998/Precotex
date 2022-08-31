@@ -118,7 +118,7 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
           this.data_det = result
         },
         (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', {
-          duration: 1500,
+          duration: 4000,
         }))
   }
  
@@ -153,15 +153,15 @@ export class SeguridadControlVehiculoHistorialComponent implements OnInit {
       this.ope).subscribe(
         (result: any) => {
           if (result[0].Respuesta == 'OK') {
-            this.matSnackBar.open('Proceso Correcto !!!', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            this.matSnackBar.open('Proceso Correcto !!!', 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 4000 })
 
             this.ListarHistorial()
           }
           else {
-            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 })
+            this.matSnackBar.open(result[0].Respuesta, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 4000 })
           }
         },
-        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 1500 }))
+        (err: HttpErrorResponse) => this.matSnackBar.open(err.message, 'Cerrar', { horizontalPosition: 'center', verticalPosition: 'top', duration: 4000 }))
       } 
     })
   }
